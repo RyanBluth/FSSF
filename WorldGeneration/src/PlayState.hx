@@ -30,7 +30,7 @@ class PlayState extends ST_State{
 		player = new ST_Sprite("img/SHIP.png");
 		addChild(scrollBackground);
 		addChild(player);
-		player.movement.friction = 0.95;
+		player.movement.friction = 0.80;
 		ST_GamepadManager.addController(0);
 		addChild(new FPS());
 	}
@@ -45,16 +45,16 @@ class PlayState extends ST_State{
 	private function playerMovement() {
 		player.movement.resetAcceleration();
 		if(ST_GeneralInput.left(0)) {
-			player.movement.applyForce(new Point( -2, 0));
+			player.movement.applyForce(new Point( -3, 0));
 		}
 		if(ST_GeneralInput.right(0)) {
-			player.movement.applyForce(new Point(2,0));
+			player.movement.applyForce(new Point(3,0));
 		}
 		if(ST_GeneralInput.down(0)) {
-			player.movement.applyForce(new Point(0,2));
+			player.movement.applyForce(new Point(0,3));
 		}
 		if(ST_GeneralInput.up(0)) {
-			player.movement.applyForce(new Point(0,-2));
+			player.movement.applyForce(new Point(0,-3));
 		}
 		
 		if (ST_GeneralInput.primary(0, true)) {

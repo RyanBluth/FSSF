@@ -3,6 +3,7 @@ package ;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;
+import haxe.Timer;
 import input.ST_TouchManager;
 
 #if !flash
@@ -34,9 +35,13 @@ class Main extends Sprite
 			return;
 		}
 		// (initialization code here)
-		stage.addEventListener(Event.ENTER_FRAME, gameLoop);
-		addChild(playState = new PlayState(stage));
+		///stage.addEventListener(Event.ENTER_FRAME, gameLoop);
+		var timer:Timer = new Timer(20);
 		
+		addChild(playState = new PlayState(stage));
+		timer.run = function gameLoop() {
+			playState.update();
+		};
 		//inputs
 		new ST_Keyboard();
 		
@@ -58,10 +63,10 @@ class Main extends Sprite
 		inited = true;
 	}
 
-	function gameLoop(event:Dynamic) {
+	/*public function gameLoop():Void {
 		playState.update();
 		playState.draw();
-	}
+	}*/
 	
 	/* SETUP */
 
