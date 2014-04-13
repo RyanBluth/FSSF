@@ -7,7 +7,7 @@ import flash.geom.Rectangle;
  */
 class ST_Camera
 {
-	public var frame:Rectangle;
+	private var frame:Rectangle;
 	private var deadzone:Rectangle;
 	private var followSprite:ST_Sprite;
 

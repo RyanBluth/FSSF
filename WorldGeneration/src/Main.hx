@@ -33,10 +33,9 @@ class Main extends Sprite
 		if (inited) {
 			return;
 		}
-		
 		// (initialization code here)
 		stage.addEventListener(Event.ENTER_FRAME, gameLoop);
-		addChild(playState = new PlayState());
+		addChild(playState = new PlayState(stage));
 		
 		//inputs
 		new ST_Keyboard();
