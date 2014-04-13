@@ -52,5 +52,4 @@ class ST_Background extends Sprite
 			bitmapTwo.y = -bitmapTwo.height;
 		}
 	}
-	
 }

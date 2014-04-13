@@ -17,6 +17,7 @@ import input.ST_GeneralInput;
 import input.ST_TouchManager;
 import utils.ST_Collision;
 import layers.ST_Background;
+import openfl.display.FPS;
 
 class PlayState extends ST_State{
 
@@ -31,6 +32,7 @@ class PlayState extends ST_State{
 		addChild(player);
 		player.movement.friction = 0.95;
 		ST_GamepadManager.addController(0);
+		addChild(new FPS());
 	}
 	
 	public override function update() {
@@ -53,6 +55,14 @@ class PlayState extends ST_State{
 		}
 		if(ST_GeneralInput.up(0)) {
 			player.movement.applyForce(new Point(0,-2));
+		}
+		
+		if (ST_GeneralInput.primary(0, true)) {
+			for (i in 0...10000000) {
+				var t = 5;
+				var s = t;
+				s = t + s * t;
+			}
 		}
 	}
 	

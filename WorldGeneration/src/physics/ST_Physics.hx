@@ -53,6 +53,11 @@ class ST_Physics
 		velocity.x *= friction;
 		velocity.y *= friction;
 		
+		if (Math.abs(velocity.x) <= 0.001) {
+			velocity.x = 0;
+		}if (Math.abs(velocity.y) <= 0.001) {
+			velocity.y = 0;
+		}
 		return reutrnPoint;
 	}
 	
