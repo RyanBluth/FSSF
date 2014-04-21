@@ -24,7 +24,7 @@
     <option directives="tools=1.3.2&#xA;lime_native&#xA;no-compilation&#xA;display&#xA;windows&#xA;desktop" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
-    <option mainClass="ApplicationMain" />
+    <option mainClass="" />
     <option enabledebug="True" />
     <option additional="--no-output&#xA;--macro allowPackage('flash')&#xA;--macro keep(&quot;Main&quot;)" />
   </build>

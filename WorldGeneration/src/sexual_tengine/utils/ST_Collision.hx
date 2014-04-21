@@ -3,6 +3,7 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import sexual_tengine.animation.ST_SpriteSheetHandler;
+import sexual_tengine.sprite.ST_Sprite;
 /**
  * ...
  * @author Sean

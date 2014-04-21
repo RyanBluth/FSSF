@@ -1,6 +1,6 @@
 package sexual_tengine.camera;
 import flash.geom.Rectangle;
-
+import sexual_tengine.sprite.ST_Sprite;
 /**
  * ...
  * @author ryan

@@ -1,4 +1,5 @@
-package sexual_tengine;
+package sexual_tengine.sprite;
+
 import flash.display.Bitmap;
 import flash.display.Sprite;
 import flash.geom.Point;
@@ -15,6 +16,7 @@ class ST_Sprite extends Sprite{
 	private var bitmap:Bitmap;
 	public var animation:ST_AnimationManager;
 	public var movement:ST_Physics;
+	public var active:Bool;
 	
 	public function new(?_bitmap:String){
 		super();
@@ -26,6 +28,7 @@ class ST_Sprite extends Sprite{
 		}
 		animation = new ST_AnimationManager(this.graphics);
 		movement = new ST_Physics();
+		active = true;
 	}
 	
 	public function update() {

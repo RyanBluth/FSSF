@@ -54,9 +54,5 @@ class ST_Game extends Sprite {
 		}
 		
 		playState.update();
-		//playState.draw();
-		//playState.update();
-		//playState.draw();
-		//trace(STI.deltaTime);
 	}
 }

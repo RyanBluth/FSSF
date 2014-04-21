@@ -11,7 +11,7 @@ import flash.Lib;
 import sexual_tengine.utils.ST_Logger;
 
 import sexual_tengine.ST_State;
-import sexual_tengine.ST_Sprite;
+import sexual_tengine.sprite.ST_Sprite;
 import sexual_tengine.input.ST_Mouse;
 import sexual_tengine.input.ST_Keyboard;
 import sexual_tengine.input.ST_GamepadManager;
