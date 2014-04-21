@@ -50,9 +50,7 @@ class ST_Game extends Sprite {
 			playState.draw();
 			accumulator -= STI.timeStep;
 			t += STI.timeStep;
-			
 		}
-		
 		playState.update();
 	}
 }

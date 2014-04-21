@@ -50,8 +50,8 @@ class ST_Physics
 		reutrnPoint = new Point(velocity.x, velocity.y);
 		
 		//Apply the friction after the movement has occured
-		velocity.x *= friction;
-		velocity.y *= friction;
+		velocity.x *= friction * STI.deltaTime/(1000/60);
+		velocity.y *= friction * STI.deltaTime/(1000/60);
 		
 		if (Math.abs(velocity.x) <= 0.001) {
 			velocity.x = 0;

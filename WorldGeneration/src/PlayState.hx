@@ -41,6 +41,7 @@ class PlayState extends ST_State{
 	function setupPlayer() {
 		
 		player = new ST_SuperSprite();
+		player.kinetics.friction = 0.9;
 		
 		var playerFire:ST_Sprite = new ST_Sprite();
 		playerFire.animation.addSpriteSheet("img/player.png", "main", true);
@@ -72,16 +73,16 @@ class PlayState extends ST_State{
 	
 		player.kinetics.resetAcceleration();
 		if(ST_GeneralInput.left(0)) {
-			player.kinetics.applyForce(new Point(-2,0));
+			player.kinetics.applyForce(new Point(-5,0));
 		}
 		if(ST_GeneralInput.right(0)) {
-			player.kinetics.applyForce(new Point(2,0));
+			player.kinetics.applyForce(new Point(5,0));
 		}
 		if(ST_GeneralInput.down(0)) {
-			player.kinetics.applyForce(new Point(0,2));
+			player.kinetics.applyForce(new Point(0,5));
 		}
 		if(ST_GeneralInput.up(0)) {
-			player.kinetics.applyForce(new Point(0,-2));
+			player.kinetics.applyForce(new Point(0,-5));
 		}
 	}
 	

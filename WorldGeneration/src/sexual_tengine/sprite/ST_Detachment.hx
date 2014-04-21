@@ -3,6 +3,7 @@ package sexual_tengine.sprite;
 import flash.display.Sprite;
 import sexual_tengine.physics.ST_Physics;
 import flash.geom.Point;
+import sexual_tengine.STI;
 
 /**
  * ...
@@ -21,8 +22,10 @@ class ST_Detachment extends Sprite
 	}
 	
 	public function update() {
+		
 		var movementVector:Point = kinetics.calculatePosition();
-		x += movementVector.x;
-		y += movementVector.y;
+		x += movementVector.x * STI.deltaTime/(1000/60);
+		y += movementVector.y * STI.deltaTime/(1000/60);
+		
 	}
 }
