@@ -1,12 +1,16 @@
 package sexual_tengine.sprite;
 
+import sexual_tengine.animation.ST_AnimationManager;
+import sexual_tengine.physics.ST_Physics;
+import sexual_tengine.sprite.ST_Detachment;
+
+import flash.display.Graphics;
 import flash.display.Bitmap;
 import flash.display.Sprite;
 import flash.geom.Point;
 import openfl.Assets;
-import sexual_tengine.animation.ST_AnimationManager;
-import sexual_tengine.physics.ST_Physics;
-import sexual_tengine.sprite.ST_Detachment;
+
+
 
 /**
  * ...
@@ -17,7 +21,7 @@ class ST_Sprite extends ST_Detachment{
 	private var bitmap:Bitmap;
 	public var animation:ST_AnimationManager;
 	
-	public function new(?_bitmap:String){
+	public function new(?_bitmap:String) {
 		super();
 		if(_bitmap != null){
 			bitmap = new Bitmap(Assets.getBitmapData(_bitmap));
@@ -30,11 +34,8 @@ class ST_Sprite extends ST_Detachment{
 		active = true;
 	}
 	
-	public function update() {
-	
-		var movementVector:Point = kinetics.calculatePosition();
-		x += movementVector.x;
-		y += movementVector.y;
+	public override function update() {
+		super.update();
 	}
 	
 	public function setBitmap(_bitmap:String) {

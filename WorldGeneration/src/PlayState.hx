@@ -22,56 +22,66 @@ import sexual_tengine.input.ST_GeneralInput;
 import sexual_tengine.input.ST_TouchManager;
 import sexual_tengine.utils.ST_Collision;
 import sexual_tengine.layers.ST_Background;
+import sexual_tengine.sprite.ST_SuperSprite;
 import openfl.display.FPS;
 
 class PlayState extends ST_State{
 
 	var scrollBackground:ST_Background;
-	var player:Array<ST_Sprite>;
+	var player:ST_SuperSprite;
 	
 	public function new() {
 		super();
-		scrollBackground = new ST_Background("img/stars.jpg", Lib.current.stage.stageWidth, Lib.current.stage.stageHeight, true,20);
-		
-		addChild(scrollBackground);
-		
-		player = new Array<ST_Sprite>();
-		for (i in 0...1) {
-			player[i] = new ST_Sprite("img/SHIP.png");
-			addChild(player[i]);
-			player[i].kinetics.friction = 0.80;
-		}
+		setupPlayer();
+		addChild(player);
 		ST_GamepadManager.addController(0);
 		addChild(new FPS());
+	}
+	
+	function setupPlayer() {
 		
-		var manager:ST_SpriteManager = new ST_SpriteManager(Bullet,["img/SHIP.png"]);
-		addChild(manager.getActiveSprite());
+		player = new ST_SuperSprite();
+		
+		var playerFire:ST_Sprite = new ST_Sprite();
+		playerFire.animation.addSpriteSheet("img/player.png", "main", true);
+		playerFire.animation.addAnimationState("main", "main", [1, 3, 4], 5, 85, 100);
+		playerFire.animation.playAnimation(0, "main");
+		
+		var playerBody:ST_Sprite = new ST_Sprite();
+		playerBody.animation.addSpriteSheet("img/player.png", "main", true);
+		playerBody.animation.addAnimationState("main", "main", [0], 5, 85, 100);
+		playerBody.animation.setAnimationState("main");
+		playerBody.animation.staticDraw();
+		
+		var playerFire2:ST_Sprite = new ST_Sprite();
+		playerFire2.animation.addSpriteSheet("img/player.png", "main", true);
+		playerFire2.animation.addAnimationState("main", "main", [3, 2, 4], 5, 85, 100);
+		playerFire2.animation.playAnimation(0, "main");
+		
+		player.addSpriteChild("playerFire", playerFire);
+		player.addSpriteChild("playerBody", playerBody);
 	}
 	
 	public override function update() {
 		super.update();
-		scrollBackground.update();
 		playerMovement();
-		for (i in 0...player.length) {
-			player[i].update();
-		}
+		player.update();
 	}
 	
 	private function playerMovement() {
-		for (i in 0...player.length) {
-			player[i].kinetics.resetAcceleration();
-			if(ST_GeneralInput.left(0)) {
-				player[i].kinetics.applyForce(new Point(-2,0));
-			}
-			if(ST_GeneralInput.right(0)) {
-				player[i].kinetics.applyForce(new Point(2,0));
-			}
-			if(ST_GeneralInput.down(0)) {
-				player[i].kinetics.applyForce(new Point(0,2));
-			}
-			if(ST_GeneralInput.up(0)) {
-				player[i].kinetics.applyForce(new Point(0,-2));
-			}
+	
+		player.kinetics.resetAcceleration();
+		if(ST_GeneralInput.left(0)) {
+			player.kinetics.applyForce(new Point(-2,0));
+		}
+		if(ST_GeneralInput.right(0)) {
+			player.kinetics.applyForce(new Point(2,0));
+		}
+		if(ST_GeneralInput.down(0)) {
+			player.kinetics.applyForce(new Point(0,2));
+		}
+		if(ST_GeneralInput.up(0)) {
+			player.kinetics.applyForce(new Point(0,-2));
 		}
 	}
 	
