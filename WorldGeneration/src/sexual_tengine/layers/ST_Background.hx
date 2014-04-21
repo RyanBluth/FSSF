@@ -47,10 +47,10 @@ class ST_Background extends Sprite
 		bitmapOne.y += speed * STI.deltaTime / 60;
 		bitmapTwo.y += speed * STI.deltaTime / 60;
 		if (bitmapOne.y >= bitmapOne.height) {
-			bitmapOne.y = -bitmapOne.height;
+			bitmapOne.y = bitmapTwo.y-bitmapOne.height;
 		}
 		if (bitmapTwo.y >= bitmapTwo.height) {
-			bitmapTwo.y = -bitmapTwo.height;
+			bitmapTwo.y = bitmapOne.y-bitmapTwo.height;
 		}
 	}
 }

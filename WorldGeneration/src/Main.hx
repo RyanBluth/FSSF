@@ -4,7 +4,7 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;
 import haxe.Timer;
-import input.ST_TouchManager;
+import sexual_tengine.input.ST_TouchManager;
 
 import sexual_tengine.ST_Game;
 
@@ -34,16 +34,10 @@ class Main extends Sprite
 		// (initialization code here)
 		
 		addChild(game = new ST_Game(new PlayState()));
-		stage.addEventListener(Event.ENTER_FRAME, gameLoop);
 		//inputs
-		new ST_Keyboard();
+		
 		inited = true;
 		
-	}
-
-	public function gameLoop():Void {
-		playState.update();
-		playState.draw();
 	}
 	
 	/* SETUP */

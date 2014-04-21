@@ -34,12 +34,12 @@ class ST_Game extends Sprite {
 		
 		playState = _playState;
 		addChild(playState);
-		addEventListener(Event.ENTER_FRAME, update);
+		Lib.current.stage.addEventListener(Event.ENTER_FRAME, update);
 		
 	}
 	private var accumulator:Float = 0;
 	private var t:Float = 0;
-	public function update(evt:Dynamic) {
+	public function update(evt:Event) {
 		ticks = Lib.getTimer();
 		STI.deltaTime = (ticks - STI.elapsedTime);
 		STI.elapsedTime = ticks;
