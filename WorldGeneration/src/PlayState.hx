@@ -39,7 +39,7 @@ class PlayState extends ST_State{
 		for (i in 0...1) {
 			player[i] = new ST_Sprite("img/SHIP.png");
 			addChild(player[i]);
-			player[i].movement.friction = 0.80;
+			player[i].kinetics.friction = 0.80;
 		}
 		ST_GamepadManager.addController(0);
 		addChild(new FPS());
@@ -59,18 +59,18 @@ class PlayState extends ST_State{
 	
 	private function playerMovement() {
 		for (i in 0...player.length) {
-			player[i].movement.resetAcceleration();
+			player[i].kinetics.resetAcceleration();
 			if(ST_GeneralInput.left(0)) {
-				player[i].movement.applyForce(new Point(-2,0));
+				player[i].kinetics.applyForce(new Point(-2,0));
 			}
 			if(ST_GeneralInput.right(0)) {
-				player[i].movement.applyForce(new Point(2,0));
+				player[i].kinetics.applyForce(new Point(2,0));
 			}
 			if(ST_GeneralInput.down(0)) {
-				player[i].movement.applyForce(new Point(0,2));
+				player[i].kinetics.applyForce(new Point(0,2));
 			}
 			if(ST_GeneralInput.up(0)) {
-				player[i].movement.applyForce(new Point(0,-2));
+				player[i].kinetics.applyForce(new Point(0,-2));
 			}
 		}
 	}

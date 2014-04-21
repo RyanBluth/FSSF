@@ -6,17 +6,16 @@ import flash.geom.Point;
 import openfl.Assets;
 import sexual_tengine.animation.ST_AnimationManager;
 import sexual_tengine.physics.ST_Physics;
+import sexual_tengine.sprite.ST_Detachment;
 
 /**
  * ...
  * @author Sean
  */
-class ST_Sprite extends Sprite{
+class ST_Sprite extends ST_Detachment{
 	
 	private var bitmap:Bitmap;
 	public var animation:ST_AnimationManager;
-	public var movement:ST_Physics;
-	public var active:Bool;
 	
 	public function new(?_bitmap:String){
 		super();
@@ -27,13 +26,13 @@ class ST_Sprite extends Sprite{
 			bitmap = new Bitmap();
 		}
 		animation = new ST_AnimationManager(this.graphics);
-		movement = new ST_Physics();
+		kinetics = new ST_Physics();
 		active = true;
 	}
 	
 	public function update() {
 	
-		var movementVector:Point = movement.calculatePosition();
+		var movementVector:Point = kinetics.calculatePosition();
 		x += movementVector.x;
 		y += movementVector.y;
 	}
