@@ -8,7 +8,10 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.utils.ByteArray;
 import flash.Lib;
+import sexual_tengine.sprite.ST_SpriteManager;
 import sexual_tengine.utils.ST_Logger;
+
+import entities.Bullet;
 
 import sexual_tengine.ST_State;
 import sexual_tengine.sprite.ST_Sprite;
@@ -40,6 +43,9 @@ class PlayState extends ST_State{
 		}
 		ST_GamepadManager.addController(0);
 		addChild(new FPS());
+		
+		var manager:ST_SpriteManager = new ST_SpriteManager(Bullet,["img/SHIP.png"]);
+		addChild(manager.getActiveSprite());
 	}
 	
 	public override function update() {
@@ -49,7 +55,6 @@ class PlayState extends ST_State{
 		for (i in 0...player.length) {
 			player[i].update();
 		}
-		
 	}
 	
 	private function playerMovement() {

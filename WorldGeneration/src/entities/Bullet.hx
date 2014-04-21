@@ -1,5 +1,6 @@
 package entities;
 
+import sexual_tengine.sprite.ST_Sprite;
 /**
  * ...
  * @author ryan
