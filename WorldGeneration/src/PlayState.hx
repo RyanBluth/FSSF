@@ -38,6 +38,8 @@ class PlayState extends ST_State{
 			addChild(player[i]);
 			player[i].movement.friction = 0.80;
 		}
+		addChild(player);
+		player.movement.friction = 0.80;
 		ST_GamepadManager.addController(0);
 		addChild(new FPS());
 	}
