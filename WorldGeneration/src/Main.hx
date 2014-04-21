@@ -3,13 +3,8 @@ package ;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;
-import input.ST_TouchManager;
 
-#if !flash
-import input.ST_GamepadManager;
-#end
-import input.ST_Keyboard;
-import input.ST_Mouse;
+import sexual_tengine.ST_Game;
 
 /**
  * ...
@@ -19,7 +14,8 @@ import input.ST_Mouse;
 class Main extends Sprite 
 {
 	var inited:Bool;
-
+	var game:ST_Game;
+	
 	/* ENTRY POINT */
 	
 	function resize(e) 
@@ -28,27 +24,16 @@ class Main extends Sprite
 		// else (resize or orientation change)
 	}
 	
-		var playState:PlayState;
+		
 	function init(){
 		if (inited) {
 			return;
 		}
 		// (initialization code here)
-		stage.addEventListener(Event.ENTER_FRAME, gameLoop);
-		addChild(playState = new PlayState(stage));
+		//stage.addEventListener(Event.ENTER_FRAME, gameLoop);
 		
-		//inputs
-		new ST_Keyboard();
+		addChild(game = new ST_Game(new PlayState()));
 		
-		#if mobile
-			new ST_TouchManager();
-		#else
-			new ST_Mouse();
-		#end
-		
-		#if !flash
-			new ST_GamepadManager();
-		#end
 		
 		// Stage:
 		// stage.stageWidth x stage.stageHeight @ stage.dpiScale
@@ -56,12 +41,9 @@ class Main extends Sprite
 		// Assets:
 		// nme.Assets.getBitmapData("img/assetname.jpg");
 		inited = true;
+		
 	}
 
-	function gameLoop(event:Dynamic) {
-		playState.update();
-		playState.draw();
-	}
 	
 	/* SETUP */
 
