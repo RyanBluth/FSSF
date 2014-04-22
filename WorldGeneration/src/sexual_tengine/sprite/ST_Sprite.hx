@@ -45,4 +45,8 @@ class ST_Sprite extends ST_Detachment{
 	public function getBitmap():Bitmap {
 		return bitmap;
 	}
+	
+	public function reset() {
+		active = true;
+	}
 }

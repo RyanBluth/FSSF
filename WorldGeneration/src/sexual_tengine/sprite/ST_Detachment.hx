@@ -26,6 +26,5 @@ class ST_Detachment extends Sprite
 		var movementVector:Point = kinetics.calculatePosition();
 		x += movementVector.x * STI.deltaTime/(1000/60);
 		y += movementVector.y * STI.deltaTime/(1000/60);
-		
 	}
 }

@@ -47,7 +47,6 @@ class ST_Mouse {
 		
 		Lib.current.stage.addEventListener(MouseEvent.MIDDLE_MOUSE_DOWN, ST_Mouse.onMiddleMouseDown);
 		Lib.current.stage.addEventListener(MouseEvent.MIDDLE_MOUSE_UP, ST_Mouse.onMiddleMouseUp);
-		Lib.current.stage.addEventListener(Event.ENTER_FRAME, ST_Mouse.clearJust);
 		
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
@@ -93,7 +92,7 @@ class ST_Mouse {
 	}
 	
 	/** Clears on ENTER_FRAME. */
-	private static function clearJust(evt:Event) {
+	public static function clearJust() {
 		leftJustPressed = false;
 		leftJustReleased = false;
 		rightJustPressed = false;

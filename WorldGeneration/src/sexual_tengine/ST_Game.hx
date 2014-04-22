@@ -9,6 +9,7 @@ import flash.display.Sprite;
 import sexual_tengine.input.ST_Keyboard;
 import sexual_tengine.input.ST_Mouse;
 import sexual_tengine.input.ST_GamepadManager;
+import sexual_tengine.input.ST_TouchManager;
 
 /**
  * ...
@@ -52,5 +53,9 @@ class ST_Game extends Sprite {
 			t += STI.timeStep;
 		}
 		playState.update();
+		
+		ST_Mouse.clearJust();
+		ST_GamepadManager.clearJust();
+		ST_Keyboard.clearJust();
 	}
 }

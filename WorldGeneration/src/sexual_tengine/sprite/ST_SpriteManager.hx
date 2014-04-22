@@ -6,7 +6,7 @@ import sexual_tengine.sprite.ST_Sprite;
  */
 class ST_SpriteManager
 {
-	var spriteArray:Array<ST_Sprite>;
+	public var spriteArray:Array<ST_Sprite>;
 	var spriteClass:Dynamic;	
 	var constructorParams:Array<Dynamic>;
 	
@@ -22,19 +22,16 @@ class ST_SpriteManager
 	}
 	
 	public function getActiveSprite():ST_Sprite {
-		
-		if (spriteArray.length > 0) {
-			for (i in spriteArray) {
-				if (!i.active) {
-					return i;
-					break;
-				}
+		for (i in spriteArray) {
+			if (!i.active) {
+				i.reset();
+				return i;
+				break;
 			}
-			return Type.createInstance(spriteClass,constructorParams);
-			
-		}else {
-			return Type.createInstance(spriteClass,constructorParams);
 		}
+		var temp = Type.createInstance(spriteClass, constructorParams);
+		spriteArray.push(temp);
+		return temp;
 	}
 	
 	public function reset() {

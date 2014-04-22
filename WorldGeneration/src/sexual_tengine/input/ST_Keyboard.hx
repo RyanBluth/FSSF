@@ -35,7 +35,6 @@ class ST_Keyboard{
 	public function new(){
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, ST_Keyboard.keyDown);
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, ST_Keyboard.keyUp);
-		Lib.current.stage.addEventListener(Event.ENTER_FRAME, ST_Keyboard.clearJust);
 	}
 	
 	/** Adds a pressed key to the map of pressedKeys and justPressedKeys. */
@@ -54,7 +53,7 @@ class ST_Keyboard{
 	}
 	
 	/** Clears justPressedKeys and justReleasedKeys on ENTER_FRAME. */
-	public static function clearJust(evt:Event){
+	public static function clearJust(){
 		for (key in justPressedKeys.keys()) {
 			justPressedKeys.remove(key);
 		}

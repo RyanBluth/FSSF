@@ -51,7 +51,6 @@ class ST_GamepadManager{
 		Lib.current.stage.addEventListener(JoystickEvent.AXIS_MOVE, ST_GamepadManager.axisMove);
 		Lib.current.stage.addEventListener(JoystickEvent.HAT_MOVE, ST_GamepadManager.hatMove);
 		Lib.current.stage.addEventListener(JoystickEvent.BALL_MOVE, ST_GamepadManager.ballMove);
-		Lib.current.stage.addEventListener(Event.ENTER_FRAME, ST_GamepadManager.clearJust);
 	}
 	private static function buttonDown(evt:JoystickEvent) {
 		if (!pads.get(evt.device).pressedButtons.exists(evt.id)){
@@ -75,7 +74,7 @@ class ST_GamepadManager{
 	}
 	
 	/** Clears justPressedButtons and justReleasedButtons on ENTER_FRAME. */
-	public static function clearJust(evt:Event) {
+	public static function clearJust() {
 		for(pad in pads){
 			for (button in pad.justPressedButtons) {
 				pad.justPressedButtons.remove(button);
