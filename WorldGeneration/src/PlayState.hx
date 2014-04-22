@@ -27,14 +27,20 @@ import sexual_tengine.sprite.ST_SuperSprite;
 import sexual_tengine.animation.ST_SpriteSheet;
 
 import openfl.display.FPS;
+import entities.Player;
+import entities.Enemy;
+
+import sexual_tengine.sprite.ST_Detachment;
 
 class PlayState extends ST_State{
 	var bulletManager:ST_SpriteManager;
 	var scrollBackground:ST_Background;
-	var player:ST_SuperSprite;
+	var player:Player;
+	var enemies:Array<Enemy>;
 	
 	public function new() {
 		super();
+		player = new Player();
 		setupPlayer();
 		addChild(player);
 		ST_GamepadManager.addController(0);
@@ -44,28 +50,18 @@ class PlayState extends ST_State{
 	}
 	
 	function setupPlayer(){
-		
-		player = new ST_SuperSprite();
 		player.kinetics.friction = 0.9;
 		
-		var playerFire:ST_Sprite = new ST_Sprite();
-		playerFire.animation.addSpriteSheet("img/player.png", "main", true);
-		playerFire.animation.addAnimationState("main", "main", [1, 3, 4], 5, 85, 100);
-		playerFire.animation.playAnimation(0, "main");
+		enemies = new Array();
+		enemies.push(new Enemy());
 		
-		var playerBody:ST_Sprite = new ST_Sprite();
-		playerBody.animation.addSpriteSheet("img/player.png", "main", true);
-		playerBody.animation.addAnimationState("main", "main", [0], 5, 85, 100);
-		playerBody.animation.setAnimationState("main");
-		playerBody.animation.staticDraw();
+		for (e in enemies) {
+			addChild(e);
+		}
 		
-		var playerFire2:ST_Sprite = new ST_Sprite();
-		playerFire2.animation.addSpriteSheet("img/player.png", "main", true);
-		playerFire2.animation.addAnimationState("main", "main", [3, 2, 4], 5, 85, 100);
-		playerFire2.animation.playAnimation(0, "main");
-		
-		player.addSpriteChild("playerFire", playerFire);
-		player.addSpriteChild("playerBody", playerBody);
+		addChild(new Enemy());
+		ST_GamepadManager.addController(0);
+		addChild(new FPS());
 	}
 	
 	public override function update(){
@@ -76,7 +72,9 @@ class PlayState extends ST_State{
 			i.update();
 			i.animation.draw();
 		}
-		trace(bulletManager.spriteArray.length);
+		for (e in enemies){
+			e.update();
+		}
 	}
 	
 	private function playerMovement() {
