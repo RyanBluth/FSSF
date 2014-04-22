@@ -24,49 +24,41 @@ import sexual_tengine.utils.ST_Collision;
 import sexual_tengine.layers.ST_Background;
 import sexual_tengine.sprite.ST_SuperSprite;
 import openfl.display.FPS;
+import entities.Player;
+import entities.Enemy;
+
+import sexual_tengine.sprite.ST_Detachment;
 
 class PlayState extends ST_State{
 
 	var scrollBackground:ST_Background;
-	var player:ST_SuperSprite;
+	var player:Player;
+	var enemies:Array<Enemy>;
 	
 	public function new() {
 		super();
-		setupPlayer();
+		player = new Player();
 		addChild(player);
+		
+		enemies = new Array();
+		enemies.push(new Enemy());
+		
+		for (e in enemies) {
+			addChild(e);
+		}
+		
+		addChild(new Enemy());
 		ST_GamepadManager.addController(0);
 		addChild(new FPS());
-	}
-	
-	function setupPlayer() {
-		
-		player = new ST_SuperSprite();
-		player.kinetics.friction = 0.9;
-		
-		var playerFire:ST_Sprite = new ST_Sprite();
-		playerFire.animation.addSpriteSheet("img/player.png", "main", true);
-		playerFire.animation.addAnimationState("main", "main", [1, 3, 4], 5, 85, 100);
-		playerFire.animation.playAnimation(0, "main");
-		
-		var playerBody:ST_Sprite = new ST_Sprite();
-		playerBody.animation.addSpriteSheet("img/player.png", "main", true);
-		playerBody.animation.addAnimationState("main", "main", [0], 5, 85, 100);
-		playerBody.animation.setAnimationState("main");
-		playerBody.animation.staticDraw();
-		
-		var playerFire2:ST_Sprite = new ST_Sprite();
-		playerFire2.animation.addSpriteSheet("img/player.png", "main", true);
-		playerFire2.animation.addAnimationState("main", "main", [3, 2, 4], 5, 85, 100);
-		playerFire2.animation.playAnimation(0, "main");
-		
-		player.addSpriteChild("playerFire", playerFire);
-		player.addSpriteChild("playerBody", playerBody);
 	}
 	
 	public override function update() {
 		super.update();
 		playerMovement();
 		player.update();
+		for (e in enemies){
+			e.update();
+		}
 	}
 	
 	private function playerMovement() {
