@@ -70,7 +70,7 @@ class PlayState extends ST_State{
 		player.update();
 		for (i in bulletManager.spriteArray) {
 			i.update();
-			i.animation.draw();
+			i.draw();
 		}
 		for (e in enemies){
 			e.update();
@@ -93,37 +93,31 @@ class PlayState extends ST_State{
 			player.kinetics.applyForce(new Point(0,-5));
 		}
 		
-		if (ST_GeneralInput.primary(0,false)) {
+		if (ST_GeneralInput.primary(0, false)) {
+			var pos:Point = new Point(player.x + 23.0*0.5, player.y + 23*0.5);
+			var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y*0.5 - 5,-1));
 			var bul:Bullet = cast(bulletManager.getActiveSprite(),Bullet);
 			//var bul:Bullet = new Bullet();
 			
-			bul.x = player.x;
-			bul.y = player.y;
-			//bul.kinetics.applyForce(player.kinetics.acceleration);
-			bul.kinetics.velocity.x = player.kinetics.velocity.x;
-			bul.kinetics.velocity.y = player.kinetics.velocity.y - 10;
+			bul.x = pos.x;
+			bul.y = pos.y;
+			bul.kinetics.velocity = vel;
 			
-			bul.animation.addSpriteSheet("img/bullet2.png", "main", true);
-			bul.animation.addAnimationState("main", "main", [0], 5, 23, 23);
-			bul.animation.playAnimation(0, "main", "main");
+			bul.animation.addSpriteSheet("img/bullet2.png", "main");
+			bul.animation.addAnimationState("main", "main", [0], 5, 23, 23, true);
 			
 			addChild(bul);
 			
 			bul = cast(bulletManager.getActiveSprite(),Bullet);
-			//var bul:Bullet = new Bullet();
 			
-			bul.x = player.x + 62;
-			bul.y = player.y;
-			//bul.kinetics.applyForce(player.kinetics.acceleration);
-			bul.kinetics.velocity.x = player.kinetics.velocity.x;
-			bul.kinetics.velocity.y = player.kinetics.velocity.y - 10;
+			bul.x = pos.x + 62;
+			bul.y = pos.y;
+			bul.kinetics.velocity = vel;
 			
-			bul.animation.addSpriteSheet("img/bullet2.png", "main", true);
-			bul.animation.addAnimationState("main", "main", [0], 5, 23, 23);
-			bul.animation.playAnimation(0, "main", "main");
+			bul.animation.addSpriteSheet("img/bullet2.png", "main");
+			bul.animation.addAnimationState("main", "main", [0], 5, 23, 23, true);
 			
 			addChild(bul);
-			//bulletManager.spriteArray.push(bul);
 		}
 	}
 	

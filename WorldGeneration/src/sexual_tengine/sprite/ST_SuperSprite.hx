@@ -28,10 +28,20 @@ class ST_SuperSprite extends ST_Detachment
 	}
 	
 	public override function update() {
-		super.update();
-		for (i in layers) {
-			spriteChildren.get(i).update();
-			spriteChildren.get(i).animation.draw();
+		if(active){
+			super.update();
+			for (i in layers) {
+				spriteChildren.get(i).update();
+				spriteChildren.get(i).animation.draw();
+			}
+		}
+	}
+	
+	public function draw() {
+		if(active){
+			for (i in layers) {
+				spriteChildren.get(i).draw();
+			}
 		}
 	}
 }

@@ -49,4 +49,18 @@ class ST_Sprite extends ST_Detachment{
 	public function reset() {
 		active = true;
 	}
+	
+	public function setOrigin(_x:Float, _y:Float) {
+		this.animation.origin.x = _x;
+		this.animation.origin.y = _y;
+	}
+	
+	/**
+	 * Needs to be called once per frame to update animation manager.
+	 */
+	public function draw() {
+		if(active){
+			this.animation.draw();
+		}
+	}
 }

@@ -22,9 +22,10 @@ class ST_Detachment extends Sprite
 	}
 	
 	public function update() {
-		
-		var movementVector:Point = kinetics.calculatePosition();
-		x += movementVector.x * STI.deltaTime/(1000/60);
-		y += movementVector.y * STI.deltaTime/(1000/60);
+		if(active){
+			var movementVector:Point = kinetics.calculatePosition();
+			x += movementVector.x * STI.deltaTime/(1000/60);
+			y += movementVector.y * STI.deltaTime / (1000 / 60);
+		}
 	}
 }

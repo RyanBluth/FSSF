@@ -21,8 +21,7 @@ class ST_SpriteSheet extends Tilesheet{
 	public var tileCorners:Array<Point>;
 	
 	/** No docs yet */
-	public function new(_bitmapPath:String) 
-	{
+	public function new(_bitmapPath:String){
 		bitmapData = Assets.getBitmapData(_bitmapPath);
 		super(bitmapData);
 		imageHeight = Math.round(bitmapData.height);
@@ -33,8 +32,7 @@ class ST_SpriteSheet extends Tilesheet{
 	}
 	
 	/** No docs yet */
-	public function addAnimationState(_name:String, _frames:Array<Int>, _frameRate:Int, _frameWidth:Int, _frameHeight:Int):Void
-	{
+	public function addAnimationState(_name:String, _frames:Array<Int>, _frameRate:Int, _frameWidth:Int, _frameHeight:Int):Void{
 		var frameRects:Array<Rectangle> = ST_SpriteSheetHandler.getSpriteArray(imageWidth,imageHeight,_frameWidth,_frameHeight,_frames);
 		
 		for(i in frameRects)

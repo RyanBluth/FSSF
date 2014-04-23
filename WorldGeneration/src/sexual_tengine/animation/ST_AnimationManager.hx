@@ -22,7 +22,7 @@ import openfl.gl.GLTexture;
 
 
 class ST_AnimationManager{
-	
+	public var origin:Point;
 	private var graphics:Graphics;
 	private var currentSpriteSheet:ST_SpriteSheet;
 	public var play:Bool;
@@ -33,6 +33,7 @@ class ST_AnimationManager{
 		graphics = _graphics;
 		spriteSheets = new Map();
 		play = false;
+		origin = new Point(0, 0);
 	}
 	
 	/** No docs yet */
@@ -52,8 +53,11 @@ class ST_AnimationManager{
 	 * @param	_frameWidth		Width of individual frames on the sprite sheet
 	 * @param	_frameHeight	Height of individual frames on the sprite sheet
 	 */
-	public function addAnimationState(_spriteSheet:String, _stateName:String, _frames:Array<Int>, _frameRate:Int, _frameWidth:Int, _frameHeight:Int):Void{	
-		spriteSheets.get(_spriteSheet).addAnimationState(_stateName, _frames, _frameRate, _frameWidth, _frameHeight);	
+	public function addAnimationState(_spriteSheet:String, _stateName:String, _frames:Array<Int>, _frameRate:Int, _frameWidth:Int, _frameHeight:Int, ?_setAsCurrent:Bool = false):Void{	
+		spriteSheets.get(_spriteSheet).addAnimationState(_stateName, _frames, _frameRate, _frameWidth, _frameHeight);
+		if (_setAsCurrent) {
+			setAnimationState(_stateName, _spriteSheet);
+		}
 	}
 	
 	/**
@@ -91,7 +95,7 @@ class ST_AnimationManager{
 	public function draw(){
 		if (play) {
 			currentSpriteSheet.currentState.incrementFrames();
-			var data=[0.0, 0.0, currentSpriteSheet.currentState.getCurrentFrame()];
+			var data=[origin.x, origin.y, currentSpriteSheet.currentState.getCurrentFrame()];
 			graphics.clear();
 			currentSpriteSheet.drawTiles(graphics, data, true);
 		}
@@ -100,7 +104,7 @@ class ST_AnimationManager{
 	/** This method is used to update the frame from the current sprite sheet's current animation state <strong>outside the main game loop, regardless of whether the sprite is paused</strong>.
 	 * <em>Note that this will not increment the frames of the animation state.</em>*/
 	public function staticDraw() {
-		var data=[0.0, 0.0, currentSpriteSheet.currentState.getCurrentFrame()];
+		var data=[origin.x, origin.y, currentSpriteSheet.currentState.getCurrentFrame()];
 		graphics.clear();
 		currentSpriteSheet.drawTiles(graphics, data, true);
 	}
