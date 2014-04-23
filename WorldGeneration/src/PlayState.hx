@@ -107,10 +107,13 @@ class PlayState extends ST_State{
 			bul.animation.addAnimationState("main", "main", [0], 5, 23, 23, true);
 			
 			addChild(bul);
+		}if (ST_GeneralInput.secondary(0, false)) {
+			var pos:Point = new Point(player.x + 23.0*0.5 + 62, player.y + 23*0.5);
+			var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y*0.5 - 5,-1));
+			var bul:Bullet = cast(bulletManager.getActiveSprite(),Bullet);
+			//var bul:Bullet = new Bullet();
 			
-			bul = cast(bulletManager.getActiveSprite(),Bullet);
-			
-			bul.x = pos.x + 62;
+			bul.x = pos.x;
 			bul.y = pos.y;
 			bul.kinetics.velocity = vel;
 			
