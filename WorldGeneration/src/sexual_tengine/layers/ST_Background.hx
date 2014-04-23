@@ -44,8 +44,8 @@ class ST_Background extends Sprite
 	}
 	
 	public function update() {
-		bitmapOne.y += speed * STI.deltaTime / 60;
-		bitmapTwo.y += speed * STI.deltaTime / 60;
+		bitmapOne.y += speed * STI.corrector;
+		bitmapTwo.y += speed * STI.corrector;
 		if (bitmapOne.y >= bitmapOne.height) {
 			bitmapOne.y = bitmapTwo.y-bitmapOne.height;
 		}

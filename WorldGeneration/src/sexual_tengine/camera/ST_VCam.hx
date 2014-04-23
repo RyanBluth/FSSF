@@ -102,8 +102,8 @@ class ST_VCam extends Sprite
 		////////////////////////////////////////////////////////////////////////////
 		// Positions the parent ////////////////////////////////////////////////////
 
-		x2=w / 2 * _scaleX;
-		y2=h / 2 * _scaleY;
+		x2=w *0.5 * _scaleX;
+		y2=h *0.5 * _scaleY;
 
 		scaleX2=_scaleX;
 		scaleY2=_scaleY;

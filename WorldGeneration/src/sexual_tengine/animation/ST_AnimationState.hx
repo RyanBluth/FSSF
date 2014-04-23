@@ -12,7 +12,7 @@ class ST_AnimationState{
 	public var frames:Array<Int>;
 	private var currentFrame:Int;
 	public var frameRate:Int;
-	private var frameCounter:Int;
+	private var frameCounter:Float;
 
 	/** No docs yet */
 	public function new(framePass:Array<Int>, frameRatePass:Int) 
@@ -28,9 +28,9 @@ class ST_AnimationState{
 		return frames[currentFrame];
 	}
 	public function incrementFrames(){
-		frameCounter++;
-		if (frameCounter >= frameRate){
-			frameCounter = 0;
+		frameCounter+=STI.corrector;
+		while (frameCounter >= frameRate){
+			frameCounter -= frameRate;
 			currentFrame++;
 			if (currentFrame >= frames.length ){
 				currentFrame = 0;

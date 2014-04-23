@@ -1,18 +1,18 @@
 package entities;
+import flash.Lib;
 import sexual_tengine.sprite.ST_SuperSprite;
 import sexual_tengine.sprite.ST_Sprite;
 /**
  * ...
  * @author ryan
  */
-class Player extends ST_SuperSprite
-{
-	public function new() 
-	{
+class Player extends ST_SuperSprite{
+	public function new() {
 		super();
 		
 		kinetics.friction = 0.9;
-		
+		this.x = (Lib.current.stage.stageWidth - 85)*0.5;
+		this.y = Lib.current.stage.stageHeight - 100*2;
 		var playerFire:ST_Sprite = new ST_Sprite();
 		playerFire.animation.addSpriteSheet("img/player.png", "main", true);
 		playerFire.animation.addAnimationState("main", "main", [1, 2, 3, 4], 5, 85, 100);

@@ -20,11 +20,11 @@ class Bullet extends ST_Sprite {
 		
 		var style = Lib.getTimer()%3000;
 		if(style >= 2000){
-			this.setOrigin( -23 / 2, -23 / 2);
+			this.setOrigin( -23 *0.5, -23 *0.5);
 		}else if(style >= 1000){
-			this.setOrigin( -53 / 2, -23 / 2);
+			this.setOrigin( -53 *0.5, -23 *0.5);
 		}else{
-			this.setOrigin( -123 / 2, -23 / 2);
+			this.setOrigin( -123 *0.5, -23 *0.5);
 		}
 		this.rotation = Std.random(180);
 	}
@@ -33,23 +33,21 @@ class Bullet extends ST_Sprite {
 			super.update();
 			
 			//kill bullets outside screen
-			if (this.x < -50 || this.y < -50 || this.x > Lib.current.stage.stageWidth+50 || this.y > Lib.current.stage.stageHeight+50) {
-				this.active = false;
-				this.graphics.clear();
+			if (x < -50 || y < -50 || x > Lib.current.stage.stageWidth+50 || y > Lib.current.stage.stageHeight+50) {
+				deactivate();
 			}
 			//kill bullets that have been onstage for too long
 			if (Lib.getTimer() - 60000 > timeStamp) {
-				this.active = false;
-				this.graphics.clear();
+				deactivate();
 			}
 			//rotate!
-			this.rotation += 10 * STI.deltaTime / (1000 / 60);
+			rotation += 10 * STI.corrector;
 		}
 	}
 	
-	public override function reset() {
-		super.reset();
+	public override function reactivate() {
+		super.reactivate();
 		timeStamp = Lib.getTimer();
-		this.rotation = Std.random(180);
+		rotation = Std.random(180);
 	}
 }

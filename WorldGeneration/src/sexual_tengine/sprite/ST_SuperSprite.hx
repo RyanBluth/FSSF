@@ -44,4 +44,18 @@ class ST_SuperSprite extends ST_Detachment
 			}
 		}
 	}
+	
+	override public function deactivate() {
+		super.deactivate();
+		for (i in layers) {
+			spriteChildren.get(i).deactivate();
+		}
+	}
+	
+	override public function reactivate() {
+		super.reactivate();
+		for (i in layers) {
+			spriteChildren.get(i).reactivate();
+		}
+	}
 }

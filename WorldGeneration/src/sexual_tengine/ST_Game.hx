@@ -43,6 +43,7 @@ class ST_Game extends Sprite {
 	public function update(evt:Event) {
 		ticks = Lib.getTimer();
 		STI.deltaTime = (ticks - STI.elapsedTime);
+		STI.corrector = STI.deltaTime / STI.target;
 		STI.elapsedTime = ticks;
 		accumulator += STI.deltaTime;
 		

@@ -24,7 +24,7 @@ class ST_SpriteManager
 	public function getActiveSprite():ST_Sprite {
 		for (i in spriteArray) {
 			if (!i.active) {
-				i.reset();
+				i.reactivate();
 				return i;
 				break;
 			}

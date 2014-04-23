@@ -46,9 +46,6 @@ class ST_Sprite extends ST_Detachment{
 		return bitmap;
 	}
 	
-	public function reset() {
-		active = true;
-	}
 	
 	public function setOrigin(_x:Float, _y:Float) {
 		this.animation.origin.x = _x;
@@ -62,5 +59,10 @@ class ST_Sprite extends ST_Detachment{
 		if(active){
 			this.animation.draw();
 		}
+	}
+	
+	override public function deactivate() {
+		super.deactivate();
+		this.graphics.clear();
 	}
 }

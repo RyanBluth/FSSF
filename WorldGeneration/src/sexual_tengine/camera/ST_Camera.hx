@@ -26,10 +26,10 @@ class ST_Camera
 	 */
 	public function new(_x:Float , _y:Float, _width:Float, _height:Float, _deadzoneWidth:Float, _deadzoneHeight:Float) {
 		frame = new Rectangle(_x, _y, _width, _height);
-		deadzone = new Rectangle(_x + (_width - _deadzoneWidth) / 2, _y +(_height / _deadzoneHeight) / 2, _deadzoneWidth, _deadzoneHeight);
+		deadzone = new Rectangle(_x + (_width - _deadzoneWidth) *0.5, _y +(_height / _deadzoneHeight) *0.5, _deadzoneWidth, _deadzoneHeight);
 		var dummySprite:ST_Sprite = new ST_Sprite();
-		dummySprite.x = frame.width / 2;
-		dummySprite.y = frame.height / 2;
+		dummySprite.x = frame.width *0.5;
+		dummySprite.y = frame.height *0.5;
 		dummySprite.width = 0;
 		dummySprite.height = 0;
 		followSprite = dummySprite;

@@ -24,8 +24,16 @@ class ST_Detachment extends Sprite
 	public function update() {
 		if(active){
 			var movementVector:Point = kinetics.calculatePosition();
-			x += movementVector.x * STI.deltaTime/(1000/60);
-			y += movementVector.y * STI.deltaTime / (1000 / 60);
+			x += movementVector.x * STI.corrector;
+			y += movementVector.y * STI.corrector;
 		}
+	}
+	
+	public function deactivate() {
+		this.active = false;
+	}
+	
+	public function reactivate() {
+		active = true;
 	}
 }
