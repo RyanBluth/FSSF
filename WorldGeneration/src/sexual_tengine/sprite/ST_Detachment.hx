@@ -9,16 +9,18 @@ import sexual_tengine.STI;
  * ...
  * @author ryan
  */
-class ST_Detachment extends Sprite
-{
+class ST_Detachment extends Sprite{
 	public var kinetics:ST_Physics;
 	public var active:Bool;
+	/** Whether this class extends ST_SuperSprite */
+	public var superSprite:Bool;
 	
 	
 	public function new() {
 		super();
 		kinetics = new ST_Physics();
 		active = true;
+		superSprite = false;
 	}
 	
 	public function update() {

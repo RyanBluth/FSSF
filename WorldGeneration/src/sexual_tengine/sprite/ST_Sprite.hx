@@ -18,6 +18,7 @@ import openfl.Assets;
  */
 class ST_Sprite extends ST_Detachment{
 	
+	
 	private var bitmap:Bitmap;
 	public var animation:ST_AnimationManager;
 	
@@ -32,6 +33,7 @@ class ST_Sprite extends ST_Detachment{
 		animation = new ST_AnimationManager(this.graphics);
 		kinetics = new ST_Physics();
 		active = true;
+		
 	}
 	
 	public override function update() {

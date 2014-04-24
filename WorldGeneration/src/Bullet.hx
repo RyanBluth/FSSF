@@ -16,8 +16,12 @@ class Bullet extends ST_Sprite {
 		super(_bitmap);
 		kinetics.friction = 1;
 		
+		animation.addSpriteSheet("img/bullet2.png", "main");
+		animation.addAnimationState("main", "main", [0], 5, 23, 23, true);
+		
 		timeStamp = Lib.getTimer();
 		
+		//silly randomizer thing
 		var style = Lib.getTimer()%3000;
 		if(style >= 2000){
 			this.setOrigin( -23 *0.5, -23 *0.5);
@@ -27,6 +31,7 @@ class Bullet extends ST_Sprite {
 			this.setOrigin( -123 *0.5, -23 *0.5);
 		}
 		this.rotation = Std.random(180);
+		
 	}
 	public override function update() {
 		if(active){
@@ -45,9 +50,14 @@ class Bullet extends ST_Sprite {
 		}
 	}
 	
-	public override function reactivate() {
+	public override function reactivate(){
 		super.reactivate();
 		timeStamp = Lib.getTimer();
 		rotation = Std.random(180);
+		animation.staticDraw();
+	}
+	
+	override public function deactivate(){
+		super.deactivate();
 	}
 }

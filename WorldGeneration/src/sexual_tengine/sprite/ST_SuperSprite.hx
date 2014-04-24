@@ -15,6 +15,7 @@ class ST_SuperSprite extends ST_Detachment
 		super();
 		spriteChildren = new Map();
 		layers = new Array();
+		superSprite = true;
 	}
 	
 	public function addSpriteChild(_name:String, _sprite:ST_Sprite) {
@@ -32,7 +33,6 @@ class ST_SuperSprite extends ST_Detachment
 			super.update();
 			for (i in layers) {
 				spriteChildren.get(i).update();
-				spriteChildren.get(i).animation.draw();
 			}
 		}
 	}

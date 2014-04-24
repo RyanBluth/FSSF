@@ -56,7 +56,9 @@ class ST_Game extends Sprite {
 		playState.update();
 		
 		ST_Mouse.clearJust();
+		#if !flash
 		ST_GamepadManager.clearJust();
+		#end
 		ST_Keyboard.clearJust();
 	}
 }

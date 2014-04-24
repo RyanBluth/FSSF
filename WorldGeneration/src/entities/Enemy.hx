@@ -10,29 +10,26 @@ import sexual_tengine.sprite.ST_Detachment;
 class Enemy extends ST_SuperSprite
 {
 
-	public function new() 
-	{
+	public var enemyFire:ST_Sprite;
+	public var enemyBody:ST_Sprite;
+	public function new() {
 		super();
 		
 		kinetics.friction = 0.9;
 		
-		var enemyFire:ST_Sprite = new ST_Sprite();
+		enemyFire = new ST_Sprite();
+		enemyFire.setOrigin( -50, -50);
 		enemyFire.animation.addSpriteSheet("img/enemy_01.png", "main", true);
-		enemyFire.animation.addAnimationState("main", "main", [1, 2, 3, 4], 5, 550, 550);
+		enemyFire.animation.addAnimationState("main", "main", [1, 2, 3, 4], 5, 100, 100, true);
 		enemyFire.animation.playAnimation(0, "main");
 		
-		var enemyBody:ST_Sprite = new ST_Sprite();
+		enemyBody = new ST_Sprite();
+		enemyBody.setOrigin( -50, -50);
 		enemyBody.animation.addSpriteSheet("img/enemy_01.png", "main", true);
-		enemyBody.animation.addAnimationState("main", "main", [0], 5, 550, 550);
-		enemyBody.animation.setAnimationState("main");
-		enemyBody.animation.staticDraw();
+		enemyBody.animation.addAnimationState("main", "main", [0], 5, 100, 100, true);
 		
 		addSpriteChild("enemyFire", enemyFire);
 		addSpriteChild("enemyBody", enemyBody);
-		
-		width = 100;
-		height = 100;
-		
 	}
 	
 	public override function update() {

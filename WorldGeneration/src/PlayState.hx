@@ -9,6 +9,7 @@ import flash.geom.Rectangle;
 import flash.utils.ByteArray;
 import flash.Lib;
 import sexual_tengine.sprite.ST_SpriteManager;
+import sexual_tengine.STI;
 import sexual_tengine.utils.ST_Logger;
 
 import Bullet;
@@ -38,15 +39,27 @@ class PlayState extends ST_State{
 	var player:Player;
 	var enemies:Array<Enemy>;
 	
+	var collisionTest:ST_Sprite;
+	
 	public function new() {
 		super();
 		player = new Player();
 		setupPlayer();
 		addChild(player);
-		ST_GamepadManager.addController(0);
 		addChild(new FPS());
 		
 		bulletManager = new ST_SpriteManager(Bullet);
+		
+		collisionTest = new ST_Sprite();
+		collisionTest.animation.addSpriteSheet("img/terrain.png", "main");
+		collisionTest.animation.addAnimationState("main", "main", [0], 0, 432, 216, true);
+		collisionTest.x = 700;
+		addChild(collisionTest);
+		
+		
+		#if !flash
+		ST_GamepadManager.addController(0);
+		#end
 	}
 	
 	function setupPlayer(){
@@ -57,10 +70,11 @@ class PlayState extends ST_State{
 		
 		for (e in enemies) {
 			addChild(e);
+			e.x = 500;
+			e.y = 500;
 		}
 		
 		addChild(new Enemy());
-		ST_GamepadManager.addController(0);
 		addChild(new FPS());
 	}
 	
@@ -70,10 +84,14 @@ class PlayState extends ST_State{
 		player.update();
 		for (i in bulletManager.spriteArray) {
 			i.update();
-			i.draw();
 		}
 		for (e in enemies){
 			e.update();
+		}
+		
+		if(ST_GeneralInput.primary(0,true)){
+			trace(ST_Collision.checkCollision(collisionTest, player.playerBody, 0, null, player));
+			trace(ST_Collision.checkCollision(enemies[0].enemyBody, player.playerBody, 0, enemies[0], player));
 		}
 	}
 	
@@ -81,44 +99,36 @@ class PlayState extends ST_State{
 	
 		player.kinetics.resetAcceleration();
 		if(ST_GeneralInput.left(0)) {
-			player.kinetics.applyForce(new Point(-5,0));
+			player.kinetics.applyForce(new Point(-1,0));
 		}
 		if(ST_GeneralInput.right(0)) {
-			player.kinetics.applyForce(new Point(5,0));
+			player.kinetics.applyForce(new Point(1,0));
 		}
 		if(ST_GeneralInput.down(0)) {
-			player.kinetics.applyForce(new Point(0,5));
+			player.kinetics.applyForce(new Point(0,1));
 		}
 		if(ST_GeneralInput.up(0)) {
-			player.kinetics.applyForce(new Point(0,-5));
+			player.kinetics.applyForce(new Point(0,-1));
 		}
 		
 		if (ST_GeneralInput.primary(0, false)) {
-			var pos:Point = new Point(player.x + 23.0*0.5, player.y + 23*0.5);
+			var pos:Point = new Point(player.x - 23*1.5, player.y - 23*2);
 			var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y*0.5 - 5,-1));
 			var bul:Bullet = cast(bulletManager.getActiveSprite(),Bullet);
-			//var bul:Bullet = new Bullet();
 			
 			bul.x = pos.x;
 			bul.y = pos.y;
 			bul.kinetics.velocity = vel;
-			
-			bul.animation.addSpriteSheet("img/bullet2.png", "main");
-			bul.animation.addAnimationState("main", "main", [0], 5, 23, 23, true);
 			
 			addChild(bul);
 		}if (ST_GeneralInput.secondary(0, false)) {
-			var pos:Point = new Point(player.x + 23.0*0.5 + 62, player.y + 23*0.5);
-			var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y*0.5 - 5,-1));
+			var pos:Point = new Point(player.x + 23*1.5, player.y - 23*2);
+			var vel:Point = new Point(player.kinetics.velocity.x*0.5*STI.corrector, Math.min(player.kinetics.velocity.y*0.5*STI.corrector - 5,-1));
 			var bul:Bullet = cast(bulletManager.getActiveSprite(),Bullet);
-			//var bul:Bullet = new Bullet();
 			
 			bul.x = pos.x;
 			bul.y = pos.y;
 			bul.kinetics.velocity = vel;
-			
-			bul.animation.addSpriteSheet("img/bullet2.png", "main");
-			bul.animation.addAnimationState("main", "main", [0], 5, 23, 23, true);
 			
 			addChild(bul);
 		}
@@ -126,5 +136,11 @@ class PlayState extends ST_State{
 	
 	public override function draw() {
 		super.draw();
+		player.draw();
+		for (e in enemies) {
+			e.draw();
+		}for (i in bulletManager.spriteArray) {
+			i.draw();
+		}
 	}
 }
