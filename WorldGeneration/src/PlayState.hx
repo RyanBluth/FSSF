@@ -8,6 +8,7 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.utils.ByteArray;
 import flash.Lib;
+import sexual_tengine.debugger.ST_Console;
 import sexual_tengine.sprite.ST_SpriteManager;
 import sexual_tengine.STI;
 import sexual_tengine.utils.ST_Logger;
@@ -40,6 +41,7 @@ class PlayState extends ST_State{
 	var enemies:Array<Enemy>;
 	
 	var collisionTest:ST_Sprite;
+	var debugger:ST_Console;
 	
 	public function new() {
 		super();
@@ -56,6 +58,8 @@ class PlayState extends ST_State{
 		collisionTest.x = 700;
 		addChild(collisionTest);
 		
+		debugger = new ST_Console();
+		addChild(debugger);
 		
 		#if !flash
 		ST_GamepadManager.addController(0);
@@ -93,6 +97,10 @@ class PlayState extends ST_State{
 			trace(ST_Collision.checkCollision(collisionTest, player.playerBody, 0, null, player));
 			trace(ST_Collision.checkCollision(enemies[0].enemyBody, player.playerBody, 0, enemies[0], player));
 		}
+		if (ST_GeneralInput.primary(0,true)) {
+			debugger.analyze(getObjectsUnderPoint(new Point(mouseX, mouseY))[0]);
+		}
+		debugger.update();
 	}
 	
 	private function playerMovement() {
