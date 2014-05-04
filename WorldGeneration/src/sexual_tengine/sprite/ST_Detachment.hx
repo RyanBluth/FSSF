@@ -1,5 +1,6 @@
 package sexual_tengine.sprite;
 
+import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;
 import sexual_tengine.physics.ST_Physics;
 import flash.geom.Point;
@@ -37,5 +38,20 @@ class ST_Detachment extends Sprite{
 	
 	public function reactivate() {
 		active = true;
+	}
+	
+	public function getParentOffset(_parent:ST_Detachment):Point{
+		var t:DisplayObjectContainer = cast(this,DisplayObjectContainer);
+		var offset:Point = new Point(0, 0);
+		while (t != _parent) {
+			t = t.parent;
+			if (t != null) {
+				offset.x += t.x;
+				offset.y += t.y;
+			}else {
+				break;
+			}
+		}
+		return offset;
 	}
 }

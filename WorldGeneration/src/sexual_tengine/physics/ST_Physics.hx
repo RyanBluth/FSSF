@@ -29,7 +29,11 @@ class ST_Physics
 	 */
 	public function calculatePosition():Point{
 		
-		var reutrnPoint;
+		//Apply the friction after the movement has occured
+		velocity.x *= friction;// * STI.corrector;
+		velocity.y *= friction;// * STI.corrector;
+		
+		var res;
 		
 		//Adjust the accleration by applying forces for the frame
 		
@@ -47,18 +51,15 @@ class ST_Physics
 			velocity.y += acceleration.y;
 		}
 		
-		reutrnPoint = new Point(velocity.x, velocity.y);
+		res = new Point(velocity.x, velocity.y);
 		
-		//Apply the friction after the movement has occured
-		velocity.x *= friction;// * STI.corrector;
-		velocity.y *= friction;// * STI.corrector;
 		
 		if (Math.abs(velocity.x) <= 0.001) {
 			velocity.x = 0;
 		}if (Math.abs(velocity.y) <= 0.001) {
 			velocity.y = 0;
 		}
-		return reutrnPoint;
+		return res;
 	}
 	
 	/*

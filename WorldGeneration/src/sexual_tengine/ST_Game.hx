@@ -41,10 +41,10 @@ class ST_Game extends Sprite {
 	private var accumulator:Float = 0;
 	private var t:Float = 0;
 	public function update(evt:Event) {
-		ticks = Lib.getTimer();
-		STI.deltaTime = (ticks - STI.elapsedTime);
+		STI.timeStamp = Lib.getTimer();
+		STI.deltaTime = (STI.timeStamp - STI.elapsedTime);
 		STI.corrector = STI.deltaTime / STI.target;
-		STI.elapsedTime = ticks;
+		STI.elapsedTime = STI.timeStamp;
 		accumulator += STI.deltaTime;
 		
 		while (accumulator >= STI.timeStep) {

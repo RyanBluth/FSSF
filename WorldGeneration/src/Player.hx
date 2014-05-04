@@ -1,4 +1,4 @@
-package entities;
+package;
 import flash.Lib;
 import sexual_tengine.sprite.ST_SuperSprite;
 import sexual_tengine.sprite.ST_Sprite;

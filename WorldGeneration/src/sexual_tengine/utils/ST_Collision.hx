@@ -16,6 +16,19 @@ class ST_Collision{
 		
 	}
 	
+	public static function circleCollide(obj1:ST_Sprite, obj2:ST_Sprite, ?obj1P:ST_SuperSprite, ?obj2P:ST_SuperSprite):Bool {
+		var t1:Point = new Point(obj1.x, obj1.y);
+		var t2:Point = new Point(obj2.x, obj2.y);
+		var t3 = obj1.getParentOffset(obj1P);
+		t1.x += t3.x;
+		t1.y += t3.y;
+		var t4 = obj2.getParentOffset(obj2P);
+		t2.x += t4.x;
+		t2.y += t4.y;
+		
+		return (t2.x-t1.x)*(t2.x-t1.x) + (t2.y-t1.y)*(t2.y-t1.y) <= (obj1.circleColliderRadius+obj2.circleColliderRadius)*(obj1.circleColliderRadius+obj2.circleColliderRadius);
+	}
+	
 	public static function checkCollision(obj1:ST_Sprite, obj2:ST_Sprite, threshold:Int = 0, ?obj1P:ST_SuperSprite, ?obj2P:ST_SuperSprite):Bool {
 		var spriteSheetOffset1:Point = new Point();
 		var spriteSheetOffset2:Point = new Point();

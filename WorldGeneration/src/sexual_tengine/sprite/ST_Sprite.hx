@@ -17,7 +17,9 @@ import openfl.Assets;
  * @author Sean
  */
 class ST_Sprite extends ST_Detachment{
-	
+	public var circleColliderRadius:Float;
+	public var circleColliderX:Float;
+	public var circleColliderY:Float;
 	
 	private var bitmap:Bitmap;
 	public var animation:ST_AnimationManager;
@@ -34,6 +36,9 @@ class ST_Sprite extends ST_Detachment{
 		kinetics = new ST_Physics();
 		active = true;
 		
+		circleColliderRadius = 0;
+		circleColliderX = 0;
+		circleColliderY = 0;
 	}
 	
 	public override function update() {

@@ -1,4 +1,4 @@
-package ;
+package;
 
 import sexual_tengine.camera.ST_Camera;
 import flash.display.Bitmap;
@@ -29,8 +29,8 @@ import sexual_tengine.sprite.ST_SuperSprite;
 import sexual_tengine.animation.ST_SpriteSheet;
 
 import openfl.display.FPS;
-import entities.Player;
-import entities.Enemy;
+import Player;
+import Enemy;
 
 import sexual_tengine.sprite.ST_Detachment;
 
@@ -58,6 +58,9 @@ class PlayState extends ST_State{
 		collisionTest.x = 700;
 		addChild(collisionTest);
 		
+		collisionTest.circleColliderRadius = 5;
+		player.playerBody.circleColliderRadius = 5;
+		
 		//debugger = new ST_Console();
 		//addChild(debugger);
 		
@@ -69,14 +72,22 @@ class PlayState extends ST_State{
 		
 		enemies = new Array();
 		enemies.push(new Enemy());
+		enemies.push(new Enemy());
+		enemies.push(new Enemy());
+		enemies.push(new Enemy());
+		enemies.push(new Enemy());
+		enemies.push(new Enemy());
+		enemies.push(new Enemy());
+		enemies.push(new Enemy());
+		enemies.push(new Enemy());
+		enemies.push(new Enemy());
 		
 		for (e in enemies) {
 			addChild(e);
-			e.x = 500;
-			e.y = 500;
+			e.x = Std.random(Lib.current.stage.stageWidth);
+			e.y = Std.random(Lib.current.stage.stageHeight);
 		}
 		
-		addChild(new Enemy());
 		addChild(new FPS());
 	}
 	
@@ -91,9 +102,10 @@ class PlayState extends ST_State{
 			e.update();
 		}
 		
-		if(ST_GeneralInput.primary(0,true)){
-			trace(ST_Collision.checkCollision(collisionTest, player.playerBody, 0, null, player));
-			trace(ST_Collision.checkCollision(enemies[0].enemyBody, player.playerBody, 0, enemies[0], player));
+		if(ST_GeneralInput.primary(0,false)){
+			trace(ST_Collision.circleCollide(collisionTest, player.playerBody, null, player));
+			//trace(ST_Collision.checkCollision(collisionTest, player.playerBody, 0, null, player));
+			//trace(ST_Collision.checkCollision(enemies[0].enemyBody, player.playerBody, 0, enemies[0], player));
 		}
 		//if (ST_GeneralInput.primary(0,true)) {
 		//	debugger.analyze(getObjectsUnderPoint(new Point(mouseX, mouseY))[0]);

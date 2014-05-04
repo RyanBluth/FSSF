@@ -6,6 +6,8 @@ class STI {
 	public static var deltaTime:Float = 0;
 	public static var corrector:Float = 1;
 	public static var timeStep:Float = 1 / 60;
+	
+	public static var timeStamp:Int;
 	public function new(){
 		
 	}
