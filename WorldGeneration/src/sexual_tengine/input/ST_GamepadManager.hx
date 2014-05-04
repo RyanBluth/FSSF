@@ -1,9 +1,10 @@
 package sexual_tengine.input;
 
-#if !flash
 import flash.events.Event;
 import flash.Lib;
-import openfl.events.JoystickEvent;
+#if (!flash && !web)
+	import openfl.events.JoystickEvent;
+#end
 
 /** Class for instantiating individual gamepad objects */
 class ST_Gamepad {
@@ -45,44 +46,55 @@ class ST_GamepadManager{
 	/** Buttons released last frame */
 	private static var justReleasedButtons:Map<Int,String> = new Map<Int,String>();
 	
-	public function new(){
-		Lib.current.stage.addEventListener(JoystickEvent.BUTTON_DOWN, ST_GamepadManager.buttonDown);
-		Lib.current.stage.addEventListener(JoystickEvent.BUTTON_UP, ST_GamepadManager.buttonUp);
-		Lib.current.stage.addEventListener(JoystickEvent.AXIS_MOVE, ST_GamepadManager.axisMove);
-		Lib.current.stage.addEventListener(JoystickEvent.HAT_MOVE, ST_GamepadManager.hatMove);
-		Lib.current.stage.addEventListener(JoystickEvent.BALL_MOVE, ST_GamepadManager.ballMove);
-	}
-	private static function buttonDown(evt:JoystickEvent) {
-		if (!pads.get(evt.device).pressedButtons.exists(evt.id)){
-			pads.get(evt.device).pressedButtons.set(evt.id, evt.id);
-			pads.get(evt.device).justPressedButtons.set(evt.id, evt.id);
+	#if (!flash && !web)
+		public function new() {
+			Lib.current.stage.addEventListener(JoystickEvent.BUTTON_DOWN, ST_GamepadManager.buttonDown);
+			Lib.current.stage.addEventListener(JoystickEvent.BUTTON_UP, ST_GamepadManager.buttonUp);
+			Lib.current.stage.addEventListener(JoystickEvent.AXIS_MOVE, ST_GamepadManager.axisMove);
+			Lib.current.stage.addEventListener(JoystickEvent.HAT_MOVE, ST_GamepadManager.hatMove);
+			Lib.current.stage.addEventListener(JoystickEvent.BALL_MOVE, ST_GamepadManager.ballMove);
 		}
-	}
-	private static function buttonUp(evt:JoystickEvent){
-		pads.get(evt.device).pressedButtons.remove(evt.id);
-		pads.get(evt.device).justReleasedButtons.set(evt.id,evt.id);
-		pads.get(evt.device).lastButtonUp = evt.id;
-	}
-	private static function axisMove(evt:JoystickEvent) {
-		pads.get(evt.device).axes = evt.axis;
-	}
-	private static function hatMove(evt:JoystickEvent) {
-		pads.get(evt.device).hat = evt.axis;
-	}
-	private static function ballMove(evt:JoystickEvent) {
-		//I don't actually know what this event covers, apparently nothing on an xbox controller
-	}
+		private static function buttonDown(evt:JoystickEvent) {
+			if (!pads.get(evt.device).pressedButtons.exists(evt.id)){
+				pads.get(evt.device).pressedButtons.set(evt.id, evt.id);
+				pads.get(evt.device).justPressedButtons.set(evt.id, evt.id);
+			}
+		}
+		private static function buttonUp(evt:JoystickEvent) {
+			pads.get(evt.device).pressedButtons.remove(evt.id);
+			pads.get(evt.device).justReleasedButtons.set(evt.id,evt.id);
+			pads.get(evt.device).lastButtonUp = evt.id;
+		}
+		private static function axisMove(evt:JoystickEvent) {
+			pads.get(evt.device).axes = evt.axis;
+		}
+		private static function hatMove(evt:JoystickEvent) {
+			pads.get(evt.device).hat = evt.axis;
+		}
+		private static function ballMove(evt:JoystickEvent) {
+			//I don't actually know what this event covers, apparently nothing on an xbox controller
+		}
+	#else
+		public function new() {}
+		private static function buttonDown() {}
+		private static function buttonUp() {}
+		private static function axisMove() {}
+		private static function hatMove() {}
+		private static function ballMove() {}
+	#end
 	
 	/** Clears justPressedButtons and justReleasedButtons on ENTER_FRAME. */
 	public static function clearJust() {
-		for(pad in pads){
-			for (button in pad.justPressedButtons) {
-				pad.justPressedButtons.remove(button);
+		#if (!flash && !web)
+			for(pad in pads){
+				for (button in pad.justPressedButtons) {
+					pad.justPressedButtons.remove(button);
+				}
+				for (button in pad.justReleasedButtons) {
+					pad.justReleasedButtons.remove(button);
+				}
 			}
-			for (button in pad.justReleasedButtons) {
-				pad.justReleasedButtons.remove(button);
-			}
-		}
+		#end
 	}
 	
 	
@@ -90,12 +102,14 @@ class ST_GamepadManager{
 	/** Adds a gamepad to the pads array 
 	 * @param	device	Controller id, <em>Defaults to ST_GamepadManager.numPads</em>*/
 	public static function addController(device:Int) {
-		if (!pads.exists(device)) {
-			pads.set(device, new ST_Gamepad(device));
-			numPads += 1;
-		}else {
-			trace("ERROR: Gamepad device '" + device + "' already exists");
-		}
+		#if (!flash && !web)
+			if (!pads.exists(device)) {
+				pads.set(device, new ST_Gamepad(device));
+				numPads += 1;
+			}else {
+				trace("ERROR: Gamepad device '" + device + "' already exists");
+			}
+		#end
 	}
 	
 	/**
@@ -105,14 +119,16 @@ class ST_GamepadManager{
 	 * @return	Bool true if any of the args are currently pressed, false otherwise.
 	*/
 	public static function isPressed(device:Int, args:Array<String>):Bool {
-		var i:String;
 		var res:Bool = false;
-		while (args.length != 0) {
-			i = args.pop();
-			if (pads.get(device).pressedButtons.exists(XboxButtons.get(i))) {
-				res = true;
+		#if (!flash && !web)
+			var i:String;
+			while (args.length != 0) {
+				i = args.pop();
+				if (pads.get(device).pressedButtons.exists(XboxButtons.get(i))) {
+					res = true;
+				}
 			}
-		}
+		#end
 		return res;
 	}
 	
@@ -123,14 +139,16 @@ class ST_GamepadManager{
 	 * @return	Bool true if any of the args were just pressed, false otherwise.
 	*/
 	public static function isJustPressed(device:Int, args:Array<String>):Bool {
-		var i:String;
 		var res:Bool = false;
-		while (args.length != 0) {
-			i = args.pop();
-			if (pads.get(device).justPressedButtons.exists(XboxButtons.get(i))) {
-				res = true;
+		#if (!flash && !web)
+			var i:String;
+			while (args.length != 0) {
+				i = args.pop();
+				if (pads.get(device).justPressedButtons.exists(XboxButtons.get(i))) {
+					res = true;
+				}
 			}
-		}
+		#end
 		return res;
 	}
 	
@@ -141,14 +159,16 @@ class ST_GamepadManager{
 	 * @return	Bool true if any of the args were just released, false otherwise.
 	*/
 	public static function isJustReleased(device:Int, args:Array<String>):Bool {
-		var i:String;
 		var res:Bool = false;
-		while (args.length != 0) {
-			i = args.pop();
-			if (pads.get(device).justReleasedButtons.exists(XboxButtons.get(i))) {
-				res = true;
+		#if (!flash && !web)
+			var i:String;
+			while (args.length != 0) {
+				i = args.pop();
+				if (pads.get(device).justReleasedButtons.exists(XboxButtons.get(i))) {
+					res = true;
+				}
 			}
-		}
+		#end
 		return res;
 	}
 	
@@ -159,8 +179,12 @@ class ST_GamepadManager{
 	 * @param	threshold	Threshold to check axis against. Values 0 to 1.
 	 * @return	True if axis is below the given thershold for the device, false otherwise
 	 */
-	public static function axisIsBelow(device:Int, axis:String, threshold:Float):Bool{
-		return pads.get(device).axes[XboxAxes[axis]] < threshold;
+	public static function axisIsBelow(device:Int, axis:String, threshold:Float):Bool {
+		var res:Bool = false;
+		#if (!flash && !web)
+			res = pads.get(device).axes[XboxAxes[axis]] < threshold;
+		#end
+		return res;
 	}
 	/**
 	 * Compares a given axis on a device to a given threshold
@@ -169,8 +193,12 @@ class ST_GamepadManager{
 	 * @param	threshold	Threshold to check axis against. Values 0 to 1.
 	 * @return	True if axis is above the given thershold for the device, false otherwise
 	 */
-	public static function axisIsAbove(device:Int, axis:String, threshold:Float):Bool{
-		return pads.get(device).axes[XboxAxes[axis]] > threshold;
+	public static function axisIsAbove(device:Int, axis:String, threshold:Float):Bool {
+		var res:Bool = false;
+		#if (!flash && !web)
+			res = pads.get(device).axes[XboxAxes[axis]] > threshold;
+		#end
+		return res;
 	}
 	/**
 	 * Compares a hat on a device to a given threshold
@@ -179,8 +207,12 @@ class ST_GamepadManager{
 	 * @param	threshold	Threshold to check hat against. Values 0 to 1.
 	 * @return	True if hat is below the given thershold for the device, false otherwise
 	 */
-	public static function hatIsBelow(device:Int, axis:String, threshold:Float):Bool{
-		return pads.get(device).hat[XboxHat[axis]] < threshold;
+	public static function hatIsBelow(device:Int, axis:String, threshold:Float):Bool {
+		var res:Bool = false;
+		#if (!flash && !web)
+			res = pads.get(device).hat[XboxHat[axis]] < threshold;
+		#end
+		return res;
 	}
 	/**
 	 * Compares a hat on a device to a given threshold
@@ -189,8 +221,12 @@ class ST_GamepadManager{
 	 * @param	threshold	Threshold to check hat against. Values 0 to 1.
 	 * @return	True if hat is above the given thershold for the device, false otherwise
 	 */
-	public static function hatIsAbove(device:Int, axis:String, threshold:Float):Bool{
-		return pads.get(device).hat[XboxHat[axis]] > threshold;
+	public static function hatIsAbove(device:Int, axis:String, threshold:Float):Bool {
+		var res:Bool = false;
+		#if (!flash && !web)
+			res =  pads.get(device).hat[XboxHat[axis]] > threshold;
+		#end
+		return res;
 	}
 	
 	
@@ -218,5 +254,3 @@ class ST_GamepadManager{
 		"X"		=>	0,
 		"Y"		=>	1];
 }
-
-#end

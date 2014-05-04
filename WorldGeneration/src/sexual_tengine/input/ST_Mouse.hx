@@ -45,8 +45,10 @@ class ST_Mouse {
 		Lib.current.stage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, ST_Mouse.onRightMouseDown);
 		Lib.current.stage.addEventListener(MouseEvent.RIGHT_MOUSE_UP, ST_Mouse.onRightMouseUp);
 		
-		Lib.current.stage.addEventListener(MouseEvent.MIDDLE_MOUSE_DOWN, ST_Mouse.onMiddleMouseDown);
-		Lib.current.stage.addEventListener(MouseEvent.MIDDLE_MOUSE_UP, ST_Mouse.onMiddleMouseUp);
+		#if !web
+			Lib.current.stage.addEventListener(MouseEvent.MIDDLE_MOUSE_DOWN, ST_Mouse.onMiddleMouseDown);
+			Lib.current.stage.addEventListener(MouseEvent.MIDDLE_MOUSE_UP, ST_Mouse.onMiddleMouseUp);
+		#end
 		
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);

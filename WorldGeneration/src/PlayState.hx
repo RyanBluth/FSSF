@@ -61,9 +61,7 @@ class PlayState extends ST_State{
 		//debugger = new ST_Console();
 		//addChild(debugger);
 		
-		#if !flash
 		ST_GamepadManager.addController(0);
-		#end
 	}
 	
 	function setupPlayer(){
