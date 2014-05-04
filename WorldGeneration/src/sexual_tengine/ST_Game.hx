@@ -49,11 +49,12 @@ class ST_Game extends Sprite {
 		
 		while (accumulator >= STI.timeStep) {
 			//playState.update();
-			playState.draw();
+			//playState.draw();
 			accumulator -= STI.timeStep;
 			t += STI.timeStep;
 		}
 		playState.update();
+		playState.draw();
 		
 		ST_Mouse.clearJust();
 		#if !flash

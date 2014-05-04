@@ -23,8 +23,7 @@ class ST_Console extends Sprite
 	private var propertiesTable:PropertiesTable;
 	private var currentPropertiesObject:Dynamic;
 	
-	public function new() 
-	{
+	public function new(){
 		super();
 		enterField = new ST_Text();
 		enterField.selectable = true;
@@ -40,9 +39,11 @@ class ST_Console extends Sprite
 		enterField.y = Lib.current.stage.stageHeight - height;
 		propertiesTable = new PropertiesTable();
 		addChild(propertiesTable);
+		
+		currentPropertiesObject = null;
 	}
 	
-	public function update() {
+	public function update(){
 		if (currentPropertiesObject != null) {
 			var fields =  Reflect.fields(currentPropertiesObject);
 			for (i in fields) {
@@ -58,7 +59,7 @@ class ST_Console extends Sprite
 	}
 	
 	public function analyze(object:Dynamic) {
-		if (object != null && object != currentPropertiesObject && object!= propertiesTable) {
+		if (object != null && object != currentPropertiesObject && object != propertiesTable) {
 			currentPropertiesObject = object;
 			var fields =  Reflect.fields(object);
 			propertiesTable.clear();
@@ -184,20 +185,22 @@ private class PropertiesTable extends Sprite {
 	}
 	
 	private function scroll() {
-		if (Lib.current.stage.mouseY > height*0.1 && ST_Mouse.rightPressed) {
-			if (scrollRect.y > 0) {
-				if (scrollRect.y - 0.1 > 0) {
-					scrollRect=  new Rectangle(0,scrollRect.y-0.1,scrollRect.width,scrollRect.height);
-				}else {
-					scrollRect =  new Rectangle(0,0,scrollRect.width,scrollRect.height);
+		if(ST_Mouse.rightPressed){
+			if (Lib.current.stage.mouseY > height*0.1) {
+				if (scrollRect.y > 0) {
+					if (scrollRect.y - 0.1 > 0) {
+						scrollRect=  new Rectangle(0,scrollRect.y-0.1,scrollRect.width,scrollRect.height);
+					}else {
+						scrollRect =  new Rectangle(0,0,scrollRect.width,scrollRect.height);
+					}
 				}
-			}
-		}else if(Lib.current.stage.mouseY < height * 0.9 && ST_Mouse.rightPressed){
-			if (scrollRect.y + scrollRect.height < parent.x + parent.height) {
-				if (scrollRect.y + 0.1 <  parent.x + parent.height) {
-					scrollRect=  new Rectangle(0,scrollRect.y+0.1,scrollRect.width,scrollRect.height);
-				}else {
-					scrollRect=  new Rectangle(0,(parent.y + parent.height) -scrollRect.height,scrollRect.width,scrollRect.height);
+			}else if(Lib.current.stage.mouseY < height * 0.9){
+				if (scrollRect.y + scrollRect.height < parent.x + parent.height) {
+					if (scrollRect.y + 0.1 <  parent.x + parent.height) {
+						scrollRect=  new Rectangle(0,scrollRect.y+0.1,scrollRect.width,scrollRect.height);
+					}else {
+						scrollRect=  new Rectangle(0,(parent.y + parent.height) -scrollRect.height,scrollRect.width,scrollRect.height);
+					}
 				}
 			}
 		}

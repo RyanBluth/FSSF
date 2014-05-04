@@ -14,7 +14,7 @@ class ST_Text extends TextField
 	public var format:TextFormat;
 	public var autoSizeField:TextFieldAutoSize;
 	
-	public function new(?_text:String,?_font:String,?_size:Float, ?_color:UInt, ?_bold:Bool, ?_italic:Bool, ?_underline:Bool) 
+	public function new(?_text:String,?_font:String,?_size:Float, ?_color:Int, ?_bold:Bool, ?_italic:Bool, ?_underline:Bool) 
 	{
 		super();
 		format = new TextFormat(_font, _size, _color, _bold, _italic, _underline);
