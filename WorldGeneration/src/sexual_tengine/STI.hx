@@ -7,7 +7,7 @@ class STI {
 	public static var corrector:Float = 1;
 	public static var timeStep:Float = 1 / 60;
 	
-	public static var timeStamp:Int;
+	public static var timeStamp:Int = 0;
 	public function new(){
 		
 	}

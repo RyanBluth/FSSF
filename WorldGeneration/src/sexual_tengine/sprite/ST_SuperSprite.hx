@@ -1,5 +1,6 @@
 package sexual_tengine.sprite;
 
+import sexual_tengine.animation.ST_SuperSpriteAnimator;
 import sexual_tengine.sprite.ST_Detachment;
 import sexual_tengine.animation.ST_SpriteSheet;
 /**
@@ -10,12 +11,14 @@ class ST_SuperSprite extends ST_Detachment
 {
 	public var layers:Array<String>;
 	public var spriteChildren:Map<String,ST_Sprite>;
+	public var animator:ST_SuperSpriteAnimator;
 	
 	public function new() {
 		super();
 		spriteChildren = new Map();
 		layers = new Array();
 		superSprite = true;
+		animator = new ST_SuperSpriteAnimator();
 	}
 	
 	public function addSpriteChild(_name:String, _sprite:ST_Sprite) {

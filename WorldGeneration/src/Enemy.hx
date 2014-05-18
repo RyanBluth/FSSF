@@ -2,9 +2,13 @@ package;
 
 import flash.geom.Point;
 import flash.Lib;
+import sexual_tengine.animation.ST_AnimationManager;
+import sexual_tengine.animation.ST_AnimatorCommand;
+import sexual_tengine.animation.ST_CircularPathInterpolator;
 import sexual_tengine.sprite.ST_Sprite;
 import sexual_tengine.sprite.ST_SuperSprite;
 import sexual_tengine.sprite.ST_Detachment;
+import sexual_tengine.ST_BasicFloatInterpolator;
 import sexual_tengine.ST_Pathing;
 import sexual_tengine.STI;
 /**
@@ -34,7 +38,9 @@ class Enemy extends ST_SuperSprite{
 		
 		addSpriteChild("enemyFire", enemyFire);
 		addSpriteChild("enemyBody", enemyBody);
-		
+		animator.addCommand("enemy", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("x", -200, 200), 120));
+		animator.addCommand("enemy1", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("y", -200, 200), 120));
+		animator.addCommand("enemyAlpha", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("alpha",0,1),50)) ;
 		path = new ST_Pathing();
 		
 		
@@ -64,6 +70,13 @@ class Enemy extends ST_SuperSprite{
 		super.update();
 		kinetics.resetAcceleration();
 		kinetics.applyForce(path.getForce());
+	}
+	
+	public override function draw() {
+		super.draw();
+		animator.animate("enemy");
+		animator.animate("enemy1");
+		animator.animate("enemyAlpha");
 	}
 	
 }

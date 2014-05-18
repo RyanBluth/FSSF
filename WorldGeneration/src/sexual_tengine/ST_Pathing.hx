@@ -27,7 +27,7 @@ class ST_Pathing{
 	}
 	
 	public function getForce():Point {
-		while (STI.timeStamp - timeStamp > inputTimes[iterator]) {
+		while ((STI.timeStamp - timeStamp) > inputTimes[iterator]) {
 			iterator += 1;
 			if (iterator >= inputTimes.length) {
 				timeStamp = (STI.timeStamp - (inputTimes[inputTimes.length - 1] + timeStamp)) + STI.timeStamp;
