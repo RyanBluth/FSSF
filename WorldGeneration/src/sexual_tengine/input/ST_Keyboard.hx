@@ -17,8 +17,12 @@ class ST_Keyboard{
 	/** Last key released */
     private static var lastKeyUp:Int;
 	
-	/** Access flash key codes using strings <em>(Only WASD, XZ, arrows, and space because I'm too lazy to do the rest)</em> */
+	/** Access flash key codes using strings <em>(Includes everything but numpad keys and key combinations)</em> */
 	public static var keyStrings:Map < String, Int > = [
+	"PGUP"	=>	33, "PAGE UP" => 33,
+	"PGDN"	=>	34, "PAGE DOWN" => 34,
+	"END"	=>	35,
+	"HOME"	=>	36,
 	"LEFT"	=>	37,
 	"RIGHT"	=>	39,
 	"UP"	=>	38,
@@ -59,7 +63,7 @@ class ST_Keyboard{
 	"X"		=>	88,
 	"Y"		=>	89,
 	"Z"		=>	90,
-	"SPACE"	=>	32,
+	"SPACE"	=>	32, "SPACEBAR" => 32,
 	"BACKSPACE"	=>	8,
 	"ENTER"	=>	13, "RETURN" => 13,
 	"SHIFT"	=>	16,
@@ -67,6 +71,7 @@ class ST_Keyboard{
 	"WIN"	=>	15,
 	"ALT"	=>	18,
 	"CAPS"	=>	20, "CAPSLOCK" => 20,
+	"NUM"	=>	144, "NUMLOCK" => 144,
 	"ESC"	=>	27, "ESCAPE" => 27,
 	"PAUSE"	=>	10,
 	"PRTSC"	=>	301, "PRINT SCREEN" => 301,
@@ -85,15 +90,16 @@ class ST_Keyboard{
 	"F12"	=>	123,
 	"~"	=>	192, "TILDE" => 192,
 	"TAB"	=>	9,
-	"-"		=>	189, "MINUS" => 189,
+	"-"		=>	189, "MINUS" => 189, "DASH" => 189,
 	"="		=>	187, "EQUALS" => 187,
 	"["		=>	219, "LEFT BRACKET" => 219,
 	"]"		=>	221, "RIGHT BRACKET" => 221,
-	"\\"	=>	220,
-	";"		=>	186,
-	","		=>	188,
-	"."		=>	190,
-	"/"		=>	191];
+	"\\"	=>	220, "FORWARD SLASH" => 220,
+	";"		=>	186, "SEMICOLON" => 186,
+	","		=>	188, "COMMA" => 188,
+	"."		=>	190, "PERIOD" => 190, "DOT" => 190,
+	"/"		=>	191, "BACK SLASH" => 191,
+	"RIGHT CLICK" => 302];
 	
 	/** Attaches event listeners so that the static stuff actually works. */
 	public function new(){
@@ -103,7 +109,6 @@ class ST_Keyboard{
 	
 	/** Adds a pressed key to the map of pressedKeys and justPressedKeys. */
 	private static function keyDown(evt:KeyboardEvent) {
-		trace(evt.keyCode);
 		if (!pressedKeys.exists(evt.keyCode)){
 			pressedKeys.set(evt.keyCode, evt.keyCode);
 			justPressedKeys.set(evt.keyCode, evt.keyCode);
