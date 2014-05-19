@@ -3,6 +3,7 @@ package sexual_tengine.sprite;
 import sexual_tengine.animation.ST_AnimationManager;
 import sexual_tengine.physics.ST_Physics;
 import sexual_tengine.sprite.ST_Detachment;
+import sexual_tengine.STI;
 
 import flash.display.Graphics;
 import flash.display.Bitmap;
@@ -54,17 +55,31 @@ class ST_Sprite extends ST_Detachment{
 	}
 	
 	
+	/** Sets the offset for the animation manager */
 	public function setOrigin(_x:Float, _y:Float) {
 		this.animation.origin.x = _x;
 		this.animation.origin.y = _y;
+	}
+	/** Returns the offset for the animation manager */
+	public function getOrigin() {
+		return this.animation.origin;
 	}
 	
 	/**
 	 * Needs to be called once per frame to update animation manager.
 	 */
 	public function draw() {
-		if(active){
-			this.animation.draw();
+		if (active) {
+			if (!STI.drawCircleColliders) {
+				this.animation.draw();
+			}else{
+				this.graphics.clear();
+				this.animation.staticDraw();
+				this.animation.draw();
+				this.graphics.beginFill(0xFF0000, 0.5);
+				this.graphics.drawCircle(0, 0, circleColliderRadius);
+				this.graphics.endFill();
+			}
 		}
 	}
 	

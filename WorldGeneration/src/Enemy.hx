@@ -40,9 +40,6 @@ class Enemy extends ST_SuperSprite{
 		
 		addSpriteChild("enemyFire", enemyFire);
 		addSpriteChild("enemyBody", enemyBody);
-		animator.addCommand("enemy", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("x", -200, 200), 120*STI.target));
-		animator.addCommand("enemy1", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("y", -200, 200), 120*STI.target));
-		animator.addCommand("enemyAlpha", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("alpha",0,1), 50*STI.target));
 		path = new ST_Pathing();
 		
 		
@@ -76,9 +73,6 @@ class Enemy extends ST_SuperSprite{
 	
 	public override function draw() {
 		super.draw();
-		animator.animate("enemy");
-		animator.animate("enemy1");
-		animator.animate("enemyAlpha");
 	}
 	
 }

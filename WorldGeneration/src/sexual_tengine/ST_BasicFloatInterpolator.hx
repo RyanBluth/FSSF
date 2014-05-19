@@ -1,6 +1,7 @@
 package sexual_tengine;
 import sexual_tengine.animation.ST_Interpolator;
 import sexual_tengine.sprite.ST_Sprite;
+import sexual_tengine.utils.ST_Logger;
 
 /**
  * ...
@@ -29,8 +30,7 @@ class ST_BasicFloatInterpolator implements ST_Interpolator
 		if (first) {
 			// verify that the field is a float before starting
 			if (!Std.is(Reflect.getProperty(target, field), Float)) {
-				trace("Field '" + field + "' is not a Float property of '" + target + "'");
-				throw "Field '" + field + "' is not a Float property of '" + target + "'";
+				ST_Logger.throwAndLog("Field '" + field + "' is not a Float property of '" + target + "'");
 			}
 			
 			Reflect.setProperty(target, field, min);

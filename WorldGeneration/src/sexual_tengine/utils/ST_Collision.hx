@@ -25,10 +25,9 @@ class ST_Collision{
 	 * @return	Array containing any sprites that it collides with
 	 */
 	public static function spriteManagerCollide(obj1:ST_Sprite, obj2:ST_SpriteManager, ?obj1P:ST_SuperSprite):Array < ST_Sprite > {
-		
-		if (obj1.circleColliderRadius == 0) {
-			trace("Tried to use grid-based circle-collision without a circleColliderRadius for "+obj1.toString());
-			throw "Tried to use grid-based circle-collision without a circleColliderRadius "+obj1.toString();
+		// Verify that there are non-zero radii
+		if (obj1.circleColliderRadius == 0 || obj2.circleColliderRadius == 0) {
+			ST_Logger.throwAndLog("Tried to use grid-based circle-collision without a circleColliderRadius for "+obj1.toString());
 		}
 		var pos:Point = obj1.getParentOffset(obj1P);
 		var res:Array<ST_Sprite> = new Array<ST_Sprite>();
@@ -63,75 +62,100 @@ class ST_Collision{
 		return res;
 	}
 	
+	/**
+	 * Checks for collision between two sprites (taking into account their parent offsets up to the supplied parents) based on their circle colliders
+	 * @param	obj1	Sprite to check collision against
+	 * @param	obj2	Sprite to check collision against
+	 * @param	?obj1P	Parent to calculate offsets for obj1
+	 * @param	?obj2P	Parent to calculate offsets for obj2
+	 * @return	True if sprites' circle colliders are colliding, false otherwise.
+	 */
 	public static function circleCollide(obj1:ST_Sprite, obj2:ST_Sprite, ?obj1P:ST_SuperSprite, ?obj2P:ST_SuperSprite):Bool {
-		var t1:Point = new Point(obj1.x, obj1.y);
-		var t2:Point = new Point(obj2.x, obj2.y);
-		var t3 = obj1.getParentOffset(obj1P);
-		t1.x += t3.x;
-		t1.y += t3.y;
-		var t4 = obj2.getParentOffset(obj2P);
-		t2.x += t4.x;
-		t2.y += t4.y;
+		//initialize offsets to zero
+		var offset1:Point = new Point();
+		var offset2:Point = new Point();
+		//if a parent was supplied, calculate the offsets
+		if (obj1P != null) {
+			offset1 = obj1.getParentOffset(obj1P);
+		}if (obj2P != null) {
+			offset2 = obj2.getParentOffset(obj2P);
+		}
 		
-		return (t2.x-t1.x)*(t2.x-t1.x) + (t2.y-t1.y)*(t2.y-t1.y) <= (obj1.circleColliderRadius+obj2.circleColliderRadius)*(obj1.circleColliderRadius+obj2.circleColliderRadius);
+		//get the sprite positions + offsets
+		var pos1:Point = new Point(obj1.x+offset1.x, obj1.y+offset1.y);
+		var pos2:Point = new Point(obj2.x+offset2.x, obj2.y+offset2.y);
+		
+		//check for collision using Euclidean distance
+		return (pos2.x-pos1.x)*(pos2.x-pos1.x) + (pos2.y-pos1.y)*(pos2.y-pos1.y) <= (obj1.circleColliderRadius+obj2.circleColliderRadius)*(obj1.circleColliderRadius+obj2.circleColliderRadius);
 	}
 	
+	/**
+	 * Checks for collision between two sprites (taking into account their parent offsets up to the supplied parents) based on the alpha of their pixels
+	 * @param	obj1		Sprite to check collision against
+	 * @param	obj2		Sprite to check collision against
+	 * @param	threshold	Alpha threshold for pixels (0-255)
+	 * @param	?obj1P		Parent to calculate offsets for obj1
+	 * @param	?obj2P		Parent to calculate offsets for obj2
+	 * @return	True if sprites' circle colliders are colliding, false otherwise.
+	 */
 	public static function pixelPerfectCollide(obj1:ST_Sprite, obj2:ST_Sprite, threshold:Int = 0, ?obj1P:ST_SuperSprite, ?obj2P:ST_SuperSprite):Bool {
+		//initialize offsets to zero
 		var spriteSheetOffset1:Point = new Point();
 		var spriteSheetOffset2:Point = new Point();
+		var offset1:Point = new Point();
+		var offset2:Point = new Point();
+		//if graphics are spritesheet based, calculate the offsets
 		if (obj1.animation.getSpriteSheet() != null) {
-			spriteSheetOffset1 = obj1.getParentOffset(obj1P);
+			spriteSheetOffset1 = spriteSheetOffset1 = obj1.animation.getXY();
 		}if (obj2.animation.getSpriteSheet() != null) {
-			spriteSheetOffset2 = obj2.getParentOffset(obj2P);
+			spriteSheetOffset2 = obj2.animation.getXY();
 		}
-		var collision:Bool = false;
-		var rect1:Rectangle = new Rectangle(obj1.x + obj1.animation.origin.x, obj1.y + obj1.animation.origin.y, obj1.width, obj1.height);
-		var rect2:Rectangle = new Rectangle(obj2.x + obj2.animation.origin.x, obj2.y + obj2.animation.origin.y, obj2.width, obj2.height);
-		
-		//offsets due to sprite nesting
+		//if a parent was supplied, calculate the offsets
 		if (obj1P != null) {
-			if (obj1P.superSprite) {
-				rect1.x += obj1P.x;
-				rect1.y += obj1P.y;
-			}
+			offset1 = obj1.getParentOffset(obj1P);
 		}if (obj2P != null) {
-			if (obj2P.superSprite) {
-				rect2.x += obj2P.x;
-				rect2.y += obj2P.y;
-			}
+			offset2 = obj2.getParentOffset(obj2P);
 		}
+		
+		var collision:Bool = false;
+		
+		//get the rectangles based on sprite positions, spritesheet origins, offsets, and widths/heights
+		var rect1:Rectangle = new Rectangle(obj1.x + obj1.animation.origin.x + offset1.x, obj1.y + obj1.animation.origin.y + offset1.y, obj1.width, obj1.height);
+		var rect2:Rectangle = new Rectangle(obj2.x + obj2.animation.origin.x + offset2.x, obj2.y + obj2.animation.origin.y + offset2.y, obj2.width, obj2.height);
 		
 		var collRect:Rectangle = rect1.intersection(rect2);
-		trace(rect1, rect2, collRect);
+		
+		//no need to check pixels if rectangle has no area
 		if (collRect.width != 0 || collRect.height != 0) {
+			//loop through pixels of collision rectangle
 			for (x in 0 ... Math.round(collRect.width)) {
 				for (y in 0 ... Math.round(collRect.height)) {
-					var bx = Math.round(x + collRect.x - rect1.x+spriteSheetOffset1.x);
-					var by = Math.round(y + collRect.y - rect1.y+spriteSheetOffset1.y);
+					var tempX = Math.round(x + collRect.x - rect1.x+spriteSheetOffset1.x);
+					var tempY = Math.round(y + collRect.y - rect1.y+spriteSheetOffset1.y);
 					
 					var a1:Int;
-					if (obj1.animation.getSpriteSheet() != null) {
-						a1 = obj1.animation.getBitmapData().getPixel32(bx, by);
-					}else {
-						a1 = obj1.getBitmap().bitmapData.getPixel32(bx, by);
+					if(obj1.animation.getSpriteSheet() != null){
+						a1 = obj1.animation.getBitmapData().getPixel32(tempX, tempY);
+					}else{
+						a1 = obj1.getBitmap().bitmapData.getPixel32(tempX, tempY);
 					}
 					
-					bx = Math.round(x + collRect.x - rect2.x+spriteSheetOffset2.x);
-					by = Math.round(y + collRect.y - rect2.y+spriteSheetOffset2.y);
+					tempX = Math.round(x + collRect.x - rect2.x+spriteSheetOffset2.x);
+					tempY = Math.round(y + collRect.y - rect2.y+spriteSheetOffset2.y);
 					
 					var a2:Int;
 					if (obj2.animation.getSpriteSheet() != null) {
-						a2 = obj2.animation.getBitmapData().getPixel32(bx, by);
+						a2 = obj2.animation.getBitmapData().getPixel32(tempX, tempY);
 					}else {
-						a2 = obj2.getBitmap().bitmapData.getPixel32(bx, by);
+						a2 = obj2.getBitmap().bitmapData.getPixel32(tempX, tempY);
 					}
 					if ((a1 >> 24 & 0xFF) > threshold && (a2 >> 24 & 0xFF) > threshold) {
 						collision = true;
-						break;
+						break; //only need to know whether there was a collision, so no need to keep looping
 					}
 				}
 				if(collision){
-					break;
+					break; //only need to know whether there was a collision, so no need to keep looping
 				}
 			}
 		}

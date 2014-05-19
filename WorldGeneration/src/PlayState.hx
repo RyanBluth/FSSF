@@ -120,7 +120,7 @@ class PlayState extends ST_State{
 		
 		if(ST_GeneralInput.primary(0,false)){
 			//trace(ST_Collision.circleCollide(collisionTest, player.playerBody, null, player));
-			//trace(ST_Collision.checkCollision(collisionTest, player.playerBody, 0, null, player));
+			//trace(ST_Collision.pixelPerfectCollide(collisionTest, player.playerBody, 0, null, player));
 			//trace(ST_Collision.checkCollision(enemies[0].enemyBody, player.playerBody, 0, enemies[0], player));
 		}
 		//if (ST_GeneralInput.primary(0,true)) {
@@ -146,26 +146,31 @@ class PlayState extends ST_State{
 			player.kinetics.applyForce(new Point(0,-1));
 		}
 		
-		if (ST_GeneralInput.primary(0, false)) {
-			var pos:Point = new Point(player.x - 23*1.5, player.y - 23*2);
-			var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y*0.5 - 5,-1));
-			var bul:Bullet = cast(bulletManager.getActiveSprite(),Bullet);
-			
-			bul.x = pos.x;
-			bul.y = pos.y;
-			bul.kinetics.velocity = vel;
-			
-			addChild(bul);
-		}if (ST_GeneralInput.secondary(0, false)) {
-			var pos:Point = new Point(player.x + 23*1.5, player.y - 23*2);
-			var vel:Point = new Point(player.kinetics.velocity.x*0.5*STI.corrector, Math.min(player.kinetics.velocity.y*0.5*STI.corrector - 5,-1));
-			var bul:Bullet = cast(bulletManager.getActiveSprite(),Bullet);
-			
-			bul.x = pos.x;
-			bul.y = pos.y;
-			bul.kinetics.velocity = vel;
-			
-			addChild(bul);
+		if (player.shotTimerElapsed >= player.shotTimerTotal) {
+			//for(i in 0...100){
+			if (ST_GeneralInput.primary(0, false)) {
+				var pos:Point = new Point(player.x - 23*1.5, player.y - 23*2);
+				var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y*0.5 - 5,-1));
+				var bul:Bullet = cast(bulletManager.getActiveSprite(),Bullet);
+				
+				bul.x = pos.x;
+				bul.y = pos.y;
+				bul.kinetics.velocity = vel;
+				
+				addChild(bul);
+			}if (ST_GeneralInput.secondary(0, false)) {
+				var pos:Point = new Point(player.x + 23*1.5, player.y - 23*2);
+				var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y*0.5 - 5,-1));
+				var bul:Bullet = cast(bulletManager.getActiveSprite(),Bullet);
+				
+				bul.x = pos.x;
+				bul.y = pos.y;
+				bul.kinetics.velocity = vel;
+				
+				addChild(bul);
+			}
+			player.shotTimerElapsed = 0;
+			//}
 		}
 	}
 	
