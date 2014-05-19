@@ -7,5 +7,5 @@ import sexual_tengine.sprite.ST_Sprite;
  */
 interface ST_Interpolator
 {
-	public function interpolate(target:ST_Sprite, totalFrames:Int, elapsedFrames:Int):Void;
+	public function interpolate(target:ST_Sprite, totalMilliseconds:Float, elapsedMilliseconds:Float):Void;
 }

@@ -51,6 +51,7 @@ class PlayState extends ST_State{
 		addChild(new FPS());
 		
 		bulletManager = new ST_SpriteManager(Bullet);
+		bulletManager.circleColliderRadius = 11.5;
 		
 		collisionTest = new ST_Sprite();
 		collisionTest.animation.addSpriteSheet("img/terrain.png", "main");
@@ -59,7 +60,7 @@ class PlayState extends ST_State{
 		addChild(collisionTest);
 		
 		collisionTest.circleColliderRadius = 5;
-		player.playerBody.circleColliderRadius = 5;
+		//player.playerBody.circleColliderRadius = 5;
 		
 		//debugger = new ST_Console();
 		//addChild(debugger);
@@ -102,8 +103,23 @@ class PlayState extends ST_State{
 			e.update();
 		}
 		
+		
+		bulletManager.updateGrid();
+		for (e in enemies) {
+			if(e.active){
+				for (b in ST_Collision.spriteManagerCollide(e.enemyBody, bulletManager, e)) {
+					e.deactivate();
+					b.deactivate();
+					break;
+				}
+			}
+		}
+		
+		
+//		trace(bulletManager.spriteArray.length,ST_Collision.spriteManagerCollide(player.playerBody, bulletManager, player).length);
+		
 		if(ST_GeneralInput.primary(0,false)){
-			trace(ST_Collision.circleCollide(collisionTest, player.playerBody, null, player));
+			//trace(ST_Collision.circleCollide(collisionTest, player.playerBody, null, player));
 			//trace(ST_Collision.checkCollision(collisionTest, player.playerBody, 0, null, player));
 			//trace(ST_Collision.checkCollision(enemies[0].enemyBody, player.playerBody, 0, enemies[0], player));
 		}
@@ -111,6 +127,7 @@ class PlayState extends ST_State{
 		//	debugger.analyze(getObjectsUnderPoint(new Point(mouseX, mouseY))[0]);
 		//}
 		//debugger.update();
+		
 	}
 	
 	private function playerMovement() {

@@ -1,6 +1,7 @@
 package sexual_tengine.animation;
 import sexual_tengine.sprite.ST_Detachment;
 import sexual_tengine.sprite.ST_Sprite;
+import sexual_tengine.STI;
 
 /**
  * ...
@@ -10,10 +11,10 @@ class ST_AnimatorCommand
 {
 	public  var target:ST_Sprite;
 	private var interpolator:ST_Interpolator;
-	private var totalFrames:Int;
-	private var elapsedFrames:Int;
+	private var totalFrames:Float;
+	private var elapsedFrames:Float;
 	
-	public function new(_target:ST_Sprite, _interpolator:ST_Interpolator, _totalFrames:Int) 
+	public function new(_target:ST_Sprite, _interpolator:ST_Interpolator, _totalFrames:Float) 
 	{
 		target = _target;
 		interpolator = _interpolator;
@@ -23,7 +24,7 @@ class ST_AnimatorCommand
 	
 	public function animate() {
 		interpolator.interpolate(target,  totalFrames, elapsedFrames);
-		elapsedFrames++;
+		elapsedFrames += STI.deltaTime;
 		if (elapsedFrames >= totalFrames) {
 			elapsedFrames = 0;
 		}

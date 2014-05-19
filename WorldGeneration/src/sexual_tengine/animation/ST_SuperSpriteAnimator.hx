@@ -5,11 +5,8 @@ import sexual_tengine.sprite.ST_Sprite;
  * ...
  * @author Ryan
  */
-class ST_SuperSpriteAnimator
-{
-	
+class ST_SuperSpriteAnimator{
 	public var commands:Map<String, ST_AnimatorCommand>;
-	
 	public function new() { 
 		commands = new Map();
 	}
@@ -19,7 +16,10 @@ class ST_SuperSpriteAnimator
 	}
 	
 	public function animate(commandName:String) {
-		commands.get(commandName).animate();
+		if(commands.exists(commandName)){
+			commands.get(commandName).animate();
+		}else {
+			trace("Called 'animate' using non-existent command '" + commandName + "'");
+		}
 	}
-	
 }

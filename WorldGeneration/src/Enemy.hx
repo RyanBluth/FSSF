@@ -30,17 +30,19 @@ class Enemy extends ST_SuperSprite{
 		enemyFire.animation.addSpriteSheet("img/enemy_01.png", "main", true);
 		enemyFire.animation.addAnimationState("main", "main", [1, 2, 3, 4], 5, 100, 100, true);
 		enemyFire.animation.playAnimation(0, "main");
+		enemyFire.circleColliderRadius = 100 *0.5;
 		
 		enemyBody = new ST_Sprite();
 		enemyBody.setOrigin( -50, -50);
 		enemyBody.animation.addSpriteSheet("img/enemy_01.png", "main", true);
 		enemyBody.animation.addAnimationState("main", "main", [0], 5, 100, 100, true);
+		enemyBody.circleColliderRadius = 100 *0.5;
 		
 		addSpriteChild("enemyFire", enemyFire);
 		addSpriteChild("enemyBody", enemyBody);
-		animator.addCommand("enemy", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("x", -200, 200), 120));
-		animator.addCommand("enemy1", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("y", -200, 200), 120));
-		animator.addCommand("enemyAlpha", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("alpha",0,1),50)) ;
+		animator.addCommand("enemy", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("x", -200, 200), 120*STI.target));
+		animator.addCommand("enemy1", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("y", -200, 200), 120*STI.target));
+		animator.addCommand("enemyAlpha", new ST_AnimatorCommand(enemyBody, new ST_BasicFloatInterpolator("alpha",0,1), 50*STI.target));
 		path = new ST_Pathing();
 		
 		

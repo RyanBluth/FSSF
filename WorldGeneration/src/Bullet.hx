@@ -14,15 +14,16 @@ class Bullet extends ST_Sprite {
 	public var timeStamp:Int;
 	public function new(?_bitmap:String) {
 		super(_bitmap);
-		kinetics.friction = 1;
+		kinetics.friction = 0;
 		
 		animation.addSpriteSheet("img/bullet2.png", "main");
 		animation.addAnimationState("main", "main", [0], 5, 23, 23, true);
 		
-		timeStamp = Lib.getTimer();
+		timeStamp = STI.timeStamp;
 		
 		//silly randomizer thing
-		var style = Lib.getTimer()%3000;
+		//var style = STI.timeStamp%3000;
+		var style = Std.random(3000);
 		if(style >= 2000){
 			this.setOrigin( -23 *0.5, -23 *0.5);
 		}else if(style >= 1000){
@@ -30,8 +31,9 @@ class Bullet extends ST_Sprite {
 		}else{
 			this.setOrigin( -123 *0.5, -23 *0.5);
 		}
+			this.setOrigin( -23 *0.5, -23 *0.5);
 		this.rotation = Std.random(180);
-		
+		this.circleColliderRadius = 23*0.5;
 	}
 	public override function update() {
 		if(active){
@@ -52,7 +54,7 @@ class Bullet extends ST_Sprite {
 	
 	public override function reactivate(){
 		super.reactivate();
-		timeStamp = Lib.getTimer();
+		timeStamp = STI.timeStamp;
 		rotation = Std.random(180);
 		animation.staticDraw();
 	}

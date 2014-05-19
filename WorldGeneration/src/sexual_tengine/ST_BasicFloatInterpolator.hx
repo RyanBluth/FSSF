@@ -25,22 +25,39 @@ class ST_BasicFloatInterpolator implements ST_Interpolator
 	
 	/* INTERFACE sexual_tengine.animation.ST_Interpolator */
 	
-	public function interpolate(target:ST_Sprite, totalFrames:Int, elapsedFrames:Int):Void 
-	{
+	public function interpolate(target:ST_Sprite, totalMilliseconds:Float, elapsedMilliseconds:Float):Void {
 		if (first) {
+			// verify that the field is a float before starting
+			if (!Std.is(Reflect.getProperty(target, field), Float)) {
+				trace("Field '" + field + "' is not a Float property of '" + target + "'");
+				throw "Field '" + field + "' is not a Float property of '" + target + "'";
+			}
+			
 			Reflect.setProperty(target, field, min);
 			first = false;
 		}
-		var steps:Float = ((Math.abs(max) + Math.abs(min)) / totalFrames);
-		if (elapsedFrames >= totalFrames - 1) {
+		
+		var step:Float;
+		if (flip) {
+			step = min + (max - min) * (elapsedMilliseconds / totalMilliseconds);
+		}else {
+			step = max - (max - min) * (elapsedMilliseconds / totalMilliseconds);
+		}
+		
+		
+		var steps:Float = ((Math.abs(max) + Math.abs(min)) / totalMilliseconds);
+		if (elapsedMilliseconds + STI.deltaTime >= totalMilliseconds) {
 			flip = !flip;
 		}
-		if (flip) {
-			Reflect.setProperty(target,field, Reflect.getProperty(target,field) + steps );
+		
+		Reflect.setProperty(target, field, step);
+		
+		/*if (flip) {
+			Reflect.setProperty(target, field, Reflect.getProperty(target, field) + steps);
 		}else {
-			Reflect.setProperty(target, field, Reflect.getProperty(target,field) - steps);
-		}
-		trace(flip);
+			Reflect.setProperty(target, field, Reflect.getProperty(target, field) - steps);
+		}*/
+		//trace(flip);
 	}
 	
 }

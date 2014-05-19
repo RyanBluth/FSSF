@@ -15,9 +15,9 @@ class ST_CircularPathInterpolator implements ST_Interpolator
 		radius = _radius;
 	}
 	
-	public function interpolate(target:ST_Sprite, totalFrames:Int, elapsedFrames:Int):Void
+	public function interpolate(target:ST_Sprite, totalMilliseconds:Float, elapsedMilliseconds:Float):Void
 	{
-		var currentDegrees = (elapsedFrames / totalFrames)*360;
+		var currentDegrees = (elapsedMilliseconds / totalMilliseconds)*360;
 		currentDegrees = (currentDegrees * Math.PI) / 180;
 		var calX = radius * Math.cos(currentDegrees);
 		var calY = radius * Math.sin(currentDegrees);
