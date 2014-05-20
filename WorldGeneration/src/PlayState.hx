@@ -146,10 +146,21 @@ class PlayState extends ST_State{
 			player.kinetics.applyForce(new Point(0,-1));
 		}
 		
-		if (player.shotTimerElapsed >= player.shotTimerTotal) {
+		/*if (ST_Keyboard.isPressed(["MINUS"])) {
+			STI.setTimestep(STI.getTimestep() + 10);
+			STI.setTimestep(10);
+		}if (ST_Keyboard.isPressed(["EQUALS"])) {
+			STI.setTimestep(STI.getTimestep()-10);
+		}*/
+		
+		STI.setFPS(60-4*Math.sqrt(player.kinetics.velocity.x * player.kinetics.velocity.x + player.kinetics.velocity.y * player.kinetics.velocity.y));
+		
+		
+		//if (player.shotTimerElapsed >= player.shotTimerTotal) {
+			for(i in 0...100){
 			if (ST_GeneralInput.primary(0, false)) {
 				var pos:Point = new Point(player.x - 23*1.5, player.y - 23*2);
-				var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y*0.5 - 5,-1));
+				var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y - 5,-1));
 				var bul:Bullet = cast(bulletManager.getActiveSprite(),Bullet);
 				
 				bul.x = pos.x;
@@ -159,7 +170,7 @@ class PlayState extends ST_State{
 				addChild(bul);
 			}if (ST_GeneralInput.secondary(0, false)) {
 				var pos:Point = new Point(player.x + 23*1.5, player.y - 23*2);
-				var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y*0.5 - 5,-1));
+				var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y - 5,-1));
 				var bul:Bullet = cast(bulletManager.getActiveSprite(),Bullet);
 				
 				bul.x = pos.x;
@@ -169,7 +180,8 @@ class PlayState extends ST_State{
 				addChild(bul);
 			}
 			player.shotTimerElapsed = 0;
-		}
+			}
+		//}
 	}
 	
 	public override function draw() {

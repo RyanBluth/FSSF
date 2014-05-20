@@ -76,7 +76,7 @@ class ST_Sprite extends ST_Detachment{
 				this.graphics.clear();
 				this.animation.staticDraw();
 				this.animation.draw();
-				this.graphics.beginFill(0xFF0000, 0.5);
+				this.graphics.beginFill(0xFF0000, 0.25);
 				this.graphics.drawCircle(0, 0, circleColliderRadius);
 				this.graphics.endFill();
 			}

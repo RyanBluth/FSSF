@@ -43,7 +43,7 @@ class ST_BasicFloatOscillator implements ST_Interpolator{
 		
 		
 		var steps:Float = ((Math.abs(max) + Math.abs(min)) / totalMilliseconds);
-		if (elapsedMilliseconds + STI.deltaTime >= totalMilliseconds) {
+		if (elapsedMilliseconds + STI.corrector >= totalMilliseconds) {
 			flip = !flip;
 		}
 		

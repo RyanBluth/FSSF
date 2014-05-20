@@ -34,7 +34,7 @@ class ST_AnimatorCommand {
 	 */
 	public function animate():Void{
 		interpolator.interpolate(target, totalMilliseconds, elapsedMilliseconds);
-		elapsedMilliseconds += STI.deltaTime;
+		elapsedMilliseconds += STI.deltaTime;// STI.corrector;
 		while (elapsedMilliseconds >= totalMilliseconds) {
 			elapsedMilliseconds -= totalMilliseconds;
 		}

@@ -39,6 +39,6 @@ class Player extends ST_SuperSprite {
 	override public function update():Void {
 		super.update();
 		
-		shotTimerElapsed += STI.deltaTime;
+		shotTimerElapsed += STI.corrector;
 	}
 }
