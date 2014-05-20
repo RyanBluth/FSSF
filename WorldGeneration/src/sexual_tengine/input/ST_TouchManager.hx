@@ -1,9 +1,13 @@
 package sexual_tengine.input;
+
+import sexual_tengine.input.ST_TouchManager.ST_Touch;
+import sexual_tengine.utils.ST_Logger;
+
 import flash.events.TouchEvent;
 import flash.Lib;
 import flash.ui.Multitouch;
 import flash.ui.MultitouchInputMode;
-import sexual_tengine.input.ST_TouchManager.ST_Touch;
+
 /**
  * ...
  * @author Sean
@@ -24,13 +28,13 @@ class ST_TouchManager {
 	public function new() 
 	{
 		//if multitouch is supported, switch the input mode to ignore gestures and only do touch points
-		trace(Multitouch.supportsTouchEvents);
+		ST_Logger.log(Multitouch.supportsTouchEvents);
 		if (Multitouch.supportsTouchEvents) {
 			Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
 			//try{
 			//	Multitouch.mapTouchToMouse = false;
 			//}catch (e:Dynamic) {
-			//	trace(e);
+			//	ST_Logger.log(e);
 			//}
 			Lib.current.stage.addEventListener(TouchEvent.TOUCH_BEGIN, ST_TouchManager.touchBegin);
 			Lib.current.stage.addEventListener(TouchEvent.TOUCH_END, ST_TouchManager.touchEnd);

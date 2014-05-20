@@ -57,7 +57,7 @@ class ST_BasicFloatInterpolator implements ST_Interpolator
 		}else {
 			Reflect.setProperty(target, field, Reflect.getProperty(target, field) - steps);
 		}*/
-		//trace(flip);
+		//ST_Logger.log(flip);
 	}
 	
 }

@@ -68,7 +68,7 @@ class ST_AnimationManager{
 	public function setSpriteSheet(_spriteSheetName:String):Void{
 		currentSpriteSheet = spriteSheets.get(_spriteSheetName);
 	}
-	/** Returns the currentSpriteSheet */
+	/** Returns the currentSpriteSheet (null if there is none assigned) */
 	public function getSpriteSheet():ST_SpriteSheet{
 		return currentSpriteSheet;
 	}

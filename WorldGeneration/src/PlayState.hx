@@ -116,12 +116,12 @@ class PlayState extends ST_State{
 		}
 		
 		
-//		trace(bulletManager.spriteArray.length,ST_Collision.spriteManagerCollide(player.playerBody, bulletManager, player).length);
+//		ST_Logger.log(bulletManager.spriteArray.length,ST_Collision.spriteManagerCollide(player.playerBody, bulletManager, player).length);
 		
 		if(ST_GeneralInput.primary(0,false)){
-			//trace(ST_Collision.circleCollide(collisionTest, player.playerBody, null, player));
-			//trace(ST_Collision.pixelPerfectCollide(collisionTest, player.playerBody, 0, null, player));
-			//trace(ST_Collision.checkCollision(enemies[0].enemyBody, player.playerBody, 0, enemies[0], player));
+			//ST_Logger.log(ST_Collision.circleCollide(collisionTest, player.playerBody, null, player));
+			ST_Logger.log(ST_Collision.pixelPerfectCollide(collisionTest, player.playerBody, 0, null, player));
+			//ST_Logger.log(ST_Collision.checkCollision(enemies[0].enemyBody, player.playerBody, 0, enemies[0], player));
 		}
 		//if (ST_GeneralInput.primary(0,true)) {
 		//	debugger.analyze(getObjectsUnderPoint(new Point(mouseX, mouseY))[0]);
@@ -147,7 +147,6 @@ class PlayState extends ST_State{
 		}
 		
 		if (player.shotTimerElapsed >= player.shotTimerTotal) {
-			//for(i in 0...100){
 			if (ST_GeneralInput.primary(0, false)) {
 				var pos:Point = new Point(player.x - 23*1.5, player.y - 23*2);
 				var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y*0.5 - 5,-1));
@@ -170,7 +169,6 @@ class PlayState extends ST_State{
 				addChild(bul);
 			}
 			player.shotTimerElapsed = 0;
-			//}
 		}
 	}
 	
