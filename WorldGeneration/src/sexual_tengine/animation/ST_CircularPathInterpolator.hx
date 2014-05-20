@@ -1,5 +1,6 @@
 package sexual_tengine.animation;
 import flash.geom.Point;
+import sexual_tengine.sprite.ST_Detachment;
 import sexual_tengine.sprite.ST_Sprite;
 
 /**
@@ -15,7 +16,7 @@ class ST_CircularPathInterpolator implements ST_Interpolator
 		radius = _radius;
 	}
 	
-	public function interpolate(target:ST_Sprite, totalMilliseconds:Float, elapsedMilliseconds:Float):Void
+	public function interpolate(target:ST_Detachment, totalMilliseconds:Float, elapsedMilliseconds:Float):Void
 	{
 		var currentDegrees = (elapsedMilliseconds / totalMilliseconds)*360;
 		currentDegrees = (currentDegrees * Math.PI) / 180;

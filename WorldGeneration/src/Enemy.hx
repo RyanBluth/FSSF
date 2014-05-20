@@ -8,7 +8,7 @@ import sexual_tengine.animation.ST_CircularPathInterpolator;
 import sexual_tengine.sprite.ST_Sprite;
 import sexual_tengine.sprite.ST_SuperSprite;
 import sexual_tengine.sprite.ST_Detachment;
-import sexual_tengine.ST_BasicFloatInterpolator;
+import sexual_tengine.ST_BasicFloatOscillator;
 import sexual_tengine.ST_Pathing;
 import sexual_tengine.STI;
 /**
@@ -42,6 +42,7 @@ class Enemy extends ST_SuperSprite{
 		addSpriteChild("enemyBody", enemyBody);
 		path = new ST_Pathing();
 		
+		animator.addCommand("enemyAlpha", new ST_AnimatorCommand(this, new ST_BasicFloatOscillator("alpha", 0.1, 1), 250));
 		
 		var style = Std.random(3000);
 		if(style >= 2000){
@@ -73,6 +74,7 @@ class Enemy extends ST_SuperSprite{
 	
 	public override function draw() {
 		super.draw();
+		animator.animate("enemyAlpha");
 	}
 	
 }
