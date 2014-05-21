@@ -1,5 +1,7 @@
 package sexual_tengine.utils;
 
+import haxe.PosInfos;
+
 /**
  * ...
  * @author ryan
@@ -25,9 +27,9 @@ class ST_Logger
 	 * 
 	 * @param	log The variable to be logged 
 	 */
-	public static function log(log:Dynamic) {
+	public static function log(log:Dynamic, ?pos:PosInfos) {
 		#if debug
-			trace(log);
+			trace( '${pos.fileName}:${pos.lineNumber}:${pos.className}.${pos.methodName}():\t'+log);
 		#end
 	}
 	
@@ -39,9 +41,9 @@ class ST_Logger
 	 * @param	logs			A dynamic array of type dynamic. Holds the items to be logged 
 	 * @param	?commaSeperated	Whether the values should be comma seperated or not
 	 */
-	public static function logMultiple(logs:Array<Dynamic>, ?commaSeperated:Bool = false) {
+	public static function logMultiple(logs:Array<Dynamic>, ?commaSeperated:Bool = false, ?pos:PosInfos) {
 		#if debug
-			var logString:String = "";
+			var logString:String = '${pos.fileName}:${pos.lineNumber}:${pos.className}.${pos.methodName}():\t';
 			var firstRun:Bool = true;
 			for (log in logs) {
 				if(commaSeperated)

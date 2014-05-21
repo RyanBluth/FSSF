@@ -1,4 +1,4 @@
-package sexual_tengine;
+package sexual_tengine.animation;
 import sexual_tengine.animation.ST_Interpolator;
 import sexual_tengine.sprite.ST_Detachment;
 import sexual_tengine.sprite.ST_Sprite;
@@ -24,7 +24,7 @@ class ST_BasicFloatOscillator implements ST_Interpolator{
 	}
 	
 	/* INTERFACE sexual_tengine.animation.ST_Interpolator */
-	public function interpolate(target:ST_Detachment, totalMilliseconds:Float, elapsedMilliseconds:Float):Void{
+	public function interpolate(target:ST_Detachment, totalFrames:Float, elapsedFrames:Float):Void{
 		if (first) {
 			// verify that the field is a float before starting
 			if (!Std.is(Reflect.getProperty(target, field), Float)) {
@@ -37,13 +37,13 @@ class ST_BasicFloatOscillator implements ST_Interpolator{
 		
 		var step:Float = 
 			flip ?
-			min + (max - min) * (elapsedMilliseconds / totalMilliseconds)
+			min + (max - min) * (elapsedFrames / totalFrames)
 			:
-			max - (max - min) * (elapsedMilliseconds / totalMilliseconds);
+			max - (max - min) * (elapsedFrames / totalFrames);
 		
 		
-		var steps:Float = ((Math.abs(max) + Math.abs(min)) / totalMilliseconds);
-		if (elapsedMilliseconds + STI.corrector >= totalMilliseconds) {
+		var steps:Float = ((Math.abs(max) + Math.abs(min)) / totalFrames);
+		if (elapsedFrames + STI.corrector >= totalFrames) {
 			flip = !flip;
 		}
 		

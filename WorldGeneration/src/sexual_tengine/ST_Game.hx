@@ -2,20 +2,18 @@ package sexual_tengine;
 
 import flash.Lib;
 import flash.events.Event;
-import openfl.display.DirectRenderer;
-import sexual_tengine.STI;
-
 import flash.display.Sprite;
+import openfl.display.DirectRenderer;
+
+import sexual_tengine.STI;
 import sexual_tengine.input.ST_Keyboard;
 import sexual_tengine.input.ST_Mouse;
 import sexual_tengine.input.ST_GamepadManager;
 import sexual_tengine.input.ST_TouchManager;
 
-/**
- * ...
- * @author ryan
- */
+@:access(sexual_tengine.STI)
 class ST_Game extends Sprite {
+	
 	private var ticks:Int = 0;
 	private var playState:ST_State;
 	public function new(_playState:ST_State) {

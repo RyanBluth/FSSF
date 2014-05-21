@@ -146,14 +146,13 @@ class PlayState extends ST_State{
 			player.kinetics.applyForce(new Point(0,-1));
 		}
 		
-		/*if (ST_Keyboard.isPressed(["MINUS"])) {
-			STI.setTimestep(STI.getTimestep() + 10);
-			STI.setTimestep(10);
+		if (ST_Keyboard.isPressed(["MINUS"])) {
+			STI.setFPS(STI.getFPS() + 1);
 		}if (ST_Keyboard.isPressed(["EQUALS"])) {
-			STI.setTimestep(STI.getTimestep()-10);
-		}*/
+			STI.setFPS(STI.getFPS()-1);
+		}
 		
-		STI.setFPS(60-4*Math.sqrt(player.kinetics.velocity.x * player.kinetics.velocity.x + player.kinetics.velocity.y * player.kinetics.velocity.y));
+		//STI.setFPS(5*Math.sqrt(player.kinetics.velocity.x * player.kinetics.velocity.x + player.kinetics.velocity.y * player.kinetics.velocity.y));
 		
 		
 		//if (player.shotTimerElapsed >= player.shotTimerTotal) {

@@ -3,10 +3,9 @@ import sexual_tengine.sprite.ST_Detachment;
 import sexual_tengine.sprite.ST_Sprite;
 
 /**
- * Implement this and define 'interpolate' as a function of elapsedMilliseconds and totalMilliseconds
- * If the interpolation is defined as a percentage of elapsedMilliseconds/totalMilliseconds, no deltaTime correction is required
- * <em>elapsedMilliseconds increases by deltaTime each frame</em>
+ * Implement this and define 'interpolate' as a function of elapsedFrames and totalFrames
+ * <em>elapsedFrames increases by corrector each frame</em>
  * */
 interface ST_Interpolator {
-	public function interpolate(target:ST_Detachment, totalMilliseconds:Float, elapsedMilliseconds:Float):Void;
+	public function interpolate(target:ST_Detachment, totalFrames:Float, elapsedFrames:Float):Void;
 }
