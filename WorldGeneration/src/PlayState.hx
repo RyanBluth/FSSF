@@ -72,16 +72,9 @@ class PlayState extends ST_State{
 		player.kinetics.friction = 0.9;
 		
 		enemies = new Array();
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
+		for(i in 0...10){
+			enemies.push(new Enemy());
+		}
 		
 		for (e in enemies) {
 			addChild(e);

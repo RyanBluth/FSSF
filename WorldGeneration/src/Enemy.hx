@@ -6,6 +6,7 @@ import sexual_tengine.animation.ST_AnimationManager;
 import sexual_tengine.animation.ST_AnimatorCommand;
 import sexual_tengine.animation.ST_CircularPathInterpolator;
 import sexual_tengine.animation.ST_BasicFloatOscillator;
+import sexual_tengine.animation.ST_RelativeLinearInterpolator;
 import sexual_tengine.sprite.ST_Sprite;
 import sexual_tengine.sprite.ST_SuperSprite;
 import sexual_tengine.sprite.ST_Detachment;
@@ -17,7 +18,7 @@ import sexual_tengine.STI;
  */
 class Enemy extends ST_SuperSprite {
 	/** The interpolation for ST_Pathing is highly instable right now. If possible, use ST_AnimatorCommands instead. */
-	public var path:ST_Pathing;
+	//public var path:ST_Pathing;
 	
 	public var enemyFire:ST_Sprite;
 	public var enemyBody:ST_Sprite;
@@ -41,11 +42,19 @@ class Enemy extends ST_SuperSprite {
 		
 		addSpriteChild("enemyFire", enemyFire);
 		addSpriteChild("enemyBody", enemyBody);
-		path = new ST_Pathing();
+		//path = new ST_Pathing();
 		
 		animator.addCommand("enemyAlpha", new ST_AnimatorCommand(enemyFire, new ST_BasicFloatOscillator("alpha", 0.1, 1), 15));
 		
-		var style = Std.random(3000);
+		var pathX:ST_RelativeLinearInterpolator = new ST_RelativeLinearInterpolator("x");
+		pathX.push(20, 20);
+		pathX.push(40, -20);
+		if (Std.random(10) > 5) {
+			pathX.push(60, -20);
+		}
+		animator.addCommand("enemyMovement", new ST_AnimatorCommand(this, pathX, 60));
+		
+		/*var style = Std.random(3000);
 		if(style >= 2000){
 			path.push(10, new Point(0, 0.1));
 			path.push(50, new Point(-1, 0));
@@ -71,21 +80,19 @@ class Enemy extends ST_SuperSprite {
 			path.push(600, new Point(1, -1));
 			path.push(700, new Point(1, 0));
 			path.push(800, new Point(1, 1));*/
-		}
+		//}
 	}
 	
 	public override function update() {
 		super.update();
 		kinetics.resetAcceleration();
-		kinetics.applyForce(path.getForce());
+		//kinetics.applyForce(path.getForce());
+		animator.animate("enemyMovement");
 	}
 	
 	public override function draw() {
 		super.draw();
 		animator.animate("enemyAlpha");
-		if(animator.commands.exists("enemyMovement")){
-			animator.animate("enemyMovement");
-		}
 	}
 	
 }
