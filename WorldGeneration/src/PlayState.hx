@@ -11,6 +11,8 @@ import flash.Lib;
 import sexual_tengine.debugger.ST_Console;
 import sexual_tengine.sprite.ST_SpriteManager;
 import sexual_tengine.STI;
+import sexual_tengine.ui.ST_UiButton;
+import sexual_tengine.ui.ST_UiPanel;
 import sexual_tengine.utils.ST_Logger;
 
 import Bullet;
@@ -42,6 +44,9 @@ class PlayState extends ST_State{
 	
 	var collisionTest:ST_Sprite;
 	var debugger:ST_Console;
+	
+	var panel:ST_UiPanel;
+	var button:ST_UiButton;
 	
 	public function new() {
 		super();
@@ -90,6 +95,17 @@ class PlayState extends ST_State{
 		}
 		
 		addChild(new FPS());
+		panel = new ST_UiPanel(200, 200);
+		panel.setBackgroundColour(0xFF0033, 1);
+		addChild(panel);
+		
+		button = new ST_UiButton(128, 32);
+		panel.addComponent("button", button, 30, 30);
+		
+		button.label.text = "Button";
+		
+		panel.x = 100;
+		panel.y = 100;
 	}
 	
 	public override function update(){
@@ -114,8 +130,8 @@ class PlayState extends ST_State{
 				}
 			}
 		}
-		
-		
+		panel.update();
+		button.update();
 //		trace(bulletManager.spriteArray.length,ST_Collision.spriteManagerCollide(player.playerBody, bulletManager, player).length);
 		
 		if(ST_GeneralInput.primary(0,false)){
@@ -172,6 +188,7 @@ class PlayState extends ST_State{
 	public override function draw() {
 		super.draw();
 		player.draw();
+		button.draw();
 		for (e in enemies) {
 			e.draw();
 		}for (i in bulletManager.spriteArray) {

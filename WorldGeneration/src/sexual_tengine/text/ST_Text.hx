@@ -24,16 +24,6 @@ class ST_Text extends TextField
 		}
 		selectable = false;
 		setTextFormat(format);
-		//autoSizeField = TextFieldAutoSize.LEFT;
-		//autoSize = autoSizeField;
-	}
-	
-	public function easyFormat() {
-		
-	}
-	
-	public function easyParams() {
-		
 	}
 	
 	public function enableAutoSize() {

@@ -46,6 +46,7 @@ class ST_Sprite extends ST_Detachment{
 	}
 	
 	public function setBitmap(_bitmap:String) {
+		removeChild(bitmap);
 		bitmap = new Bitmap(Assets.getBitmapData(_bitmap));
 		addChild(bitmap);
 	}

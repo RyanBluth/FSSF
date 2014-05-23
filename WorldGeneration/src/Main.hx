@@ -5,7 +5,6 @@ import flash.events.Event;
 import flash.Lib;
 import haxe.Timer;
 import sexual_tengine.input.ST_TouchManager;
-
 import sexual_tengine.ST_Game;
 
 /**
