@@ -49,10 +49,14 @@ class Enemy extends ST_SuperSprite {
 		var pathX:ST_RelativeLinearInterpolator = new ST_RelativeLinearInterpolator("x");
 		pathX.push(20, 20);
 		pathX.push(40, -20);
-		if (Std.random(10) > 5) {
-			pathX.push(60, -20);
+		if (Std.random(10) > 3) {
+			if(Std.random(10) > 5){
+				pathX.push(60, -20);
+			}else {
+				pathX.push(60, 20);
+			}
 		}
-		animator.addCommand("enemyMovement", new ST_AnimatorCommand(this, pathX, 60));
+		animator.addCommand("enemyMovement", new ST_AnimatorCommand(this, pathX, pathX.totalFrames()));
 		
 		/*var style = Std.random(3000);
 		if(style >= 2000){

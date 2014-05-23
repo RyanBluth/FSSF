@@ -35,12 +35,16 @@ class ST_RelativeLinearInterpolator implements ST_Interpolator{
 		positions.push(_v);
 	}
 	
+	public function totalFrames():Float {
+		return times.length > 0 ? times[times.length - 1] : 0;
+	}
+	
 	/* INTERFACE sexual_tengine.animation.ST_Interpolator */
-	public function interpolate(target:ST_Detachment, totalFrames:Float, elapsedFrames:Float):Void{
+	public function interpolate(target:Dynamic, totalFrames:Float, elapsedFrames:Float):Void{
 		if (first) {
 			// verify that the field is a float before starting
 			if (!Std.is(Reflect.getProperty(target, field), Float)) {
-				ST_Logger.throwAndLog("Field '" + field + "' is not a Float property of '" + target + "'");
+				ST_Logger.throwAndLog("Field '" + field + "' is not a Float property of '" + target + "'"+Type.typeof(Reflect.getProperty(target, field)));
 			}
 			
 			src = Reflect.getProperty(target, field);
@@ -61,7 +65,7 @@ class ST_RelativeLinearInterpolator implements ST_Interpolator{
 			t = true;
 		}
 		
-		var step:Float = src + (dest - src) * (1 - (times[iterator] - elapsedFrames) / (times[iterator] - (iterator == 0 ? 0 : times[iterator - 1])));
+		var step:Float = ST_Easing.none(elapsedFrames - (iterator == 0 ? 0 : times[iterator - 1]), src, (dest - src), (times[iterator] - (iterator == 0 ? 0 : times[iterator - 1])));
 		
 		Reflect.setProperty(target, field, step);
 	}

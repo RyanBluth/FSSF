@@ -72,7 +72,7 @@ class PlayState extends ST_State{
 		player.kinetics.friction = 0.9;
 		
 		enemies = new Array();
-		for(i in 0...10){
+		for(i in 0...20){
 			enemies.push(new Enemy());
 		}
 		
@@ -149,7 +149,7 @@ class PlayState extends ST_State{
 		
 		
 		//if (player.shotTimerElapsed >= player.shotTimerTotal) {
-			for(i in 0...100){
+			for(i in 0...1){
 			if (ST_GeneralInput.primary(0, false)) {
 				var pos:Point = new Point(player.x - 23*1.5, player.y - 23*2);
 				var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y - 5,-1));

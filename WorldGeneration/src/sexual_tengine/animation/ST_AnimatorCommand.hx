@@ -9,7 +9,7 @@ import sexual_tengine.STI;
  */
 class ST_AnimatorCommand {
 	/** Sprite affected by interpolator */
-	public  var target:ST_Detachment;
+	public  var target:Dynamic;
 	/** Interpolator to affect sprite */
 	private var interpolator:ST_Interpolator;
 	
@@ -22,7 +22,7 @@ class ST_AnimatorCommand {
 	 * @param	_interpolator		Interpolator to affect sprite
 	 * @param	_totalFrames	Total Frames for interpolation
 	 */
-	public function new(_target:ST_Detachment, _interpolator:ST_Interpolator, _totalFrames:Float){
+	public function new(_target:Dynamic, _interpolator:ST_Interpolator, _totalFrames:Float){
 		target = _target;
 		interpolator = _interpolator;
 		totalFrames = _totalFrames;

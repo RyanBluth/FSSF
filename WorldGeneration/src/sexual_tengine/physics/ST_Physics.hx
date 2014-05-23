@@ -28,7 +28,6 @@ class ST_Physics
 	 * @return A point containing the x and y offset for the object 
 	 */
 	public function calculatePosition():Point{
-		
 		//Apply the friction after the movement has occured
 		velocity.x *= friction;// * STI.corrector;
 		velocity.y *= friction;// * STI.corrector;

@@ -7,5 +7,5 @@ import sexual_tengine.sprite.ST_Sprite;
  * <em>elapsedFrames increases by corrector each frame</em>
  * */
 interface ST_Interpolator {
-	public function interpolate(target:ST_Detachment, totalFrames:Float, elapsedFrames:Float):Void;
+	public function interpolate(target:Dynamic, totalFrames:Float, elapsedFrames:Float):Void;
 }
