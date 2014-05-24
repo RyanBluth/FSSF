@@ -103,9 +103,11 @@ class PlayState extends ST_State{
 		panel.addComponent("button", button, 30, 30);
 		
 		button.label.text = "Button";
+		button.label.format.size = 20.5;
 		
 		panel.x = 100;
 		panel.y = 100;
+		
 	}
 	
 	public override function update(){
