@@ -36,6 +36,10 @@ class ST_UiComponent extends ST_Sprite
 		displayWidth = _width;
 		displayHeight = _height;
 		animation.play = false;
+		marginBottom = 0;
+		marginLeft = 0;
+		marginRight = 0;
+		marginTop = 0;
 	}
 	
 	public function setBackgroundColour(_color:Int, _alpha:Float) {
@@ -76,7 +80,6 @@ class ST_UiComponent extends ST_Sprite
 		}
 		draw();
 	}
-	
 	public override function draw() {
 		super.draw();
 	}
@@ -88,7 +91,7 @@ class ST_UiComponent extends ST_Sprite
 		marginBottom = _bottom;
 	}
 	
-		function setButtonClickCallback(value:Void->Void):Void->Void {
+	function setButtonClickCallback(value:Void->Void):Void->Void {
 		return clickCallback = value;
 	}
 	

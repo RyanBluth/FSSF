@@ -1,4 +1,5 @@
 package sexual_tengine.ui;
+import flash.geom.Rectangle;
 
 /**
  * ...
@@ -6,10 +7,52 @@ package sexual_tengine.ui;
  */
 class ST_UiLinearLayout extends ST_UiComponent
 {
+	public var children:Array<ST_UiComponent>;
+	private var updateRequired:Bool;
 
 	public function new(_width:Float, _height:Float) {
-		super(_width, _height);
-		
+		super(_width, _height);		
+		children = new Array();
+		updateRequired = true;
+	}
+
+	public override function draw() {
+		super.draw();
+		if(updateRequired){
+			for (i in 0...children.length) {
+				if (i == 0) {
+					children[i].y = children[i].marginTop;
+				}else {
+					children[i].y = children[i - 1].y + children[i - 1].displayHeight + children[i - 1].marginBottom + children[i].marginTop;
+				}
+			}
+			if(children.length > 0){
+				displayHeight = height + children[children.length-1].marginBottom;
+				displayWidth = width;
+			}
+			updateRequired = false;
+		}
 	}
 	
+	public function addChildren(_children:Array<ST_UiComponent>, ?_startIndex:Int=-1) {
+		if(_startIndex==-1){
+			for(i in 0..._children.length) {
+				children.push(_children[i]);
+				addChild(_children[i]);
+			}
+		}else {
+			for(i in 0..._children.length) {
+				children.insert(_startIndex + i, _children[i]);
+				addChild(_children[i]);
+			}
+		}
+		updateRequired = true;
+	}
+	
+	public function setChildOrderIndex(_child:ST_UiComponent, index:Int) {
+		var childTemp = _child;
+		children.remove(_child);
+		children.insert(index, childTemp);
+		updateRequired = true;
+	}
 }

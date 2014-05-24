@@ -13,6 +13,7 @@ import sexual_tengine.sprite.ST_SpriteManager;
 import sexual_tengine.STI;
 import sexual_tengine.ui.ST_UiButton;
 import sexual_tengine.ui.ST_UiInputText;
+import sexual_tengine.ui.ST_UiLinearLayout;
 import sexual_tengine.ui.ST_UiPanel;
 import sexual_tengine.utils.ST_Logger;
 
@@ -48,6 +49,8 @@ class PlayState extends ST_State{
 	
 	var panel:ST_UiPanel;
 	var button:ST_UiButton;
+	
+	var linLay:ST_UiLinearLayout;
 	
 	public function new() {
 		super();
@@ -101,15 +104,24 @@ class PlayState extends ST_State{
 		addChild(panel);
 		
 		button = new ST_UiButton(128, 32);
-		panel.addComponent("button", button, 30, 30);
+		//panel.addComponent("button", button, 30, 30);
 		
 		button.label.text = "Button";
 		button.label.format.size = 20.5;
-		panel.addComponent("text", new ST_UiInputText(100, 30), 50, 50);
-		
+		//panel.addComponent("text", new ST_UiInputText(100, 30), 50, 50);
+		var text =  new ST_UiInputText(100, 30);
+		var text2 =  new ST_UiInputText(100, 30);
+		var text3 =  new ST_UiInputText(100, 30);
+		var text4 =  new ST_UiInputText(100, 30);
 		panel.x = 100;
 		panel.y = 100;
 		
+		linLay = new ST_UiLinearLayout(0, 0);
+		linLay.addChildren([button, text,text2,text3,text4]);
+		panel.addComponent("lin", linLay, 50, 50);
+		
+		linLay.setChildOrderIndex(button, 3);
+		button.marginBottom = 20;
 	}
 	
 	public override function update(){
@@ -123,7 +135,6 @@ class PlayState extends ST_State{
 			e.update();
 		}
 		
-		
 		bulletManager.updateGrid();
 		for (e in enemies) {
 			if(e.active){
@@ -134,6 +145,7 @@ class PlayState extends ST_State{
 				}
 			}
 		}
+		linLay.update();
 		panel.update();
 		button.update();
 //		trace(bulletManager.spriteArray.length,ST_Collision.spriteManagerCollide(player.playerBody, bulletManager, player).length);
@@ -191,6 +203,7 @@ class PlayState extends ST_State{
 	
 	public override function draw() {
 		super.draw();
+		linLay.draw();
 		player.draw();
 		button.draw();
 		for (e in enemies) {
