@@ -12,6 +12,7 @@ import sexual_tengine.debugger.ST_Console;
 import sexual_tengine.sprite.ST_SpriteManager;
 import sexual_tengine.STI;
 import sexual_tengine.ui.ST_UiButton;
+import sexual_tengine.ui.ST_UiInputText;
 import sexual_tengine.ui.ST_UiPanel;
 import sexual_tengine.utils.ST_Logger;
 
@@ -104,6 +105,7 @@ class PlayState extends ST_State{
 		
 		button.label.text = "Button";
 		button.label.format.size = 20.5;
+		panel.addComponent("text", new ST_UiInputText(100, 30), 50, 50);
 		
 		panel.x = 100;
 		panel.y = 100;

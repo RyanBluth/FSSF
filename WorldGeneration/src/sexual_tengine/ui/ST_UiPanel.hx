@@ -14,11 +14,15 @@ class ST_UiPanel extends ST_UiComponent
 		components = new Map();
 	}
 	
-	public function addComponent(name:String, component:ST_UiComponent, _componentX:Float, _componentY:Float){
-		components.set(name, component);
-		addChild(component);
-		component.x = _componentX;
-		component.y = _componentY;
+	public function addComponent(_name:String, _component:ST_UiComponent, _componentX:Float, _componentY:Float){
+		components.set(_name, _component);
+		addChild(_component);
+		_component.x = _componentX;
+		_component.y = _componentY;
+	}
+	
+	public function getComponentByName(_name:String):ST_UiComponent {
+		return components.get(_name);
 	}
 	
 }

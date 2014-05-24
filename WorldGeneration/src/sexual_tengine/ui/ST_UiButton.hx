@@ -5,6 +5,8 @@ import flash.Lib;
 import flash.text.TextFormatAlign;
 import sexual_tengine.input.ST_Mouse;
 import sexual_tengine.text.ST_Text;
+import sexual_tengine.ui.ST_UiState;
+import sexual_tengine.ui.ST_UiConstants;
 
 /**
  * ...
@@ -15,11 +17,6 @@ class ST_UiButton extends ST_UiComponent
 	private var standardState:String;
 	private var mouseDownState:String;
 	private var mouseOverState:String;
-	private var currentState:ST_ButtonState;
-
-	private var clickCallback:Void->Void;
-	private var downCallback:Void->Void;
-	private var overCallback:Void->Void;
 	
 	public var label:ST_Text;
 	
@@ -37,7 +34,7 @@ class ST_UiButton extends ST_UiComponent
 		setBitmap(standardState);
 	}
 	
-	public function setButtonState(_state:ST_ButtonState, _source:String) {
+	public function setButtonState(_state:ST_UiState, _source:String) {
 		switch _state {
 			case UP: standardState = _source;
 			case FOCUSED: mouseOverState = _source;
@@ -47,32 +44,6 @@ class ST_UiButton extends ST_UiComponent
 	
 	public override function update() {
 		super.update();
-		if (parent.mouseX >= x && parent.mouseX <= x + width && parent.mouseY >= y && parent.mouseY <= y + height) {
-			if (ST_Mouse.leftJustReleased) {
-				currentState = UP;
-				label.format.size = 20.5;
-				if(clickCallback!=null){
-					clickCallback();
-				}
-			}else{
-				if (ST_Mouse.leftPressed) {
-					currentState = DOWN;
-					label.format.size = 20;
-					if(downCallback!=null){
-						downCallback();
-					}
-				}else {
-					currentState = FOCUSED;
-					label.format.size = 20.5;
-					if(overCallback != null){
-						overCallback();
-					}
-				}
-			}
-		}else {
-			currentState = UP;
-		}
-		draw();
 	}
 	
 	private function manageLabel() {
@@ -93,22 +64,4 @@ class ST_UiButton extends ST_UiComponent
 		}
 		manageLabel();
 	}
-	
-	function setButtonClickCallback(value:Void->Void):Void->Void {
-		return clickCallback = value;
-	}
-	
-	function setMoueOverCallback(value:Void->Void):Void->Void {
-		return overCallback = value;
-	
-	}
-	function setButtonDownCallback(value:Void->Void):Void->Void {
-		return downCallback = value;
-	}
-}
-
-enum ST_ButtonState {
-	UP;
-	FOCUSED;
-	DOWN;
 }
