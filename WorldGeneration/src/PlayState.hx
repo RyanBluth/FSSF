@@ -15,6 +15,7 @@ import sexual_tengine.ui.ST_UiButton;
 import sexual_tengine.ui.ST_UiImage;
 import sexual_tengine.ui.ST_UiInputText;
 import sexual_tengine.ui.ST_UiLabel;
+import sexual_tengine.ui.ST_UiLayoutUtil;
 import sexual_tengine.ui.ST_UiLinearLayout;
 import sexual_tengine.ui.ST_UiPanel;
 import sexual_tengine.utils.ST_Logger;
@@ -129,6 +130,15 @@ class PlayState extends ST_State{
 		linLay.setChildOrderIndex(button, 3);
 		button.marginBottom = 20;
 		label.text.setFont("font/PTC55F.ttf");
+		
+		
+		var text5 = new ST_UiInputText(100, 30);
+		var text6 = new ST_UiInputText(100, 30);
+		
+		panel.addComponent("text5", text5, 0, 0);
+		panel.addComponent("text6", text6, 0, 0);
+		ST_UiLayoutUtil.centerVerical(linLay, [text5], 10);
+		trace(linLay.displayHeight);
 	}
 	
 	public override function update(){

@@ -43,7 +43,7 @@ class ST_UiLinearLayout extends ST_UiComponent
 				}
 				if(children.length > 0){
 					displayHeight = height;
-					displayWidth = width + children[children.length-1].marginRight;
+					displayWidth  = width + children[children.length-1].marginRight;
 				}
 			}
 			updateRequired = false;
@@ -63,6 +63,7 @@ class ST_UiLinearLayout extends ST_UiComponent
 			}
 		}
 		updateRequired = true;
+		draw();
 	}
 	
 	public function setChildOrderIndex(_child:ST_UiComponent, index:Int) {
@@ -70,11 +71,13 @@ class ST_UiLinearLayout extends ST_UiComponent
 		children.remove(_child);
 		children.insert(index, childTemp);
 		updateRequired = true;
+		draw();
 	}
 	
 	public function setOrientation(_orientation:ST_UiLinearLayoutOrientation) {
 		orientation = _orientation;
 		updateRequired = true;
+		draw();
 	}
 }
 
