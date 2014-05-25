@@ -32,6 +32,8 @@ class ST_UiButton extends ST_UiComponent
 		currentState = UP;
 		
 		setBitmap(standardState);
+		bitmap.width = displayWidth;
+		bitmap.height = displayHeight;
 	}
 	
 	public function setButtonState(_state:ST_UiState, _source:String) {
@@ -48,11 +50,11 @@ class ST_UiButton extends ST_UiComponent
 	
 	private function manageLabel() {
 		setChildIndex(label, numChildren - 1);
-		label.width = getBitmap().width;
-		label.height = getBitmap().height;
+		label.width = displayWidth;
+		label.height = bitmap.height;
 		label.format.align = TextFormatAlign.CENTER;
 		label.setTextFormat(label.format);
-		label.y = label.height * 0.5 - (label.height * 0.25) * label.format.size/12;
+		label.y = label.height * 0.5 - (label.height * 0.25) * label.format.size / 12;
 	}
 	
 	public override function draw() {
@@ -62,6 +64,8 @@ class ST_UiButton extends ST_UiComponent
 			case FOCUSED: setBitmap(mouseOverState);
 			case DOWN: setBitmap(mouseDownState);
 		}
+		bitmap.width = displayWidth;
+		bitmap.height = displayHeight;
 		manageLabel();
 	}
 }

@@ -14,7 +14,7 @@ import sexual_tengine.ui.ST_UiState;
  */
 class ST_UiComponent extends ST_Sprite
 {
-	public var backgroundColor:Int;
+	private var backgroundColor:Int;
 	
 	public var displayWidth:Float;
 	public var displayHeight:Float;
@@ -30,7 +30,6 @@ class ST_UiComponent extends ST_Sprite
 	private var downCallback:Void->Void;
 	private var overCallback:Void->Void;
 	
-	
 	public function new(_width:Float, _height:Float){
 		super();
 		displayWidth = _width;
@@ -45,7 +44,7 @@ class ST_UiComponent extends ST_Sprite
 	public function setBackgroundColour(_color:Int, _alpha:Float) {
 		graphics.clear();
 		graphics.beginFill(_color,_alpha);
-		graphics.drawRect(x, y, displayWidth, displayHeight);
+		graphics.drawRect(0, 0, displayWidth, displayHeight);
 		graphics.endFill();
 	}
 	
@@ -56,7 +55,7 @@ class ST_UiComponent extends ST_Sprite
 	
 	public override function update() {
 		super.update();
-		if (parent.mouseX >= x && parent.mouseX <= x + width && parent.mouseY >= y && parent.mouseY <= y + height) {
+		if (parent.mouseX >= x && parent.mouseX <= x + displayWidth && parent.mouseY >= y && parent.mouseY <= y + displayHeight) {
 			if (ST_Mouse.leftJustReleased) {
 				currentState = UP;
 				if(clickCallback!=null){
@@ -91,15 +90,15 @@ class ST_UiComponent extends ST_Sprite
 		marginBottom = _bottom;
 	}
 	
-	function setButtonClickCallback(value:Void->Void):Void->Void {
+	public function setButtonClickCallback(value:Void->Void):Void->Void {
 		return clickCallback = value;
 	}
 	
-	function setMoueOverCallback(value:Void->Void):Void->Void {
+	public function setMoueOverCallback(value:Void->Void):Void->Void {
 		return overCallback = value;
 	
 	}
-	function setButtonDownCallback(value:Void->Void):Void->Void {
+	public function setButtonDownCallback(value:Void->Void):Void->Void {
 		return downCallback = value;
 	}
 }

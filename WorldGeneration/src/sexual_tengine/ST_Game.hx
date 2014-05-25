@@ -17,8 +17,9 @@ import sexual_tengine.input.ST_TouchManager;
  */
 class ST_Game extends Sprite {
 	private var ticks:Int = 0;
-	private var playState:ST_State;
-	public function new(_playState:ST_State) {
+	private var currentState:ST_State;
+	private var pendingState:ST_State;
+	public function new(_startState:ST_State) {
 		super();
 		//inputs
 		new ST_Keyboard();
@@ -33,14 +34,22 @@ class ST_Game extends Sprite {
 			new ST_GamepadManager();
 		#end
 		
-		playState = _playState;
-		addChild(playState);
+		currentState = _startState;
+		currentState.game = this;
+		
+		addChild(currentState);
 		Lib.current.stage.addEventListener(Event.ENTER_FRAME, update);
 		
 	}
 	private var accumulator:Float = 0;
 	private var t:Float = 0;
 	public function update(evt:Event) {
+		if (pendingState != null) {
+			removeChild(currentState);
+			currentState = pendingState;
+			addChild(currentState);
+			pendingState = null;
+		}
 		STI.timeStamp = Lib.getTimer();
 		STI.deltaTime = (STI.timeStamp - STI.elapsedTime);
 		STI.corrector = STI.deltaTime / STI.target;
@@ -53,13 +62,17 @@ class ST_Game extends Sprite {
 			accumulator -= STI.timeStep;
 			t += STI.timeStep;
 		}
-		playState.update();
-		playState.draw();
+		currentState.update();
+		currentState.draw();
 		
 		ST_Mouse.clearJust();
 		#if !flash
 		ST_GamepadManager.clearJust();
 		#end
 		ST_Keyboard.clearJust();
+	}
+	
+	public function setCurrentState(_state:ST_State) {
+		pendingState = _state;
 	}
 }

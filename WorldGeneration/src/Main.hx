@@ -32,7 +32,7 @@ class Main extends Sprite
 		}
 		// (initialization code here)
 		
-		addChild(game = new ST_Game(new PlayState()));
+		addChild(game = new ST_Game(new MenuState(game)));
 		//inputs
 		
 		inited = true;

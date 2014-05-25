@@ -10,6 +10,7 @@ import flash.utils.ByteArray;
 import flash.Lib;
 import sexual_tengine.debugger.ST_Console;
 import sexual_tengine.sprite.ST_SpriteManager;
+import sexual_tengine.ST_Game;
 import sexual_tengine.STI;
 import sexual_tengine.ui.ST_UiButton;
 import sexual_tengine.ui.ST_UiImage;
@@ -55,8 +56,8 @@ class PlayState extends ST_State{
 	
 	var linLay:ST_UiLinearLayout;
 	
-	public function new() {
-		super();
+	public function new(_game:ST_Game) {
+		super(_game);
 		player = new Player();
 		setupPlayer();
 		addChild(player);
@@ -137,6 +138,7 @@ class PlayState extends ST_State{
 		
 		panel.addComponent("text5", text5, 0, 0);
 		panel.addComponent("text6", text6, 0, 0);
+		linLay.setBackgroundColour(0x0000FF, 1);
 		ST_UiLayoutUtil.center(linLay, [text5]);
 		trace(linLay.displayHeight);
 	}
