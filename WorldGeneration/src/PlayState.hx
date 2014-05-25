@@ -137,7 +137,7 @@ class PlayState extends ST_State{
 		
 		panel.addComponent("text5", text5, 0, 0);
 		panel.addComponent("text6", text6, 0, 0);
-		ST_UiLayoutUtil.centerVerical(linLay, [text5], 10);
+		ST_UiLayoutUtil.center(linLay, [text5]);
 		trace(linLay.displayHeight);
 	}
 	

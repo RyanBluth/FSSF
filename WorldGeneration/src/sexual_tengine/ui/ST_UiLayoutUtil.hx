@@ -7,81 +7,81 @@ package sexual_tengine.ui;
 class ST_UiLayoutUtil
 {
 
-	public static function layoutAbove(anchor:ST_UiComponent, targets:Array<ST_UiComponent>, margin:Float) {
-		for (i in targets) {
-			i.y = anchor.y - i.displayHeight - margin;
+	public static function layoutAbove(_anchor:ST_UiComponent, _targets:Array<ST_UiComponent>, margin:Float) {
+		for (i in _targets) {
+			i.y = _anchor.y - i.displayHeight - margin;
 		}
 	}
 	
-	public static function layoutBelow(anchor:ST_UiComponent, targets:Array<ST_UiComponent>, margin:Float) {
-		for (i in targets) {
-			i.y = anchor.y + anchor.displayHeight + margin;
+	public static function layoutBelow(_anchor:ST_UiComponent, _targets:Array<ST_UiComponent>, margin:Float) {
+		for (i in _targets) {
+			i.y = _anchor.y + _anchor.displayHeight + margin;
 		}
 	}
 	
-	public static function layoutLeft(anchor:ST_UiComponent, targets:Array<ST_UiComponent>, margin:Float) {
-		for (i in targets) {
-			i.x = anchor.x - i.width - margin;
+	public static function layoutLeft(_anchor:ST_UiComponent, _targets:Array<ST_UiComponent>, margin:Float) {
+		for (i in _targets) {
+			i.x = _anchor.x - i.width - margin;
 		}
 	}
 	
-	public static function layoutRight(anchor:ST_UiComponent, targets:Array<ST_UiComponent>, margin:Float) {
-		for (i in targets) {
-			i.x = anchor.x + i.width + margin;
+	public static function layoutRight(_anchor:ST_UiComponent, _targets:Array<ST_UiComponent>, margin:Float) {
+		for (i in _targets) {
+			i.x = _anchor.x + i.width + margin;
 		}
 	}
 	
-	public static function alignTop(anchor:ST_UiComponent, targets:Array<ST_UiComponent>, alignHorizontal:Bool) {
-		for (i in targets) {
-			i.y = anchor.y;
+	public static function alignTop(_anchor:ST_UiComponent, _targets:Array<ST_UiComponent>, _alignHorizontal:Bool) {
+		for (i in _targets) {
+			i.y = _anchor.y;
 		}
-		if (alignHorizontal) {
-			alignHorizontal(anchor, targets);
-		}
-	}
-	
-	public static function alignBottom(anchor:ST_UiComponent, targets:Array<ST_UiComponent>, alignHorizontal:Bool) {
-		for (i in targets) {
-			i.y = anchor.y + anchor.displayHeight - i.displayHeight;
-		}
-		if (alignHorizontal) {
-			alignHorizontal(anchor, targets);
+		if (_alignHorizontal) {
+			centerHorizontal(_anchor, _targets);
 		}
 	}
 	
-	public static function alignLeft(anchor:ST_UiComponent, targets:Array<ST_UiComponent>, alignVertical:Bool){
-		for (i in targets) {
-			i.x = anchor.x;
+	public static function alignBottom(_anchor:ST_UiComponent, _targets:Array<ST_UiComponent>, _alignHorizontal:Bool) {
+		for (i in _targets) {
+			i.y = _anchor.y + _anchor.displayHeight - i.displayHeight;
 		}
-		if (alignVertical) {
-			alignVertical(anchor, targets);
+		if (_alignHorizontal) {
+			centerHorizontal(_anchor, _targets);
 		}
 	}
 	
-	public static function alignRight(anchor:ST_UiComponent, targets:Array<ST_UiComponent>, alignVertical:Bool) {
-		for (i in targets) {
-			i.x = anchor.x + anchor.displayWidth - i.displayWidth;
+	public static function alignLeft(_anchor:ST_UiComponent, _targets:Array<ST_UiComponent>, _alignVertical:Bool){
+		for (i in _targets) {
+			i.x = _anchor.x;
+		}
+		if (_alignVertical) {
+			centerVertical(_anchor, _targets);
+		}
+	}
+	
+	public static function alignRight(_anchor:ST_UiComponent, _targets:Array<ST_UiComponent>, _alignVertical:Bool) {
+		for (i in _targets) {
+			i.x = _anchor.x + _anchor.displayWidth - i.displayWidth;
 		}	
-		if (alignVertical) {
-			alignVertical(anchor, targets);
+		if (_alignVertical) {
+			centerVertical(_anchor, _targets);
 		}
 	}
 	
-	public static function centerVerical(anchor:ST_UiComponent, targets:Array<ST_UiComponent>) {
-		for (i in targets) {
-			i.y = anchor.y + anchor.displayHeight * 0.5 - i.displayHeight * 0.5;
+	public static function centerVertical(_anchor:ST_UiComponent, _targets:Array<ST_UiComponent>) {
+		for (i in _targets) {
+			i.y = _anchor.y + _anchor.displayHeight * 0.5 - i.displayHeight * 0.5;
 		}
 	}
 	
-	public static function centerHorizontal(anchor:ST_UiComponent, targets:Array<ST_UiComponent>) {
-		for (i in targets) {
-			i.x = anchor.x + anchor.displayWidth * 0.5 - i.displayWidth * 0.5;
+	public static function centerHorizontal(_anchor:ST_UiComponent, _targets:Array<ST_UiComponent>) {
+		for (i in _targets) {
+			i.x = _anchor.x + _anchor.displayWidth * 0.5 - i.displayWidth * 0.5;
 		}
 	}
 	
-	public static function center(anchor:ST_UiComponent, targets:Array<ST_UiComponent>) {
-		centerHorizontal(anchor, targets);
-		centerVerical(anchor, targets);
+	public static function center(_anchor:ST_UiComponent, _targets:Array<ST_UiComponent>) {
+		centerHorizontal(_anchor, _targets);
+		centerVertical(_anchor, _targets);
 	}
 
 }
