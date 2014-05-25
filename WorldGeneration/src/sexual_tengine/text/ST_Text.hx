@@ -1,4 +1,5 @@
 package sexual_tengine.text;
+import flash.text.Font;
 import flash.text.GridFitType;
 import flash.text.TextField;
 import flash.text.TextFormat;
@@ -11,6 +12,7 @@ import openfl.Assets;
  */
 class ST_Text extends TextField
 {
+	
 	public var format:TextFormat;
 	public var autoSizeField:TextFieldAutoSize;
 	
@@ -18,11 +20,12 @@ class ST_Text extends TextField
 	{
 		super();
 		format = new TextFormat(_font, _size, _color, _bold, _italic, _underline);
-		
+		embedFonts = true;
 		if (_text != null) {
 			text = _text;
 		}
 		selectable = false;
+		format.size = 12;
 		setTextFormat(format);
 	}
 	
@@ -33,5 +36,10 @@ class ST_Text extends TextField
 	
 	public function disableAutoSize() {
 		autoSize = TextFieldAutoSize.NONE;
+	}
+	
+	public function setFont(fontPath:String) {
+		format.font = Assets.getFont(fontPath).fontName;
+		setTextFormat(format);
 	}
 }

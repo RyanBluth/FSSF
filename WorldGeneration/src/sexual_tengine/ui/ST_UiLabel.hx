@@ -1,5 +1,5 @@
 package sexual_tengine.ui;
-
+import sexual_tengine.text.ST_Text;
 /**
  * ...
  * @author Ryan
@@ -18,4 +18,8 @@ class ST_UiLabel extends ST_UiComponent
 		addChild(text);
 	}
 	
+	public override function draw() {
+		super.draw();
+		text.setTextFormat(text.format);
+	}
 }

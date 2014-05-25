@@ -26,5 +26,4 @@ class ST_UiInputText extends ST_UiComponent
 		addChild(text);
 	}
 	
-	
 }
