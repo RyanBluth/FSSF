@@ -20,6 +20,7 @@ class MenuState extends ST_State
 	var playButton:ST_UiButton;
 	var optionsButton:ST_UiButton;
 	var i = 100;
+	
 	public function new(_game:ST_Game) 
 	{
 		super(_game);
@@ -48,13 +49,12 @@ class MenuState extends ST_State
 		playButton.label.text = "Play";
 		playButton.marginBottom = 30;
 		
-		trace(_game);
 		playButton.setButtonClickCallback(function() {
 			game.setCurrentState(new PlayState(_game));
 		});
 		
-		optionsButton = new ST_UiButton(250,40);
-		optionsButton.label.format.size = 20;
+		optionsButton = new ST_UiButton(250,200);
+		optionsButton.label.format.size = 30;
 		optionsButton.label.setFont("font/PTC55F.ttf");
 		optionsButton.label.text = "Options";
 		
@@ -67,7 +67,6 @@ class MenuState extends ST_State
 		ST_UiLayoutUtil.layoutBelow(title, [buttonLayout], 100);
 		
 		addChild(mainPanel);	
-
 	}
 	
 	public override function update() {
@@ -77,16 +76,17 @@ class MenuState extends ST_State
 		buttonLayout.update();
 		playButton.update();
 		optionsButton.update();
-		for(j in 0...17){
-			i--;
-			if (i <= 1) {
-				i = 100;
+		for(j in 0...40){
+			i++;
+			if (i >= 99) {
+				i = 1;
 			}
-			mainPanel.components.get(Std.string(i)).setBackgroundColour(grayscale(Std.random(0xFF)) , 1);
+			mainPanel.components.get(Std.string(i)).setBackgroundColour(grayscale(Std.random(200)) , 1);
 		}
 	}
 	
-	private function grayscale ( tint:Int):Int{
+	private function grayscale ( tint:Int):Int {
+		
 		if (tint < 0) { tint = 0; }
 		if (tint > 255) { tint = 255; }
 		return (tint << 16) | (tint << 8) | tint;

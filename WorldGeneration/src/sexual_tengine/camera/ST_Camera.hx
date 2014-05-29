@@ -1,5 +1,6 @@
 package sexual_tengine.camera;
 import flash.geom.Rectangle;
+import sexual_tengine.sprite.ST_Detachment;
 import sexual_tengine.sprite.ST_Sprite;
 /**
  * ...
@@ -9,7 +10,7 @@ class ST_Camera
 {
 	private var frame:Rectangle;
 	private var deadzone:Rectangle;
-	private var followSprite:ST_Sprite;
+	private var followSprite:ST_Detachment;
 
 	/**
 	 * A basic virtual camera which makes use of a sprites scrollRect
@@ -41,7 +42,7 @@ class ST_Camera
 	 * 
 	 * @param	_followSprite
 	 */
-	public function follow(_followSprite:ST_Sprite) {
+	public function follow(_followSprite:ST_Detachment) {
 		followSprite = _followSprite; 
 	}
 	

@@ -54,7 +54,8 @@ class ST_UiButton extends ST_UiComponent
 		label.height = bitmap.height;
 		label.format.align = TextFormatAlign.CENTER;
 		label.setTextFormat(label.format);
-		label.y = label.height * 0.5 - (label.height * 0.25) * label.format.size / 12;
+		//I have no idea why this equation works but it does
+		label.y = label.height * 0.5 - (label.height * 0.25) * label.format.size /((12)*(displayHeight/32));
 	}
 	
 	public override function draw() {
