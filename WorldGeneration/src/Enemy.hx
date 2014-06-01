@@ -1,7 +1,7 @@
 package;
 
-import flash.geom.Point;
-import flash.Lib;
+import openfl.geom.Point;
+import openfl.Lib;
 import sexual_tengine.animation.ST_AnimationManager;
 import sexual_tengine.animation.ST_AnimatorCommand;
 import sexual_tengine.animation.ST_CircularPathInterpolator;

@@ -1,6 +1,6 @@
 package sexual_tengine.utils;
-import flash.geom.Point;
-import flash.geom.Rectangle;
+import openfl.geom.Point;
+import openfl.geom.Rectangle;
 import sexual_tengine.sprite.ST_Detachment;
 import sexual_tengine.sprite.ST_SpriteManager;
 import sexual_tengine.sprite.ST_SuperSprite;

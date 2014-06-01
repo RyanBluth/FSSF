@@ -1,5 +1,5 @@
 package sexual_tengine.camera;
-import flash.display.Sprite;
+import openfl.display.Sprite;
 
 /**
  * ...

@@ -1,5 +1,5 @@
 package;
-import flash.Lib;
+import openfl.Lib;
 import sexual_tengine.sprite.ST_SuperSprite;
 import sexual_tengine.sprite.ST_Sprite;
 /**

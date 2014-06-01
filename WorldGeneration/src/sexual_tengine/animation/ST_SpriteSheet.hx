@@ -1,11 +1,11 @@
 package sexual_tengine.animation;
 
-import flash.display.BitmapData;
-import flash.geom.Rectangle;
+import openfl.display.BitmapData;
+import openfl.geom.Rectangle;
 import openfl.Assets;
 import openfl.display.Tilesheet;
-import flash.display.Bitmap;
-import flash.geom.Point;
+import openfl.display.Bitmap;
+import openfl.geom.Point;
 
 /**
  * ...

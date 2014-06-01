@@ -9,15 +9,15 @@ import sexual_tengine.animation.ST_AnimationState;
 import sexual_tengine.animation.ST_SpriteSheet;
 import sexual_tengine.animation.ST_SpriteSheetHandler;
 
-import flash.display.*;
-import flash.display.Bitmap;
-import flash.display.BitmapData;
-import flash.events.*;
-import flash.geom.Point;
-import flash.geom.Rectangle;
+import openfl.display.*;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
+import openfl.events.*;
+import openfl.geom.Point;
+import openfl.geom.Rectangle;
 import openfl.Assets;
 import openfl.display.Tilesheet;
-import flash.display.Graphics;
+import openfl.display.Graphics;
 import openfl.gl.GLTexture;
 
 

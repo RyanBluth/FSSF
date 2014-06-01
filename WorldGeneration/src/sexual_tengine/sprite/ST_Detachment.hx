@@ -1,9 +1,9 @@
 package sexual_tengine.sprite;
 
-import flash.display.DisplayObjectContainer;
-import flash.display.Sprite;
+import openfl.display.DisplayObjectContainer;
+import openfl.display.Sprite;
 import sexual_tengine.physics.ST_Physics;
-import flash.geom.Point;
+import openfl.geom.Point;
 import sexual_tengine.STI;
 
 /**

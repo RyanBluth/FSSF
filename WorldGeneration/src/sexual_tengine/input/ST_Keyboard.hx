@@ -1,8 +1,8 @@
 package sexual_tengine.input;
-import flash.events.Event;
-import flash.events.KeyboardEvent;
-import flash.Lib;
-import flash.ui.Keyboard;
+import openfl.events.Event;
+import openfl.events.KeyboardEvent;
+import openfl.Lib;
+import openfl.ui.Keyboard;
 import Map;
 
 /** Utility class for keyboard input. <strong>Requires that a KeyboardUtil object be initialized before the static members will be of any use.</strong> */

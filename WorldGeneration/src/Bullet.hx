@@ -1,8 +1,8 @@
 package ;
 
-import flash.geom.Matrix;
-import flash.geom.Point;
-import flash.Lib;
+import openfl.geom.Matrix;
+import openfl.geom.Point;
+import openfl.Lib;
 import sexual_tengine.sprite.ST_Sprite;
 import sexual_tengine.STI;
 

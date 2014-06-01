@@ -1,9 +1,9 @@
 package sexual_tengine.ui;
 import sexual_tengine.sprite.ST_Sprite;
-import flash.display.DisplayObjectContainer;
-import flash.events.MouseEvent;
-import flash.Lib;
-import flash.text.TextFormatAlign;
+import openfl.display.DisplayObjectContainer;
+import openfl.events.MouseEvent;
+import openfl.Lib;
+import openfl.text.TextFormatAlign;
 import sexual_tengine.input.ST_Mouse;
 import sexual_tengine.text.ST_Text;
 import sexual_tengine.ui.ST_UiState;

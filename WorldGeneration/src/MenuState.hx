@@ -1,5 +1,5 @@
 package ;
-import flash.Lib;
+import openfl.Lib;
 import sexual_tengine.ST_Game;
 import sexual_tengine.ST_State;
 import sexual_tengine.ui.ST_UiButton;

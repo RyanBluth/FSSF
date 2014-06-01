@@ -1,5 +1,5 @@
 package sexual_tengine.camera;
-import flash.geom.Rectangle;
+import openfl.geom.Rectangle;
 import sexual_tengine.sprite.ST_Detachment;
 import sexual_tengine.sprite.ST_Sprite;
 /**

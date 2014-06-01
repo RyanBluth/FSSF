@@ -1,10 +1,10 @@
 package sexual_tengine.utils;
 
-import flash.media.Sound;
-import flash.media.SoundChannel;
+import openfl.media.Sound;
+import openfl.media.SoundChannel;
 import haxe.Timer;
 import Map;
-import flash.net.URLRequest;
+import openfl.net.URLRequest;
 
 /**
  * ...

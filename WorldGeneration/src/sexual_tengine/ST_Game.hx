@@ -1,11 +1,11 @@
 package sexual_tengine;
 
-import flash.Lib;
-import flash.events.Event;
+import openfl.Lib;
+import openfl.events.Event;
 import openfl.display.DirectRenderer;
 import sexual_tengine.STI;
 
-import flash.display.Sprite;
+import openfl.display.Sprite;
 import sexual_tengine.input.ST_Keyboard;
 import sexual_tengine.input.ST_Mouse;
 import sexual_tengine.input.ST_GamepadManager;

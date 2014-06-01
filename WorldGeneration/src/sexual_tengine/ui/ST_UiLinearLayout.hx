@@ -1,5 +1,5 @@
 package sexual_tengine.ui;
-import flash.geom.Rectangle;
+import openfl.geom.Rectangle;
 
 /**
  * ...

@@ -1,13 +1,13 @@
 package;
 
 import sexual_tengine.camera.ST_Camera;
-import flash.display.Bitmap;
-import flash.display.Sprite;
-import flash.display.Stage;
-import flash.geom.Point;
-import flash.geom.Rectangle;
-import flash.utils.ByteArray;
-import flash.Lib;
+import openfl.display.Bitmap;
+import openfl.display.Sprite;
+import openfl.display.Stage;
+import openfl.geom.Point;
+import openfl.geom.Rectangle;
+import openfl.utils.ByteArray;
+import openfl.Lib;
 import sexual_tengine.debugger.ST_Console;
 import sexual_tengine.sprite.ST_SpriteManager;
 import sexual_tengine.ST_Game;
@@ -79,6 +79,7 @@ class PlayState extends ST_State{
 		//addChild(debugger);
 		
 		ST_GamepadManager.addController(0);
+		camera.follow(player);
 	}
 	
 	function setupPlayer(){

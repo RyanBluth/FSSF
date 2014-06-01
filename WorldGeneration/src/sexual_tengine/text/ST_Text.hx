@@ -1,23 +1,21 @@
 package sexual_tengine.text;
-import flash.text.Font;
-import flash.text.GridFitType;
-import flash.text.TextField;
-import flash.text.TextFormat;
-import flash.text.TextFieldAutoSize;
+import openfl.text.Font;
+import openfl.text.GridFitType;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
+import openfl.text.TextFieldAutoSize;
 import openfl.Assets;
 /**
  * Helper class used to create text fields
  * 
  * @author ryan
  */
-class ST_Text extends TextField
-{
-	
+class ST_Text extends TextField { 
+
 	public var format:TextFormat;
 	public var autoSizeField:TextFieldAutoSize;
 	
-	public function new(?_text:String,?_font:String,?_size:Float, ?_color:Int, ?_bold:Bool, ?_italic:Bool, ?_underline:Bool) 
-	{
+	public function new(?_text:String,?_font:String,?_size:Float, ?_color:Int, ?_bold:Bool, ?_italic:Bool, ?_underline:Bool) {
 		super();
 		format = new TextFormat(_font, _size, _color, _bold, _italic, _underline);
 		embedFonts = true;
@@ -27,6 +25,9 @@ class ST_Text extends TextField
 		selectable = false;
 		format.size = 12;
 		setTextFormat(format);
+		if(_font != null){
+			setFont(_font);
+		}
 	}
 	
 	public function enableAutoSize() {

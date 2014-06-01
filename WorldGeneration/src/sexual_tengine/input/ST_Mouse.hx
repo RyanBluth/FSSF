@@ -4,9 +4,9 @@ package sexual_tengine.input;
  * ...
  * @author Ryan
  */
-import flash.events.Event;
-import flash.events.MouseEvent;
-import flash.Lib;
+import openfl.events.Event;
+import openfl.events.MouseEvent;
+import openfl.Lib;
 
 class ST_Mouse {
 	/** Whether the left mouse button is currently pressed */

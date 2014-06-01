@@ -1,8 +1,8 @@
 package sexual_tengine.input;
-import flash.events.TouchEvent;
-import flash.Lib;
-import flash.ui.Multitouch;
-import flash.ui.MultitouchInputMode;
+import openfl.events.TouchEvent;
+import openfl.Lib;
+import openfl.ui.Multitouch;
+import openfl.ui.MultitouchInputMode;
 import sexual_tengine.input.ST_TouchManager.ST_Touch;
 /**
  * ...

@@ -1,15 +1,15 @@
 package sexual_tengine.debugger;
-import flash.display.SpreadMethod;
-import flash.display.Sprite;
-import flash.events.Event;
-import flash.events.MouseEvent;
-import flash.geom.Rectangle;
-import flash.Lib;
-import flash.text.AntiAliasType;
-import flash.text.TextField;
-import flash.text.TextFieldType;
+import openfl.display.SpreadMethod;
+import openfl.display.Sprite;
+import openfl.events.Event;
+import openfl.events.MouseEvent;
+import openfl.geom.Rectangle;
+import openfl.Lib;
+import openfl.text.AntiAliasType;
+import openfl.text.TextField;
+import openfl.text.TextFieldType;
 import sexual_tengine.text.ST_Text;
-import flash.events.KeyboardEvent;
+import openfl.events.KeyboardEvent;
 import sexual_tengine.input.ST_Mouse;
 
 /**

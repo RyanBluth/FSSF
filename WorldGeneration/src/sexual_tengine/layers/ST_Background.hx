@@ -1,8 +1,8 @@
 package sexual_tengine.layers;
-import flash.display.Bitmap;
-import flash.display.Sprite;
+import openfl.display.Bitmap;
+import openfl.display.Sprite;
 import openfl.Assets;
-import flash.Lib;
+import openfl.Lib;
 import sexual_tengine.STI;
 /**
  * ...

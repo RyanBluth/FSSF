@@ -1,6 +1,6 @@
 package sexual_tengine.animation;
 
-import flash.geom.Rectangle;
+import openfl.geom.Rectangle;
 
 /**
  * ...

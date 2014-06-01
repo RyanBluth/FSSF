@@ -4,10 +4,10 @@ import sexual_tengine.animation.ST_AnimationManager;
 import sexual_tengine.physics.ST_Physics;
 import sexual_tengine.sprite.ST_Detachment;
 
-import flash.display.Graphics;
-import flash.display.Bitmap;
-import flash.display.Sprite;
-import flash.geom.Point;
+import openfl.display.Graphics;
+import openfl.display.Bitmap;
+import openfl.display.Sprite;
+import openfl.geom.Point;
 import openfl.Assets;
 
 

@@ -1,7 +1,7 @@
 package sexual_tengine.input;
 
-import flash.events.Event;
-import flash.Lib;
+import openfl.events.Event;
+import openfl.Lib;
 #if (!flash && !web)
 	import openfl.events.JoystickEvent;
 #end

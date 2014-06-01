@@ -1,7 +1,7 @@
 package sexual_tengine.utils;
-import flash.display.Bitmap;
-import flash.geom.Rectangle;
-import flash.utils.ByteArray;
+import openfl.display.Bitmap;
+import openfl.geom.Rectangle;
+import openfl.utils.ByteArray;
 
 /**
  * ...

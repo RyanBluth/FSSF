@@ -1,8 +1,11 @@
 package sexual_tengine;
-import flash.display.Sprite;
-import flash.display.Stage;
-import flash.Lib;
+import openfl.display.Sprite;
+import openfl.display.Stage;
+import openfl.Lib;
+import openfl.display.DisplayObject;
 import sexual_tengine.camera.ST_Camera;
+import openfl.display.DisplayObjectContainer;
+import sexual_tengine.sprite.ST_Detachment;
 
 /**
  * @author ryan
@@ -17,14 +20,10 @@ class ST_State extends Sprite
 		camera = new ST_Camera(0, 0, Lib.current.stage.stageWidth, Lib.current.stage.stageHeight, 1, 1);
 		game = _game;
 	}
-	
 	public function update(){
 		scrollRect = camera.getFrame();
 	}
-	
 	public function draw(){
 		
 	}
-	
-	
 }

@@ -1,5 +1,5 @@
 package sexual_tengine.animation;
-import flash.geom.Point;
+import openfl.geom.Point;
 import sexual_tengine.sprite.ST_Sprite;
 
 /**

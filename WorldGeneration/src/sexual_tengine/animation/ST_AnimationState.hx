@@ -5,8 +5,8 @@ package sexual_tengine.animation;
  * @author Ryan
  */
 
-import flash.display.*;
-import flash.events.*;
+import openfl.display.*;
+import openfl.events.*;
 
 class ST_AnimationState{
 	public var frames:Array<Int>;

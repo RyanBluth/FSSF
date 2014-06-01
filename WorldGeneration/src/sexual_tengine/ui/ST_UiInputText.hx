@@ -1,6 +1,6 @@
 package sexual_tengine.ui;
 import sexual_tengine.text.ST_Text;
-import flash.text.TextFieldType;
+import openfl.text.TextFieldType;
 
 /**
  * ...
