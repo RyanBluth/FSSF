@@ -1,5 +1,6 @@
 package;
 
+import openfl.media.Sound;
 import sexual_tengine.camera.ST_Camera;
 import openfl.display.Bitmap;
 import openfl.display.Sprite;
@@ -9,6 +10,7 @@ import openfl.geom.Rectangle;
 import openfl.utils.ByteArray;
 import openfl.Lib;
 import sexual_tengine.debugger.ST_Console;
+import sexual_tengine.sound.ST_SoundManager;
 import sexual_tengine.sprite.ST_SpriteManager;
 import sexual_tengine.ST_Game;
 import sexual_tengine.STI;
@@ -55,6 +57,7 @@ class PlayState extends ST_State{
 	var button:ST_UiButton;
 	
 	var linLay:ST_UiLinearLayout;
+	var soundManager:ST_SoundManager;
 	
 	public function new(_game:ST_Game) {
 		super(_game);
@@ -80,6 +83,11 @@ class PlayState extends ST_State{
 		
 		ST_GamepadManager.addController(0);
 		camera.follow(player);
+		soundManager = new ST_SoundManager();
+		soundManager.addSound("sound/laser.wav", "playerShot");
+		soundManager.addSound("sound/spaceLoop.ogg", "tunes");
+		soundManager.fadeInSound("tunes", 3000, 0, 9999);
+		
 	}
 	
 	function setupPlayer(){
@@ -208,6 +216,7 @@ class PlayState extends ST_State{
 			bul.kinetics.velocity = vel;
 			
 			addChild(bul);
+			soundManager.playSound("playerShot",0,0);
 		}if (ST_GeneralInput.secondary(0, false)) {
 			var pos:Point = new Point(player.x + 23*1.5, player.y - 23*2);
 			var vel:Point = new Point(player.kinetics.velocity.x*0.5*STI.corrector, Math.min(player.kinetics.velocity.y*0.5*STI.corrector - 5,-1));
@@ -218,6 +227,8 @@ class PlayState extends ST_State{
 			bul.kinetics.velocity = vel;
 			
 			addChild(bul);
+			soundManager.fadeOutSound("tunes", 1000);
+		
 		}
 	}
 	
