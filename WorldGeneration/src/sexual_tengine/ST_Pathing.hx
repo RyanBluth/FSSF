@@ -2,17 +2,16 @@ package sexual_tengine;
 import openfl.geom.Point;
 
 /**
- * ...
- * @author Sean
+ * The interpolation for ST_Pathing is highly instable right now. If possible, use ST_AnimatorCommands instead.
  */
 class ST_Pathing{
 	public var inputTimes:Array<Int>;
 	public var inputForces:Array<Point>;
-	public var timeStamp:Int;
+	public var elapsedFrames:Float;
 	private var iterator:Int;
 	public function new() {
 		iterator = 0;
-		timeStamp = STI.timeStamp;
+		elapsedFrames = 0;
 		inputTimes = new Array();
 		inputForces = new Array();
 	}
@@ -26,21 +25,44 @@ class ST_Pathing{
 		return res;
 	}
 	
+	/** Needs to be called each frame like an update function. */
 	public function getForce():Point {
-		while ((STI.timeStamp - timeStamp) > inputTimes[iterator]) {
+		var res:Point = new Point();
+		var res2:Bool = true;
+		elapsedFrames += STI.corrector;
+		if (inputForces.length <= 0) {
+			return new Point(0, 0);
+		}
+		while (elapsedFrames > inputTimes[iterator]) {
 			iterator += 1;
 			if (iterator >= inputTimes.length) {
-				timeStamp = (STI.timeStamp - (inputTimes[inputTimes.length - 1] + timeStamp)) + STI.timeStamp;
 				iterator = 0;
+				elapsedFrames -= inputTimes[inputTimes.length - 1];
 				
-				//interpolate between the last input force and the first input force by a ratio equivalent to the overlap in the time taken between frames
-				var a = inputForces[inputForces.length - 1];
-				var b = inputForces[0];
-				var dif = (timeStamp-STI.timeStamp)/STI.target;
-				var res:Point = new Point(a.x*(dif) + b.x*(1-dif), a.y * (dif) + b.y * (1-dif));
-				return res;
-			}
+				/*for (i in 0...inputTimes.length) {
+					inputTimes[i] += inputTimes[inputTimes.length - 1];
+				}*/
+				//var dif = (elapsedFrames - inputTimes[inputTimes.length - 1])*STI.corrector;
+				//trace(dif);
+				/*while(elapsedFrames > inputTimes[0]){
+					elapsedFrames -= inputTimes[inputTimes.length - 1];// inputTimes[inputTimes.length -1];// (STI.timeStamp - (inputTimes[inputTimes.length - 1] + elapsedFrames)) + STI.timeStamp;
+				}iterator = 0;
+				*/
+				
+			}//interpolate between the last input force and the first input force by a ratio equivalent to the overlap in the time taken between frames
+			var iterator2 = iterator != 0 ? iterator - 1 : inputForces.length - 1;
+			var div = iterator != 0 ? (inputTimes[iterator] - inputTimes[iterator2]) : inputTimes[iterator];
+			var a = inputForces[iterator2];
+			var b = inputForces[iterator];
+			var dif = 1-(inputTimes[iterator] - elapsedFrames) / div;// / STI.deltaTime;
+			trace(dif);
+			res.x = a.x * (dif) + b.x * (1 - dif);
+			res.y = a.y * (dif) + b.y * (1 - dif);
+			res2 = false;
 		}
-		return inputForces[iterator];
+		if(res2){
+			res = inputForces[iterator];
+		}
+		return res;
 	}
 }

@@ -1,7 +1,9 @@
 package sexual_tengine.input;
 
-import openfl.events.Event;
-import openfl.Lib;
+import sexual_tengine.utils.ST_Logger;
+
+import flash.events.Event;
+import flash.Lib;
 #if (!flash && !web)
 	import openfl.events.JoystickEvent;
 #end
@@ -107,7 +109,7 @@ class ST_GamepadManager{
 				pads.set(device, new ST_Gamepad(device));
 				numPads += 1;
 			}else {
-				trace("ERROR: Gamepad device '" + device + "' already exists");
+				ST_Logger.log("ERROR: Gamepad device '" + device + "' already exists");
 			}
 		#end
 	}

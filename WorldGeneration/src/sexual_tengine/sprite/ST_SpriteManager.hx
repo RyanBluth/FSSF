@@ -19,6 +19,7 @@ class ST_SpriteManager{
 		}else{
 			constructorParams = new Array<Dynamic>();
 		}
+		updateGrid();
 	}
 	
 	public function getActiveSprite():ST_Sprite {

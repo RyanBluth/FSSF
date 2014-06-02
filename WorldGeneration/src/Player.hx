@@ -2,11 +2,15 @@ package;
 import openfl.Lib;
 import sexual_tengine.sprite.ST_SuperSprite;
 import sexual_tengine.sprite.ST_Sprite;
+import sexual_tengine.STI;
 /**
  * ...
  * @author ryan
  */
-class Player extends ST_SuperSprite{
+class Player extends ST_SuperSprite {
+	public var shotTimerTotal:Float = 60;
+	public var shotTimerElapsed:Float = 100;
+	
 	public var playerFire:ST_Sprite;
 	public var playerBody:ST_Sprite;
 	public function new() {
@@ -30,5 +34,11 @@ class Player extends ST_SuperSprite{
 		
 		addSpriteChild("playerFire", playerFire);
 		addSpriteChild("playerBody", playerBody);
-	}	
+	}
+	
+	override public function update():Void {
+		super.update();
+		
+		shotTimerElapsed += STI.corrector;
+	}
 }

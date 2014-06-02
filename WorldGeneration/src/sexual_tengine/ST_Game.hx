@@ -15,7 +15,9 @@ import sexual_tengine.input.ST_TouchManager;
  * ...
  * @author ryan
  */
+@:access(sexual_tengine.STI)
 class ST_Game extends Sprite {
+	
 	private var ticks:Int = 0;
 	private var currentState:ST_State;
 	private var pendingState:ST_State;

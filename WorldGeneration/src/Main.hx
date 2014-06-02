@@ -12,8 +12,7 @@ import sexual_tengine.ST_Game;
  * @author Sean
  */
 
-class Main extends Sprite 
-{
+class Main extends Sprite{
 	var inited:Bool;
 	var game:ST_Game;
 	

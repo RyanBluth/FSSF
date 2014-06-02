@@ -51,7 +51,7 @@ class ST_Console extends Sprite
 			}
 		}
 		//propertiesTable.scrollRect = new Rectangle(propertiesTable.scrollRect.x + 0.1, 200, 500, 300);
-		//trace(propertiesTable.scrollRect);
+		//ST_Logger.log(propertiesTable.scrollRect);
 	}
 	
 	private function keyup(evt:KeyboardEvent) {

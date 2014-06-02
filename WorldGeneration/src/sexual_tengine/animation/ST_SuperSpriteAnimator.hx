@@ -1,5 +1,6 @@
 package sexual_tengine.animation;
 import sexual_tengine.sprite.ST_Sprite;
+import sexual_tengine.utils.ST_Logger;
 
 /**
  * ...
@@ -19,7 +20,7 @@ class ST_SuperSpriteAnimator{
 		if(commands.exists(commandName)){
 			commands.get(commandName).animate();
 		}else {
-			trace("Called 'animate' using non-existent command '" + commandName + "'");
+			ST_Logger.throwAndLog("Called 'animate' using non-existent command '" + commandName + "'");
 		}
 	}
 }

@@ -17,7 +17,7 @@ class ST_Background extends Sprite
 	public function new(_resource:String, _width:Float, _height:Float, ?_scrollable:Bool, ?_speed:Int){
 		super();
 		bitmapOne = new Bitmap(Assets.getBitmapData(_resource));
-		//trace(_width,_height);
+		//ST_Logger.log(_width,_height);
 		/*if (bitmapOne.width < bitmapOne.height){
 			bitmapOne.scaleX = _width / _height;
 			bitmapOne.scaleY = bitmapOne.scaleX;
