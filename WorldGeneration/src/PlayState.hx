@@ -51,9 +51,15 @@ class PlayState extends ST_State{
 	var player:Player;
 	var enemies:Array<Enemy>;
 	var soundManager:ST_SoundManager;
+	var container:ST_Sprite;
 	
 	public function new(_game:ST_Game) {
 		super(_game);
+		container = new ST_Sprite();
+		container.graphics.beginFill(0xFFFFFF);
+		container.graphics.drawRect(15, 15, 1250, 650);
+		container.graphics.endFill();
+		addChild(container);
 		player = new Player();
 		setupPlayer();
 		addChild(player);
@@ -63,8 +69,6 @@ class PlayState extends ST_State{
 		bulletManager.circleColliderRadius = 11.5;
 		
 		ST_GamepadManager.addController(0);
-		
-		camera.follow(player);
 		soundManager = new ST_SoundManager();
 	}
 	
@@ -91,6 +95,7 @@ class PlayState extends ST_State{
 		}
 		
 		addChild(new FPS());
+		
 	}
 	
 	public override function update(){
@@ -129,7 +134,7 @@ class PlayState extends ST_State{
 			player.kinetics.applyForce(new Point(0,1));
 		}
 		if(ST_GeneralInput.up(0)) {
-			player.kinetics.applyForce(new Point(0,-1));
+			player.kinetics.applyForce(new Point(0, -1));
 		}
 		
 		if (ST_GeneralInput.primary(0, false)) {
@@ -151,6 +156,18 @@ class PlayState extends ST_State{
 			bul.y = pos.y;
 			bul.kinetics.velocity = vel;
 			addChild(bul);
+		}
+		if (player.y < 20 + player.height*0.5) {
+				player.y = 20 + player.height*0.5;
+		}
+		if (player.y > 660 - player.height*0.5) {
+				player.y = 660 - player.height*0.5;
+		}
+		if (player.x < 20 + player.width*0.5) {
+				player.x = 20 + player.width*0.5;
+		}
+		if (player.x > 1260 - player.width*0.5) {
+				player.x = 1260 - player.width*0.5;
 		}
 	}
 	

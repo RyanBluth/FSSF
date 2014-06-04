@@ -61,7 +61,7 @@ class Main extends Sprite{
 	{
 		// static entry point
 		Lib.current.stage.align = openfl.display.StageAlign.TOP_LEFT;
-		Lib.current.stage.scaleMode = openfl.display.StageScaleMode.NO_SCALE;
+		Lib.current.stage.scaleMode = openfl.display.StageScaleMode.SHOW_ALL;
 		Lib.current.addChild(new Main());
 	}
 }

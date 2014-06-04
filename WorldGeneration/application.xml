@@ -8,8 +8,8 @@
 	<!-- output -->
 	<app main="Main" file="WorldGeneration" path="bin" />
 	
-	<window background="#FFFFFF" fps="60"  />
-	<window width="1280" height="720" unless="mobile" />
+	<window background="#222222" fps="500"  />
+	<window width="1280" height="720"  unless="mobile" />
 
 	<window orientation="landscape" vsync="true" antialiasing="8"/>
 	
