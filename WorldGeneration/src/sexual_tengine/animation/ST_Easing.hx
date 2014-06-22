@@ -7,6 +7,42 @@ package sexual_tengine.animation;
 class ST_Easing{
 	public function new(){}
 	
+	public static function call(type:String, t:Float, b:Float, c:Float, d:Float):Float {
+		switch(type) {
+			case "none": return none(t,b,c,d);
+			case "easeInQuad": return easeInQuad(t,b,c,d);
+			case "easeOutQuad": return easeOutQuad(t,b,c,d);
+			case "easeInOutQuad": return easeInOutQuad(t,b,c,d);
+			case "easeInCubic": return easeInCubic(t,b,c,d);
+			case "easeOutCubic": return easeOutCubic(t,b,c,d);
+			case "easeInOutCubic": return easeInOutCubic(t,b,c,d);
+			case "easeInQuart": return easeInQuart(t,b,c,d);
+			case "easeOutQuart": return easeOutQuart(t,b,c,d);
+			case "easeInOutQuart": return easeInOutQuart(t,b,c,d);
+			case "easeInQuint": return easeInQuint(t,b,c,d);
+			case "easeOutQuint": return easeOutQuint(t,b,c,d);
+			case "easeInOutQuint": return easeInOutQuint(t,b,c,d);
+			case "easeInSine": return easeInSine(t,b,c,d);
+			case "easeOutSine": return easeOutSine(t,b,c,d);
+			case "easeInOutSine": return easeInOutSine(t,b,c,d);
+			case "easeInExpo": return easeInExpo(t,b,c,d);
+			case "easeOutExpo": return easeOutExpo(t,b,c,d);
+			case "easeInOutExpo": return easeInOutExpo(t,b,c,d);
+			case "easeInCirc": return easeInCirc(t,b,c,d);
+			case "easeOutCirc": return easeOutCirc(t,b,c,d);
+			case "easeInOutCirc": return easeInOutCirc(t,b,c,d);
+			case "easeInElastic": return easeInElastic(t,b,c,d);
+			case "easeOutElastic": return easeOutElastic(t,b,c,d);
+			case "easeInOutElastic": return easeInOutElastic(t,b,c,d);
+			case "easeInBounce": return easeInBounce(t,b,c,d);
+			case "easeOutBounce": return easeOutBounce(t,b,c,d);
+			case "easeInOutBounce": return easeInOutBounce(t,b,c,d);
+			case "easeInBack": return easeInBack(t,b,c,d);
+			case "easeOutBack": return easeOutBack(t,b,c,d);
+			case "easeInOutBack": return easeInOutBack(t,b,c,d);
+		}
+		return 0;
+	}
 	
 	/**
 	 * @param	t	Current time

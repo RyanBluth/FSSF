@@ -20,50 +20,13 @@ class EnemyType {
 	public var width:Int;
 	public var height:Int;
 	public var frames:Array<Int>;
-	public var pathX:ST_RelativeLinearInterpolator;
-	public var pathY:ST_RelativeLinearInterpolator;
+	public var type:Int;
 		
 	public function new(_width:Int, _height:Int, _frames:Array<Int>, _type:Int) {
 		width = _width;
 		height = _height;
 		frames = _frames;
-		pathX = new ST_RelativeLinearInterpolator("x");
-		pathY = new ST_RelativeLinearInterpolator("y");
-		
-		switch(_type) {
-			case 1:
-				pathX.push(20, 20);
-				pathX.push(40, -20);
-			case 2:
-				pathX.push(20, 10);
-				pathX.push(40, -10);
-			case 3:
-				pathX.push(20, 0);
-			case 4:
-				pathX.push(20, 0);
-			case 5:
-				pathX.push(20, 0);
-			case 6:
-				pathX.push(20, 0);
-			case 7:
-				pathX.push(20, 0);
-			case 8:
-				pathX.push(20, 0);
-			case 9:
-				pathX.push(20, 0);
-		}
-		
-		/*pathX.push(20, 20);
-		pathX.push(40, -20);
-		if (Std.random(10) > 3) {
-			if(Std.random(10) > 5){
-				pathX.push(60, -20);
-			}else {
-				pathX.push(60, 20);
-			}
-		}*/
-		
-		pathY.push(10, 0);
+		type = _type;
 	}
 }
 class Enemy extends ST_SuperSprite {
@@ -79,7 +42,7 @@ class Enemy extends ST_SuperSprite {
 		new EnemyType(89, 100, [1,2,3,4], 2),
 		new EnemyType(49, 76, [1,2,3,4], 3),
 		new EnemyType(79, 125, [1,2,3,4], 4),
-		new EnemyType(60, 100, [1,2,3,4], 5),
+		new EnemyType(60, 120, [1,2,3,4], 5),
 		new EnemyType(180, 133, [1,2,3,4], 6),
 		new EnemyType(186, 175, [1,2,3,4], 7),
 		new EnemyType(106, 175, [1,2,3,4], 8),
@@ -89,7 +52,7 @@ class Enemy extends ST_SuperSprite {
 	public function new() {
 		super();
 		
-		var enemyType:Int = Std.random(9);
+		var enemyType:Int = 4;// Std.random(9);
 		
 		kinetics.friction = 0.9;
 		
@@ -112,18 +75,46 @@ class Enemy extends ST_SuperSprite {
 		
 		animator.addCommand("enemyAlpha", new ST_AnimatorCommand(enemyFire, new ST_BasicFloatOscillator("alpha", 0.1, 1), 15));
 		
-		/*var pathX:ST_RelativeLinearInterpolator = new ST_RelativeLinearInterpolator("x");
-		pathX.push(20, 20);
-		pathX.push(40, -20);
-		if (Std.random(10) > 3) {
-			if(Std.random(10) > 5){
-				pathX.push(60, -20);
-			}else {
-				pathX.push(60, 20);
-			}
-		}*/
-		var pathX = Reflect.copy(enemyTypes[enemyType].pathX);
-		var pathY = Reflect.copy(enemyTypes[enemyType].pathY);
+		
+		var pathX = new ST_RelativeLinearInterpolator("x");
+		var pathY = new ST_RelativeLinearInterpolator("y");
+		
+		switch(enemyTypes[enemyType].type) {
+			case 1:
+				pathX.push(20, 20);
+				pathX.push(40, -20);
+				pathY.push(40, 5);
+			case 2:
+			case 3:
+				pathX.push(20, 0);
+			case 4:
+				pathX.push(20, 0);
+			case 5:
+				var randomFactor:Float = Math.random();
+				
+				pathX.push(40, 0);
+				pathX.push(50, -20*randomFactor,"easeInOutCubic");
+				pathX.push(60, 40*randomFactor,"easeInOutCubic");
+				pathX.push(70, -40*randomFactor,"easeInOutCubic");
+				pathX.push(80, 20*randomFactor,"easeInOutCubic");
+				pathY.push(40, 100,"easeOutElastic");
+				pathY.push(80, -50, "easeInCubic");
+			case 6:
+				pathX.push(20, 0);
+			case 7:
+				pathX.push(20, 0);
+			case 8:
+				pathX.push(20, 0);
+			case 9:
+				pathX.push(20, 0);
+		}
+		
+		if(pathX.length == 0){
+			pathX.push(10, 0);
+		}if(pathY.length == 0){
+			pathY.push(10, 0);
+		}
+		
 		animator.addCommand("enemyMovement1", new ST_AnimatorCommand(this, pathX, pathX.totalFrames()));
 		animator.addCommand("enemyMovement2", new ST_AnimatorCommand(this, pathY, pathY.totalFrames()));
 	}

@@ -18,6 +18,8 @@ class ST_RelativeLinearInterpolator implements ST_Interpolator{
 	private var iterator:Int;
 	private var times:Array<Float>;
 	private var positions:Array<Float>;
+	private var easings:Array<String>;
+	public var length:Int;
 	private var dest:Float;
 	private var src:Float;
 	
@@ -28,11 +30,19 @@ class ST_RelativeLinearInterpolator implements ST_Interpolator{
 		iterator = 0;
 		times = new Array<Float>();
 		positions = new Array<Float>();
+		easings = new Array<String>();
+		length = 0;
 	}
 	
-	public function push(_t, _v):Void {
+	public function push(_t:Float, _v:Float, ?_easing:String):Void {
 		times.push(_t);
 		positions.push(_v);
+		if(_easing != null){
+			easings.push(_easing);
+		}else {
+			easings.push("none");
+		}
+		length += 1;
 	}
 	
 	public function totalFrames():Float {
@@ -40,7 +50,7 @@ class ST_RelativeLinearInterpolator implements ST_Interpolator{
 	}
 	
 	/* INTERFACE sexual_tengine.animation.ST_Interpolator */
-	public function interpolate(target:Dynamic, totalFrames:Float, elapsedFrames:Float):Void{
+	public function interpolate(target:Dynamic, totalFrames:Float, elapsedFrames:Float):Void {
 		if (first) {
 			// verify that the field is a float before starting
 			if (!Std.is(Reflect.getProperty(target, field), Float)) {
@@ -65,9 +75,10 @@ class ST_RelativeLinearInterpolator implements ST_Interpolator{
 			t = true;
 		}
 		
-		var step:Float = ST_Easing.none(elapsedFrames - (iterator == 0 ? 0 : times[iterator - 1]), src, (dest - src), (times[iterator] - (iterator == 0 ? 0 : times[iterator - 1])));
+		
+		//var step:Float = ST_Easing.easeInOutCirc(elapsedFrames - (iterator == 0 ? 0 : times[iterator - 1]), src, (dest - src), (times[iterator] - (iterator == 0 ? 0 : times[iterator - 1])));
+		var step:Float = ST_Easing.call(easings[iterator], elapsedFrames - (iterator == 0 ? 0 : times[iterator - 1]), src, (dest - src), (times[iterator] - (iterator == 0 ? 0 : times[iterator - 1])));
 		
 		Reflect.setProperty(target, field, step);
 	}
-	
 }
