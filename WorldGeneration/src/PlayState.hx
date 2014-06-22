@@ -77,16 +77,9 @@ class PlayState extends ST_State{
 		player.kinetics.friction = 0.9;
 		
 		enemies = new Array();
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
-		enemies.push(new Enemy());
+		for(i in 0...25){
+			enemies.push(new Enemy());
+		}
 		
 		for (e in enemies) {
 			addChild(e);
@@ -128,10 +121,10 @@ class PlayState extends ST_State{
 			player.kinetics.applyForce(new Point(-1,0));
 		}
 		if(ST_GeneralInput.right(0)) {
-			player.kinetics.applyForce(new Point(1,0));
+			player.kinetics.applyForce(new Point(1, 0));
 		}
 		if(ST_GeneralInput.down(0)) {
-			player.kinetics.applyForce(new Point(0,1));
+			player.kinetics.applyForce(new Point(0, 1));
 		}
 		if(ST_GeneralInput.up(0)) {
 			player.kinetics.applyForce(new Point(0, -1));
@@ -149,7 +142,7 @@ class PlayState extends ST_State{
 
 		}if (ST_GeneralInput.secondary(0, false)) {
 			var pos:Point = new Point(player.x + 23*1.5, player.y - 23*2);
-			var vel:Point = new Point(player.kinetics.velocity.x*0.5*STI.corrector, Math.min(player.kinetics.velocity.y*0.5*STI.corrector - 5,-1));
+			var vel:Point = new Point(player.kinetics.velocity.x*0.5, Math.min(player.kinetics.velocity.y*0.5 - 5,-1));
 			var bul:Bullet = cast(bulletManager.getActiveSprite(),Bullet);
 			
 			bul.x = pos.x;
