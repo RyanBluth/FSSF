@@ -20,6 +20,11 @@ class ST_UiButton extends ST_UiComponent
 	
 	public var label:ST_Text;
 	
+	/**
+	 * Creates a new UI button with the desired width and height 
+	 * @param	_width The display width
+	 * @param	_height The display height
+	 */
 	public function new(_width:Float, _height:Float){
 		
 		super(_width, _height);
@@ -36,6 +41,11 @@ class ST_UiButton extends ST_UiComponent
 		bitmap.height = displayHeight;
 	}
 	
+	/**
+	 * Used to set the image for a specific button state
+	 * @param	_state The button state
+	 * @param	_source The path for the desired image
+	 */
 	public function setButtonState(_state:ST_UiState, _source:String) {
 		switch _state {
 			case UP: standardState = _source;
@@ -44,10 +54,16 @@ class ST_UiButton extends ST_UiComponent
 		}
 	}
 	
+	/**
+	 * Calls super.update()
+	 */
 	public override function update() {
 		super.update();
 	}
 	
+	/**
+	 * Updates label formatting and positioning 
+	 */
 	private function manageLabel() {
 		setChildIndex(label, numChildren - 1);
 		label.width = displayWidth;
@@ -58,6 +74,10 @@ class ST_UiButton extends ST_UiComponent
 		label.y = label.height * 0.5 - (label.height * 0.25) * label.format.size /((12)*(displayHeight/32));
 	}
 	
+	/**
+	 * Draws the correct image for the current mouse state and also
+	 * updates the buttons label
+	 */
 	public override function draw() {
 		super.draw();
 		switch currentState {

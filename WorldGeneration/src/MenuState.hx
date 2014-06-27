@@ -41,7 +41,7 @@ class MenuState extends ST_State
 		title.text.text = "Face Space Ship Face";
 		title.setBackgroundColour(0xFFFFFF, 0.9);
 		
-		buttonLayout = new ST_UiLinearLayout(0, 0, VERTICAL);
+		buttonLayout = new ST_UiLinearLayout(VERTICAL);
 		
 		playButton = new ST_UiButton(250, 40);
 		playButton.label.format.size = 20;
@@ -65,6 +65,7 @@ class MenuState extends ST_State
 		
 		ST_UiLayoutUtil.centerHorizontal(mainPanel, [title, buttonLayout]);
 		ST_UiLayoutUtil.layoutBelow(title, [buttonLayout], 100);
+		buttonLayout.setBackgroundImage("img/spritesheet.png");
 		
 		addChild(mainPanel);	
 	}

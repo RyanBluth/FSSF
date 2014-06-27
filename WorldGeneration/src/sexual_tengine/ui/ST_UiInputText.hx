@@ -11,6 +11,11 @@ class ST_UiInputText extends ST_UiComponent
 	public var text:ST_Text;
 	public var hintText:String;
 	
+	/**
+	 * Creates a new UIinput text field
+	 * @param	_width The display width of the component
+	 * @param	_height The display height of the component
+	 */
 	public function new(_width:Float, _height:Float) {
 		super(_width, _height);
 		
