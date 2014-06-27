@@ -40,6 +40,8 @@ class ST_Detachment extends Sprite{
 		active = true;
 	}
 	
+	public function draw(){};
+	
 	public function getParentOffset(_parent:ST_Detachment):Point{
 		var t:DisplayObjectContainer = cast(this,DisplayObjectContainer);
 		var offset:Point = new Point(0, 0);

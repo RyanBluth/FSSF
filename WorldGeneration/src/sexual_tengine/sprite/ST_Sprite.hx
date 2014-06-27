@@ -47,7 +47,9 @@ class ST_Sprite extends ST_Detachment{
 	}
 	
 	public function setBitmap(_bitmap:String) {
-		removeChild(bitmap);
+		if(this.contains(bitmap)){
+			removeChild(bitmap);
+		}
 		bitmap = new Bitmap(Assets.getBitmapData(_bitmap));
 		addChild(bitmap);
 	}
@@ -69,7 +71,7 @@ class ST_Sprite extends ST_Detachment{
 	/**
 	 * Needs to be called once per frame to update animation manager.
 	 */
-	public function draw() {
+	public override function draw() {
 		if (active) {
 			if (!STI.drawCircleColliders) {
 				this.animation.draw();

@@ -10,7 +10,7 @@ import sexual_tengine.animation.ST_SpriteSheet;
 class ST_SuperSprite extends ST_Detachment
 {
 	public var layers:Array<String>;
-	public var spriteChildren:Map<String,ST_Sprite>;
+	public var spriteChildren:Map<String,ST_Detachment>;
 	public var animator:ST_SuperSpriteAnimator;
 	
 	public function new() {
@@ -21,13 +21,13 @@ class ST_SuperSprite extends ST_Detachment
 		animator = new ST_SuperSpriteAnimator();
 	}
 	
-	public function addSpriteChild(_name:String, _sprite:ST_Sprite) {
+	public function addSpriteChild(_name:String, _sprite:ST_Detachment) {
 		spriteChildren.set(_name, _sprite);
 		addChild(spriteChildren.get(_name));
 		layers.push(_name);
 	}
 	
-	public function getSpriteChild(_name:String):ST_Sprite{
+	public function getSpriteChild(_name:String):ST_Detachment{
 		return spriteChildren.get(_name);
 	}
 	
@@ -40,7 +40,7 @@ class ST_SuperSprite extends ST_Detachment
 		}
 	}
 	
-	public function draw() {
+	public override function draw() {
 		if(active){
 			for (i in layers) {
 				spriteChildren.get(i).draw();
