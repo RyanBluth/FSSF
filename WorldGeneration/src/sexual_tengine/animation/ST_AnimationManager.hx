@@ -5,6 +5,7 @@ package sexual_tengine.animation;
  * @author Ryan
  */
  
+import openfl.geom.Matrix;
 import sexual_tengine.animation.ST_AnimationState;
 import sexual_tengine.animation.ST_SpriteSheet;
 import sexual_tengine.animation.ST_SpriteSheetHandler;
@@ -104,8 +105,10 @@ class ST_AnimationManager{
 	public function staticDraw() {
 		var currentRect = currentSpriteSheet.getCurrentFrameRect();
 		graphics.clear();
-		graphics.beginBitmapFill(currentSpriteSheet.getBimapForCurrentFrame());
-		graphics.drawRect(0, 0, currentRect.width, currentRect.height);
+		var matrix:Matrix = new Matrix();
+		matrix.translate(origin.x, origin.y);
+		graphics.beginBitmapFill(currentSpriteSheet.getBimapForCurrentFrame(), matrix, true, false);
+		graphics.drawRect(origin.x, origin.y, currentRect.width, currentRect.height);
 		graphics.endFill();
 	}
 	/**
