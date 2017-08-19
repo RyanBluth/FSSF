@@ -107,7 +107,7 @@ class ST_AnimationManager{
 		graphics.clear();
 		var matrix:Matrix = new Matrix();
 		matrix.translate(origin.x, origin.y);
-		graphics.beginBitmapFill(currentSpriteSheet.getBimapForCurrentFrame(), matrix, true, false);
+		graphics.beginBitmapFill(currentSpriteSheet.getBimapForCurrentFrame(), matrix, false, false);
 		graphics.drawRect(origin.x, origin.y, currentRect.width, currentRect.height);
 		graphics.endFill();
 	}
