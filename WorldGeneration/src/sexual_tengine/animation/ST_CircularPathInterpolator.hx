@@ -16,7 +16,7 @@ class ST_CircularPathInterpolator implements ST_Interpolator
 		radius = _radius;
 	}
 	
-	public function interpolate(target:ST_Detachment, totalFrames:Float, elapsedFrames:Float):Void
+	public function interpolate(target:Dynamic, totalFrames:Float, elapsedFrames:Float):Void
 	{
 		var currentDegrees = (elapsedFrames / totalFrames)*360;
 		currentDegrees = (currentDegrees * Math.PI) / 180;
@@ -26,3 +26,4 @@ class ST_CircularPathInterpolator implements ST_Interpolator
 		target.y = calY;
 	}
 }
+ 

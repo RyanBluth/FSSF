@@ -55,7 +55,6 @@ class Enemy extends ST_SuperSprite {
 		var enemyType:Int = 4;// Std.random(9);
 		
 		kinetics.friction = 0.9;
-		
 		enemyFire = new ST_Sprite();
 		enemyFire.setOrigin( -enemyTypes[enemyType].width/2, -enemyTypes[enemyType].height/2);
 		enemyFire.animation.addSpriteSheet("img/enemy_0"+Std.string(enemyType+1)+".png", "main", true);

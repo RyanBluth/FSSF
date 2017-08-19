@@ -24,7 +24,7 @@ class ST_BasicFloatOscillator implements ST_Interpolator{
 	}
 	
 	/* INTERFACE sexual_tengine.animation.ST_Interpolator */
-	public function interpolate(target:ST_Detachment, totalFrames:Float, elapsedFrames:Float):Void{
+	public function interpolate(target:Dynamic, totalFrames:Float, elapsedFrames:Float):Void{
 		if (first) {
 			// verify that the field is a float before starting
 			if (!Std.is(Reflect.getProperty(target, field), Float)) {

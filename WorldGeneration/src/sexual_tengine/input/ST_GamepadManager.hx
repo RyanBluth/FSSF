@@ -5,7 +5,8 @@ import sexual_tengine.utils.ST_Logger;
 import flash.events.Event;
 import flash.Lib;
 #if (!flash && !web)
-	import openfl.events.JoystickEvent;
+	import openfl.events.GameInputEvent;
+	import lime.ui.Joystick;
 #end
 
 /** Class for instantiating individual gamepad objects */
@@ -50,12 +51,13 @@ class ST_GamepadManager{
 	
 	#if (!flash && !web)
 		public function new() {
-			Lib.current.stage.addEventListener(JoystickEvent.BUTTON_DOWN, ST_GamepadManager.buttonDown);
-			Lib.current.stage.addEventListener(JoystickEvent.BUTTON_UP, ST_GamepadManager.buttonUp);
-			Lib.current.stage.addEventListener(JoystickEvent.AXIS_MOVE, ST_GamepadManager.axisMove);
-			Lib.current.stage.addEventListener(JoystickEvent.HAT_MOVE, ST_GamepadManager.hatMove);
-			Lib.current.stage.addEventListener(JoystickEvent.BALL_MOVE, ST_GamepadManager.ballMove);
+			//Lib.current.stage.addEventListener(GameInputEvent.BUTTON_DOWN, ST_GamepadManager.buttonDown);
+			//Lib.current.stage.addEventListener(GameInputEvent.BUTTON_UP, ST_GamepadManager.buttonUp);
+		//	Lib.current.stage.addEventListener(GameInputEvent.AXIS_MOVE, ST_GamepadManager.axisMove);
+			//Lib.current.stage.addEventListener(GameInputEvent.HAT_MOVE, ST_GamepadManager.hatMove);
+		//	Lib.current.stage.addEventListener(GameInputEvent.BALL_MOVE, ST_GamepadManager.ballMove);
 		}
+		/*
 		private static function buttonDown(evt:JoystickEvent) {
 			if (!pads.get(evt.device).pressedButtons.exists(evt.id)){
 				pads.get(evt.device).pressedButtons.set(evt.id, evt.id);
@@ -67,15 +69,16 @@ class ST_GamepadManager{
 			pads.get(evt.device).justReleasedButtons.set(evt.id,evt.id);
 			pads.get(evt.device).lastButtonUp = evt.id;
 		}
-		private static function axisMove(evt:JoystickEvent) {
+		private static function axisMove(evt:GameInputEvent) {
 			pads.get(evt.device).axes = evt.axis;
 		}
-		private static function hatMove(evt:JoystickEvent) {
+		private static function hatMove(evt:GameInputEvent) {
 			pads.get(evt.device).hat = evt.axis;
 		}
-		private static function ballMove(evt:JoystickEvent) {
+		private static function ballMove(evt:GameInputEvent) {
 			//I don't actually know what this event covers, apparently nothing on an xbox controller
 		}
+		*/
 	#else
 		public function new() {}
 		private static function buttonDown() {}

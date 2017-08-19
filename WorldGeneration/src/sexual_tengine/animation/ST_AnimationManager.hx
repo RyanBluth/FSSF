@@ -16,9 +16,9 @@ import openfl.events.*;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
 import openfl.Assets;
-import openfl.display.Tilesheet;
+import openfl.display.Tilemap;
 import openfl.display.Graphics;
-import openfl.gl.GLTexture;
+import lime.graphics.opengl.GLTexture;
 
 
 class ST_AnimationManager{
@@ -97,7 +97,7 @@ class ST_AnimationManager{
 			currentSpriteSheet.currentState.incrementFrames();
 			var data=[origin.x, origin.y, currentSpriteSheet.currentState.getCurrentFrame()];
 			graphics.clear();
-			currentSpriteSheet.drawTiles(graphics, data, true);
+			//currentSpriteSheet.(graphics, data, true);
 		}
 	}
 	
@@ -106,7 +106,7 @@ class ST_AnimationManager{
 	public function staticDraw() {
 		var data=[origin.x, origin.y, currentSpriteSheet.currentState.getCurrentFrame()];
 		graphics.clear();
-		currentSpriteSheet.drawTiles(graphics, data, true);
+		//currentSpriteSheet.drawTiles(graphics, data, true);
 	}
 	/**
 	 * Sets the animation manager to pause, preventing frame updates to occur. Optionally specify frame to pause at, target state, and host spritesheet (will always switch to these if specified)
@@ -148,7 +148,7 @@ class ST_AnimationManager{
 	
 	/** No docs yet */
 	public function getCurrentFrameBounds():Rectangle {
-		return currentSpriteSheet.getTileRect(currentSpriteSheet.currentState.getCurrentFrame());
+		return currentSpriteSheet.tileset.getRect(currentSpriteSheet.currentState.getCurrentFrame());
 	}
 	
 	/** No docs yet */
@@ -158,9 +158,9 @@ class ST_AnimationManager{
 		var largest:Float = 0;
 		var returnRect:Rectangle = new Rectangle(0,0,0,0);
 		for (i in tempState.frames) {
-			if (tempSpriteSheet.getTileRect(i).width > largest) {
-				returnRect = tempSpriteSheet.getTileRect(i);
-				largest = tempSpriteSheet.getTileRect(i).width;
+			if (tempSpriteSheet.tileset.getRect(i).width > largest) {
+				returnRect = tempSpriteSheet.tileset.getRect(i);
+				largest = tempSpriteSheet.tileset.getRect(i).width;
 			}
 		}
 		
@@ -174,9 +174,9 @@ class ST_AnimationManager{
 		var largest:Float = 0;
 		var returnRect:Rectangle= new Rectangle(0,0,0,0);
 		for (i in tempState.frames) {
-			if (tempSpriteSheet.getTileRect(i).height > largest) {
-				returnRect = tempSpriteSheet.getTileRect(i);
-				largest = tempSpriteSheet.getTileRect(i).height;
+			if (tempSpriteSheet.tileset.getRect(i).height > largest) {
+				returnRect = tempSpriteSheet.tileset.getRect(i);
+				largest = tempSpriteSheet.tileset.getRect(i).height;
 			}
 		}
 		
@@ -190,9 +190,9 @@ class ST_AnimationManager{
 		var largest:Float = 0;
 		var returnRect:Rectangle= new Rectangle(0,0,0,0);
 		for (i in tempState.frames) {
-			if (tempSpriteSheet.getTileRect(i).width * tempSpriteSheet.getTileRect(i).height > largest) {
-				returnRect = tempSpriteSheet.getTileRect(i);
-				largest = tempSpriteSheet.getTileRect(i).width * tempSpriteSheet.getTileRect(i).height;
+			if (tempSpriteSheet.tileset.getRect(i).width * tempSpriteSheet.tileset.getRect(i).height > largest) {
+				returnRect = tempSpriteSheet.tileset.getRect(i);
+				largest = tempSpriteSheet.tileset.getRect(i).width * tempSpriteSheet.tileset.getRect(i).height;
 			}
 		}
 		
@@ -206,9 +206,9 @@ class ST_AnimationManager{
 		var smallest:Float = 0;
 		var returnRect:Rectangle= new Rectangle(0,0,0,0);
 		for (i in tempState.frames) {
-			if (tempSpriteSheet.getTileRect(i).width > smallest) {
-				returnRect = tempSpriteSheet.getTileRect(i);
-				smallest = tempSpriteSheet.getTileRect(i).width;
+			if (tempSpriteSheet.tileset.getRect(i).width > smallest) {
+				returnRect = tempSpriteSheet.tileset.getRect(i);
+				smallest = tempSpriteSheet.tileset.getRect(i).width;
 			}
 		}
 		
@@ -222,9 +222,9 @@ class ST_AnimationManager{
 		var smallest:Float = 0;
 		var returnRect:Rectangle= new Rectangle(0,0,0,0);
 		for (i in tempState.frames) {
-			if (tempSpriteSheet.getTileRect(i).height > smallest) {
-				returnRect = tempSpriteSheet.getTileRect(i);
-				smallest = tempSpriteSheet.getTileRect(i).height;
+			if (tempSpriteSheet.tileset.getRect(i).height > smallest) {
+				returnRect = tempSpriteSheet.tileset.getRect(i);
+				smallest = tempSpriteSheet.tileset.getRect(i).height;
 			}
 		}
 		
@@ -238,9 +238,9 @@ class ST_AnimationManager{
 		var smallest:Float = 0;
 		var returnRect:Rectangle= new Rectangle(0,0,0,0);
 		for (i in tempState.frames) {
-			if (tempSpriteSheet.getTileRect(i).width * tempSpriteSheet.getTileRect(i).height > smallest) {
-				returnRect = tempSpriteSheet.getTileRect(i);
-				smallest = tempSpriteSheet.getTileRect(i).width * tempSpriteSheet.getTileRect(i).height;
+			if (tempSpriteSheet.tileset.getRect(i).width * tempSpriteSheet.tileset.getRect(i).height > smallest) {
+				returnRect = tempSpriteSheet.tileset.getRect(i);
+				smallest = tempSpriteSheet.tileset.getRect(i).width * tempSpriteSheet.tileset.getRect(i).height;
 			}
 		}
 		
@@ -329,9 +329,9 @@ class ST_AnimationManager{
 	
 	public function getBitmapData(?_spriteSheetName:String):BitmapData {
 		if (_spriteSheetName != null) {
-			return spriteSheets.get(_spriteSheetName).bitmapData;
+			return spriteSheets.get(_spriteSheetName).tileset.bitmapData;
 		}else {
-			return currentSpriteSheet.bitmapData;
+			return currentSpriteSheet.tileset.bitmapData;
 		}
 	}
 	public function getXY():Point {
