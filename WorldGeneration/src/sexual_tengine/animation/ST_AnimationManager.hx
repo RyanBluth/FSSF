@@ -24,6 +24,7 @@ import lime.graphics.opengl.GLTexture;
 
 class ST_AnimationManager{
 	public var origin:Point;
+	private var matrix:Matrix;
 	private var graphics:Graphics;
 	private var currentSpriteSheet:ST_SpriteSheet;
 	public var play:Bool;
@@ -35,6 +36,7 @@ class ST_AnimationManager{
 		spriteSheets = new Map();
 		play = false;
 		origin = new Point(0, 0);
+		matrix = new Matrix();
 	}
 	
 	/** No docs yet */
@@ -89,6 +91,13 @@ class ST_AnimationManager{
 		staticDraw();
 	}
 	
+	public function setOrigin(_x:Float, _y:Float){
+		origin.x = _x;
+		origin.y = _y;
+		matrix.identity();
+		matrix.translate(origin.x, origin.y);
+	}
+	
 	/** 
 	 * This method is used to draw the frame from the current sprite sheet's current animation state <strong>in the main game loop</strong>.
 	 * Each time we call draw we clear the graphics (otherwise the sprites will just be added on top).
@@ -105,8 +114,6 @@ class ST_AnimationManager{
 	public function staticDraw() {
 		var currentRect = currentSpriteSheet.getCurrentFrameRect();
 		graphics.clear();
-		var matrix:Matrix = new Matrix();
-		matrix.translate(origin.x, origin.y);
 		graphics.beginBitmapFill(currentSpriteSheet.getBimapForCurrentFrame(), matrix, false, false);
 		graphics.drawRect(origin.x, origin.y, currentRect.width, currentRect.height);
 		graphics.endFill();

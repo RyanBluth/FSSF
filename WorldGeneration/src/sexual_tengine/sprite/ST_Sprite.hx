@@ -60,8 +60,7 @@ class ST_Sprite extends ST_Detachment{
 	
 	/** Sets the offset for the animation manager */
 	public function setOrigin(_x:Float, _y:Float) {
-		this.animation.origin.x = _x;
-		this.animation.origin.y = _y;
+		this.animation.setOrigin(_x, _y);
 	}
 	/** Returns the offset for the animation manager */
 	public function getOrigin() {
