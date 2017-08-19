@@ -68,7 +68,6 @@ class PlayState extends ST_State{
 		bulletManager = new ST_SpriteManager(Bullet);
 		bulletManager.circleColliderRadius = 11.5;
 		
-		ST_GamepadManager.addController(0);
 		soundManager = new ST_SoundManager();
 	}
 	

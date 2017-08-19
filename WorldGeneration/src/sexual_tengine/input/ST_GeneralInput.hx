@@ -14,7 +14,7 @@ class ST_GeneralInput{
 	 * @return	true if generalized input for down is active, false otherwise
 	 */
 	public static function down(device:Int):Bool {
-		return ST_Keyboard.isPressed(["S", "DOWN"]) || ST_GamepadManager.axisIsAbove(device, "LY", 0.5) || ST_GamepadManager.hatIsAbove(device, "Y", 0.5);
+		return ST_Keyboard.isPressed(["S", "DOWN"]) || ST_GamepadManager.axisIsAbove(device, "LY", 0.5);
 	}
 	
 	/**
@@ -23,7 +23,7 @@ class ST_GeneralInput{
 	 * @return	true if generalized input for up is active, false otherwise
 	 */
 	public static function up(device:Int):Bool{
-		return ST_Keyboard.isPressed(["W", "UP"]) || ST_GamepadManager.axisIsBelow(device, "LY", -0.5) || ST_GamepadManager.hatIsBelow(device, "Y", -0.5);
+		return ST_Keyboard.isPressed(["W", "UP"]) || ST_GamepadManager.axisIsBelow(device, "LY", -0.5);
 	}
 	
 	/**
@@ -32,7 +32,7 @@ class ST_GeneralInput{
 	 * @return	true if generalized input for left is active, false otherwise
 	 */
 	public static function left(device:Int):Bool {
-		return ST_Keyboard.isPressed(["A", "LEFT"]) || ST_GamepadManager.axisIsBelow(device, "LX", -0.5) || ST_GamepadManager.hatIsBelow(device, "X", -0.5);
+		return ST_Keyboard.isPressed(["A", "LEFT"]) || ST_GamepadManager.axisIsBelow(device, "LX", -0.5);
 	}
 	
 	/**
@@ -41,7 +41,7 @@ class ST_GeneralInput{
 	 * @return	true if generalized input for right is active, false otherwise
 	 */
 	public static function right(device:Int):Bool{
-		return ST_Keyboard.isPressed(["D", "RIGHT"]) || ST_GamepadManager.axisIsAbove(device, "LX", 0.5) || ST_GamepadManager.hatIsAbove(device, "X", 0.5);
+		return ST_Keyboard.isPressed(["D", "RIGHT"]) || ST_GamepadManager.axisIsAbove(device, "LX", 0.5);
 	}
 	
 	
